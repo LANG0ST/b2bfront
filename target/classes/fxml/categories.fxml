@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.fxml.FXMLLoader?>
+<?import javafx.fxml.FXML?>
+<?import javafx.fxml.JavaFXBuilderFactory?>
+
+<BorderPane xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.fx.b2bfront.controller.categories.CategoriesController"
+            prefWidth="1600" prefHeight="900"
+            stylesheets="@../style/categories.css">
+
+    <!-- TOP NAVBAR (reused) -->
+    <top>
+        <fx:include source="components/Navbar.fxml"/>
+    </top>
+
+    <!-- LEFT FILTER PANEL -->
+    <left>
+        <VBox prefWidth="260"
+              spacing="15"
+              styleClass="filters-panel">
+
+            <padding>
+                <Insets top="30" right="20" bottom="20" left="30"/>
+            </padding>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Filtres" styleClass="filters-title"/>
+                <Label text="Effacer" styleClass="filters-clear"/>
+            </HBox>
+
+            <Label text="Catégorie actuelle"
+                   styleClass="filters-section-title"/>
+
+            <Label fx:id="currentCategoryLabel"
+                   text="Engins et Matériel Lourd"
+                   styleClass="filters-current-category"/>
+
+            <Label text="Affiner par"
+                   styleClass="filters-section-title"/>
+
+            <!-- Dynamic filter content will be added here -->
+            <VBox fx:id="filtersBox"
+                  spacing="6"
+                  styleClass="filters-box"/>
+
+        </VBox>
+    </left>
+
+    <!-- CENTER PRODUCTS GRID -->
+    <center>
+        <ScrollPane fitToWidth="true"
+                    fitToHeight="true"
+                    hbarPolicy="NEVER"
+                    styleClass="products-scroll">
+
+            <VBox spacing="20" styleClass="products-root">
+
+                <!-- Header row: title + sort -->
+                <HBox spacing="10"
+                      styleClass="products-header">
+
+                    <Label fx:id="productsTitle"
+                           text="Produits pour les chantiers"
+                           styleClass="products-title"/>
+
+                    <HBox spacing="5" styleClass="sort-box">
+                        <Label text="Trier par" styleClass="sort-label"/>
+                        <Label text="Populaire ▾" styleClass="sort-value"/>
+                    </HBox>
+                </HBox>
+
+                <!-- Product grid -->
+                <TilePane fx:id="productsTile"
+                          hgap="20" vgap="20"
+                          prefColumns="3"
+                          styleClass="products-tile">
+
+                    <!-- Controller will add product cards here -->
+
+                </TilePane>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

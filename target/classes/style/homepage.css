@@ -1,0 +1,167 @@
+/* ===========================
+   GLOBAL
+   =========================== */
+.root {
+    -fx-font-family: "Inter", "Segoe UI", sans-serif;
+    -fx-background-color: #F5F6FA;
+}
+
+/* ===========================
+   NAVBAR
+   =========================== */
+.navbar {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 0 40;
+    -fx-border-color: #E8E8E8;
+    -fx-border-width: 0 0 1 0;
+}
+
+.logo {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #6A4DFF;
+}
+
+/* Search Bar */
+.search-bar {
+    -fx-background-color: #EFEAFF;
+    -fx-background-radius: 25;
+    -fx-padding: 0 15 0 15;
+    -fx-font-size: 14px;
+    -fx-border-radius: 25;
+    -fx-border-color: transparent;
+    -fx-min-height: 45;
+}
+
+.search-bar:focused {
+    -fx-background-color: #E6E0FF;
+    -fx-border-color: #B4A4FF;
+}
+
+/* Top Right Buttons */
+.icon-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #333;
+    -fx-font-size: 15px;
+    -fx-padding: 8 15;
+    -fx-background-radius: 10;
+}
+
+.icon-button:hover {
+    -fx-background-color: #EFEAFF;
+}
+
+/* ===========================
+   SIDEBAR
+   =========================== */
+.sidebar {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E8E8E8;
+    -fx-border-width: 0 1 0 0;
+}
+
+.sidebar-title {
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 0 0 10 0;
+}
+
+.sidebar-item {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E6E6E6;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 15;
+    -fx-cursor: hand;
+}
+
+.sidebar-item:hover {
+    -fx-background-color: #EFEAFF;
+    -fx-border-color: #C4B3FF;
+}
+
+/* ===========================
+   FEATURED CARD
+   =========================== */
+.featured-card {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-padding: 20;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 18, 0.1, 0, 2);
+}
+
+.featured-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.featured-image {
+    -fx-background-color: #F3F0FF;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: #EAE5FF;
+    -fx-alignment: CENTER;
+}
+
+.placeholder {
+    -fx-text-fill: #A39CD6;
+    -fx-font-size: 14px;
+}
+
+.featured-price {
+    -fx-font-size: 16px;
+    -fx-text-fill: #6A4DFF;
+    -fx-font-weight: bold;
+}
+
+/* ===========================
+   TRENDING TITLE
+   =========================== */
+.section-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+/* ===========================
+   PRODUCT CARDS
+   =========================== */
+.product-card {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 18;
+    -fx-border-radius: 18;
+    -fx-padding: 12;
+    -fx-spacing: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0.1, 0, 2);
+    -fx-alignment: TOP_CENTER;
+}
+
+.product-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(106,77,255,0.25), 25, 0.2, 0, 4);
+}
+
+.product-image {
+    -fx-background-color: #F5F1FF;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #E6DEFF;
+    -fx-alignment: CENTER;
+}
+
+.product-name {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.product-price {
+    -fx-font-size: 13px;
+    -fx-text-fill: #6A4DFF;
+    -fx-font-weight: bold;
+}

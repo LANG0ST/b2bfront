@@ -1,0 +1,127 @@
+/* ------------------------------------------------------------
+   GLOBAL
+------------------------------------------------------------ */
+
+* {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+/* Background of the whole scene */
+.root {
+    -fx-background-color: linear-gradient(to bottom right, #f7f9fc, #eaeef4);
+}
+
+/* ------------------------------------------------------------
+   TITLES
+------------------------------------------------------------ */
+
+.label-title {
+    -fx-font-size: 36px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #111;
+}
+
+/* Title inside slider */
+.slider-title {
+    -fx-font-size: 32px;
+    -fx-font-weight: 700;
+    -fx-text-fill: white;
+    -fx-padding: 0 40 0 40;
+    -fx-text-alignment: center;
+}
+
+/* ------------------------------------------------------------
+   TEXTFIELDS & PASSWORD FIELDS
+------------------------------------------------------------ */
+
+.text-input {
+    -fx-pref-height: 48px;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d0d5dd;
+    -fx-border-width: 1.2px;
+    -fx-padding: 0 14 0 14;
+    -fx-font-size: 15px;
+    -fx-text-fill: #222;
+}
+
+.text-input:focused {
+    -fx-border-color: #6a92f2;
+    -fx-border-width: 1.8px;
+    -fx-effect: dropshadow(gaussian, rgba(106, 146, 242, 0.25), 15, 0.2, 0, 0);
+}
+
+/* ------------------------------------------------------------
+   BUTTONS
+------------------------------------------------------------ */
+
+.primary-button {
+    -fx-background-color: #111;
+    -fx-text-fill: white;
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12px;
+    -fx-padding: 12px 20px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 8, 0.2, 0, 2);
+}
+
+.primary-button:hover {
+    -fx-background-color: #2c2c2c;
+}
+
+.primary-button:pressed {
+    -fx-background-color: #000;
+}
+
+.action-button {
+    -fx-background-color: #FFA726;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 14px;
+    -fx-padding: 14px 20px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(255,167,38,0.3), 12, 0.25, 0, 2);
+}
+
+.action-button:hover {
+    -fx-background-color: #ffb85c;
+}
+
+.action-button:pressed {
+    -fx-background-color: #ff9800;
+}
+
+/* ------------------------------------------------------------
+   HYPERLINKS
+------------------------------------------------------------ */
+
+.hyperlink {
+    -fx-text-fill: #4e6dd8;
+    -fx-font-size: 14px;
+}
+
+.hyperlink:hover {
+    -fx-text-fill: #2d4bb8;
+}
+
+/* ------------------------------------------------------------
+   CHECKBOX
+------------------------------------------------------------ */
+
+.check-box {
+    -fx-font-size: 15px;
+    -fx-text-fill: #333;
+}
+
+/* ------------------------------------------------------------
+   SLIDER PANEL
+------------------------------------------------------------ */
+#slider {
+    -fx-background-color: #1e1f22;
+}
+

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="org.fx.b2bfront.controller.auth.AuthController"
+           prefWidth="1600" prefHeight="900"
+           minWidth="1600" maxWidth="1600"
+           minHeight="900" maxHeight="900"
+           stylesheets="@../style/auth.css">
+
+    <!-- BACKGROUND FORMS -->
+    <HBox prefWidth="1600" prefHeight="900"
+          minWidth="1600" maxWidth="1600"
+          minHeight="900" maxHeight="900">
+
+        <!-- LOGIN FORM (LEFT) -->
+        <VBox fx:id="loginPane" alignment="CENTER" spacing="40"
+              prefWidth="800" minWidth="800" maxWidth="800"
+              prefHeight="900" minHeight="900" maxHeight="900">
+
+            <Label text="LOGIN" styleClass="label-title"/>
+
+            <VBox spacing="15" maxWidth="350">
+
+                <Label text="Email"/>
+                <TextField fx:id="loginEmail" prefHeight="45" styleClass="text-input"/>
+
+                <Label text="Password"/>
+                <PasswordField fx:id="loginPassword" prefHeight="45" styleClass="text-input"/>
+
+                <Button fx:id="loginButton"
+                        text="Sign In"
+                        prefWidth="350" prefHeight="48"
+                        styleClass="primary-button"/>
+
+                <Hyperlink text="Forgot password?"/>
+            </VBox>
+        </VBox>
+
+        <!-- SIGNUP FORM (RIGHT) -->
+        <VBox fx:id="signupPane" alignment="CENTER" spacing="40"
+              prefWidth="800" minWidth="800" maxWidth="800"
+              prefHeight="900" minHeight="900" maxHeight="900">
+
+            <Label text="SIGN UP" styleClass="label-title"/>
+
+            <VBox spacing="15" maxWidth="350">
+
+                <Label text="Email"/>
+                <TextField fx:id="signupEmail" prefHeight="45" styleClass="text-input"/>
+
+                <Label text="Password"/>
+                <PasswordField fx:id="signupPassword" prefHeight="45" styleClass="text-input"/>
+
+                <CheckBox text="Remember me"/>
+
+                <Button fx:id="signupButton"
+                        text="Register"
+                        prefWidth="350" prefHeight="48"
+                        styleClass="primary-button"/>
+            </VBox>
+        </VBox>
+
+    </HBox>
+
+    <!-- SLIDER PANEL -->
+    <Pane fx:id="slider"
+          prefWidth="800" minWidth="800" maxWidth="800"
+          prefHeight="900" minHeight="900" maxHeight="900"
+          StackPane.alignment="CENTER_LEFT"
+          translateX="800"
+          id="slider">
+
+        <VBox alignment="CENTER" spacing="40"
+              prefWidth="800" minWidth="800" maxWidth="800"
+              prefHeight="900" minHeight="900" maxHeight="900">
+
+            <Label fx:id="slideTitle"
+                   text="DON'T HAVE AN ACCOUNT?"
+                   wrapText="true"
+                   styleClass="slider-title"/>
+
+            <Button fx:id="slideButton"
+                    text="SIGN UP"
+                    prefWidth="200" prefHeight="55"
+                    styleClass="action-button"/>
+        </VBox>
+
+    </Pane>
+
+</StackPane>

@@ -1,0 +1,9 @@
+org\fx\b2bfront\controller\categories\CategoriesController$FilterGroup.class
+org\fx\b2bfront\controller\categories\CategoriesController$Product.class
+org\fx\b2bfront\controller\components\NavbarController.class
+org\fx\b2bfront\utils\AppNavigator.class
+org\fx\b2bfront\controller\categories\CategoriesController.class
+module-info.class
+org\fx\b2bfront\MainApp.class
+org\fx\b2bfront\controller\home\HomepageController.class
+org\fx\b2bfront\controller\auth\AuthController.class
