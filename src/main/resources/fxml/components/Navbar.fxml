@@ -43,7 +43,7 @@
 
         <!-- Notifications Dropdown -->
         <StackPane>
-            <Button fx:id="btnNotifications" styleClass="icon-button" text="Notifications" />
+            <Button fx:id="btnNotifications" styleClass="icon-button" text=" 🔔 Notifications" />
 
             <VBox fx:id="dropdownNotifications" alignment="TOP_LEFT" managed="false" prefWidth="250" spacing="12" styleClass="dropdown" visible="false">
 
@@ -61,7 +61,7 @@
         <Button styleClass="nav-button" text="Dashboard" />
 
         <!-- Account Button -->
-        <Button styleClass="nav-button" text="Account" />
+        <Button styleClass="nav-button" text="👤 Account" />
 
     </HBox>
 

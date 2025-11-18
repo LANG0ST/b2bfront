@@ -4,6 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.*?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <StackPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="org.fx.b2bfront.controller.auth.AuthController"
@@ -75,6 +77,19 @@
           translateX="800"
           id="slider">
 
+        <!-- IMAGE EN PREMIER PLAN -->
+        <ImageView
+                fitWidth="800"
+                fitHeight="900"
+                preserveRatio="false"
+                opacity="1"
+                pickOnBounds="false">
+            <image>
+                <Image url="@../images/auth_bg.png" />
+            </image>
+        </ImageView>
+
+        <!-- CONTENU DU SLIDER PAR DESSUS L'IMAGE -->
         <VBox alignment="CENTER" spacing="40"
               prefWidth="800" minWidth="800" maxWidth="800"
               prefHeight="900" minHeight="900" maxHeight="900">
@@ -91,5 +106,6 @@
         </VBox>
 
     </Pane>
+
 
 </StackPane>
