@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/20"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.fx.b2bfront.controller.Admin.AdminDashBoardController"
+            stylesheets="@../style/dashboard.css"
+            prefHeight="900" prefWidth="1600">
+
+    <!-- ======================================================== -->
+    <!--                         TOP HEADER                        -->
+    <!-- ======================================================== -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-header">
+
+            <!-- Logo -->
+            <ImageView fitHeight="42" fitWidth="42" preserveRatio="true">
+                <image>
+                    <Image url="@../images/logo.png"/>
+                </image>
+            </ImageView>
+
+            <!-- App Title -->
+            <Label text="B2B Admin Dashboard" styleClass="header-title"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <!-- Search bar -->
+            <TextField promptText="Rechercher..."
+                       styleClass="search-bar"
+                       prefWidth="320"/>
+
+            <!-- Profile -->
+            <HBox spacing="12" alignment="CENTER_RIGHT">
+                <Label text="Admin" styleClass="profile-name"/>
+                <ImageView fitHeight="36" fitWidth="36" preserveRatio="true" styleClass="profile-avatar">
+                    <image>
+                        <Image url="@../images/admin.png"/>
+                    </image>
+                </ImageView>
+            </HBox>
+
+        </HBox>
+    </top>
+
+    <!-- ======================================================== -->
+    <!--                        SIDE NAVIGATION                    -->
+    <!-- ======================================================== -->
+    <left>
+        <VBox spacing="8" styleClass="sidebar">
+
+            <Label text="MENU" styleClass="sidebar-section"/>
+
+            <Button text="Dashboard"      styleClass="sidebar-active" onMouseClicked="#openDashboard"/>
+            <Button text="Gestion d'Utilisateurs"   styleClass="sidebar-item" onMouseClicked="#openUsersModule"/>
+            <Button text="Gestion de Produits"       styleClass="sidebar-item" onMouseClicked="#openProductsModule"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="Déconnexion"    styleClass="sidebar-logout" onMouseClicked="#openAuthpage"/>
+
+        </VBox>
+    </left>
+    <Region VBox.vgrow="ALWAYS"/>
+
+
+    <!-- ======================================================== -->
+    <!--                         MAIN CONTENT                      -->
+    <!-- ======================================================== -->
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="scroll-center">
+
+            <VBox spacing="40" styleClass="main-content">
+
+                <!-- Title -->
+                <Label text="Vue d’ensemble" styleClass="section-title"/>
+
+                <!-- ================= Cards ================= -->
+                <HBox spacing="30" alignment="CENTER">
+
+                    <VBox styleClass="stats-card" spacing="10">
+                        <Label text="👥" styleClass="stats-icon"/>
+                        <Label text="Utilisateurs" styleClass="stats-title"/>
+                        <Label fx:id="usersCount" text="0" styleClass="stats-value"/>
+                    </VBox>
+
+                    <VBox styleClass="stats-card" spacing="10">
+                        <Label text="📦" styleClass="stats-icon"/>
+                        <Label text="Produits" styleClass="stats-title"/>
+                        <Label fx:id="productsCount" text="0" styleClass="stats-value"/>
+                    </VBox>
+
+                    <VBox styleClass="stats-card" spacing="10">
+                        <Label text="🚚" styleClass="stats-icon"/>
+                        <Label text="Commades" styleClass="stats-title"/>
+                        <Label fx:id="commadeCount" text="0" styleClass="stats-value"/>
+                    </VBox>
+
+                </HBox>
+
+                <!-- ================= SECTION PLACEHOLDER ================= -->
+                <VBox spacing="18">
+                    <Label text="Activité récente" styleClass="section-title"/>
+
+                    <Pane prefHeight="240" styleClass="placeholder-box">
+                        <Label text="Graphique ou activité récente" styleClass="placeholder-text"/>
+                    </Pane>
+                </VBox>
+
+            </VBox>
+
+        </ScrollPane>
+    </center>
+
+    <!-- ======================================================== -->
+    <!--                          FOOTER                           -->
+    <!-- ======================================================== -->
+    <bottom>
+        <HBox alignment="CENTER" styleClass="footer">
+            <Label text="© 2025 B2B Platform | All rights reserved" styleClass="footer-text"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

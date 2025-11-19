@@ -15,6 +15,8 @@ public class AuthController {
     @FXML private Button slideButton;
 
     @FXML private Button loginButton; // <----- add this
+    @FXML private Button signupButton; // <----- add this
+
 
     private boolean showingLogin = true;
 
@@ -27,6 +29,10 @@ public class AuthController {
         // SIGN IN -> Homepage
         loginButton.setOnAction(e -> {
             AppNavigator.navigateTo("homepage.fxml");
+        });
+        signupButton.setOnAction(e -> {
+            System.out.println("GHA DFE3 LKEROSSA BINMA T9AD HADCHI");
+            AppNavigator.navigateTo("AdminDashBoard.fxml");
         });
     }
 

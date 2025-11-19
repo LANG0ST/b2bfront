@@ -1,0 +1,355 @@
+/* ===========================================================
+   GLOBAL
+=========================================================== */
+.root {
+    -fx-font-family: "Segoe UI", system-ui;
+    -fx-background-color: #F5F5F5;
+}
+
+/* ScrollPane (center) */
+.scroll-center {
+    -fx-background-color: transparent;
+}
+
+.main-content {
+    -fx-padding: 40 60;
+}
+
+/* ===========================================================
+   TOP HEADER
+=========================================================== */
+.top-header {
+    -fx-background-color: white;
+    -fx-padding: 18 28;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 14, 0, 0, 3);
+}
+
+.header-title {
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.search-bar {
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-background-color: #F2F2F2;
+    -fx-padding: 6 12;
+    -fx-font-size: 13;
+}
+
+.search-bar:focused {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #FF8A00;
+}
+
+.profile-name {
+    -fx-font-size: 14;
+    -fx-font-weight: 600;
+    -fx-text-fill: #444444;
+}
+
+.profile-avatar {
+    -fx-background-radius: 50%;
+}
+
+/* ===========================================================
+   SIDEBAR
+=========================================================== */
+.sidebar {
+    -fx-background-color: white;
+    -fx-padding: 25 18;
+    -fx-pref-width: 210;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 15, 0, 0, 3);
+}
+
+.sidebar-section {
+    -fx-font-size: 13;
+    -fx-text-fill: #777777;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 8 2;
+}
+
+.sidebar-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: #444444;
+    -fx-font-size: 14;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 8 14;
+    -fx-background-radius: 8;
+}
+
+.sidebar-item:hover {
+    -fx-background-color: #FFE7D1;
+    -fx-text-fill: #FF8A00;
+    -fx-cursor: hand;
+}
+
+.sidebar-active {
+    -fx-background-color: #FF8A00;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.sidebar-logout {
+    -fx-background-color: #FF4444;
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 14;
+}
+
+.sidebar-logout:hover {
+    -fx-background-color: #d43434;
+    -fx-cursor: hand;
+}
+
+/* ===========================================================
+   TITLES & SECTIONS
+=========================================================== */
+.section-title {
+    -fx-font-size: 22;
+    -fx-font-weight: 800;
+    -fx-text-fill: #3A3A3A;
+    -fx-opacity: 0.95;
+    -fx-padding: 0 0 6 0;
+    -fx-letter-spacing: 0.5px;
+}
+
+
+
+/* ===========================================================
+   STATS CARDS
+=========================================================== */
+.stats-card {
+    -fx-background-color: white;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+    -fx-padding: 22 26;
+    -fx-pref-width: 230;
+    -fx-alignment: CENTER;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 12, 0, 0, 2);
+}
+
+.stats-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0, 0, 3);
+    -fx-translate-y: -2;
+    -fx-cursor: hand;
+}
+
+.stats-icon {
+    -fx-font-size: 32;
+}
+
+.stats-title {
+    -fx-font-size: 14;
+    -fx-text-fill: #333333;
+}
+
+.stats-value {
+    -fx-font-size: 28;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FF8A00;
+}
+
+/* ===========================================================
+   PLACEHOLDER BOX (Graph space)
+=========================================================== */
+.placeholder-box {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 12, 0, 0, 3);
+    -fx-alignment: CENTER;
+}
+
+.placeholder-text {
+    -fx-font-size: 14;
+    -fx-text-fill: #777777;
+    -fx-opacity: 0.7;
+}
+
+/* ===========================================================
+   QUICK ACTION CARDS
+=========================================================== */
+.quick-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-padding: 20 28;
+    -fx-pref-width: 200;
+    -fx-alignment: CENTER;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);
+}
+
+.quick-card:hover {
+    -fx-background-color: #FFE7D1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.14), 14, 0, 0, 3);
+    -fx-cursor: hand;
+}
+
+.quick-text {
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FF8A00;
+}
+
+/* ===========================================================
+   FOOTER
+=========================================================== */
+.footer {
+    -fx-background-color: white;
+    -fx-padding: 14 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, -2);
+}
+
+.footer-text {
+    -fx-font-size: 12;
+    -fx-text-fill: #777777;
+}
+/* ===========================================================
+   USERS TABLE — DESIGN COMPLET
+=========================================================== */
+
+.users-table {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);
+    -fx-border-radius: 12;
+}
+
+/* Hauteur de ligne */
+.table-row-cell {
+    -fx-cell-size: 48px;
+}
+
+/* Texte des cellules */
+.users-table .table-cell {
+    -fx-text-fill: #333333;
+    -fx-font-size: 14px;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* Header (ligne des titres) */
+.users-table .column-header-background {
+    -fx-background-color: #F2F2F2;
+    -fx-background-radius: 8 8 0 0;
+}
+
+.users-table .column-header .label {
+    -fx-text-fill: #555555;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+/* Hover row */
+.table-row-cell:hover {
+    -fx-background-color: #FFF5EB;
+}
+
+/* Selected row */
+.table-row-cell:selected {
+    -fx-background-color: #FFE7D1 !important;
+    -fx-text-fill: #222222;
+}
+
+/* CheckBox colonne gauche */
+.table-row-cell .check-box {
+    -fx-padding: 0 15;
+}
+
+/* ===========================================================
+   ACTION BUTTONS (dans la colonne Actions)
+=========================================================== */
+
+.action-btn {
+    -fx-background-color: #FF8A00;
+    -fx-text-fill: white;
+    -fx-padding: 6 14;
+    -fx-background-radius: 6;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.action-btn:hover {
+    -fx-background-color: #e67a00;
+}
+
+.action-btn-green {
+    -fx-background-color: #0CA10C;
+    -fx-text-fill: white;
+    -fx-padding: 6 14;
+    -fx-background-radius: 6;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.action-btn-green:hover {
+    -fx-background-color: #0b880b;
+}
+
+.action-btn-red {
+    -fx-background-color: #FF4747;
+    -fx-text-fill: white;
+    -fx-padding: 6 14;
+    -fx-background-radius: 6;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.action-btn-red:hover {
+    -fx-background-color: #d63838;
+}
+
+/* Alignement des boutons d'action */
+.action-buttons-box {
+    -fx-alignment: CENTER_LEFT;
+    -fx-spacing: 10;
+}
+
+/* ===========================================================
+   SEARCH + FILTERS
+=========================================================== */
+
+.search-bar-users {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8;
+    -fx-padding: 8 12;
+    -fx-font-size: 14;
+    -fx-border-color: #DDDDDD;
+    -fx-border-radius: 8;
+}
+
+.search-bar-users:focused {
+    -fx-border-color: #FF8A00;
+}
+
+/* Filter combo boxes */
+.filter-box {
+    -fx-background-radius: 8;
+    -fx-padding: 6 10;
+    -fx-font-size: 13;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #DDDDDD;
+    -fx-border-radius: 8;
+}
+
+.clear-filters-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: #FF8A00;
+    -fx-border-radius: 8;
+    -fx-text-fill: #FF8A00;
+    -fx-padding: 6 14;
+    -fx-font-weight: bold;
+}
+
+.clear-filters-btn:hover {
+    -fx-background-color: #FFF2E5;
+}
+
+
+
+
+
+
