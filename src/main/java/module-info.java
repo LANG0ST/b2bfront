@@ -8,6 +8,9 @@ module b2bfront {
     opens org.fx.b2bfront.controller.home to javafx.fxml;
     opens org.fx.b2bfront.controller.components to javafx.fxml;
     opens org.fx.b2bfront.controller.categories to javafx.fxml;
+    opens org.fx.b2bfront.controller.product to javafx.fxml;
+    opens org.fx.b2bfront.controller.cart to javafx.fxml;
+    opens org.fx.b2bfront.controller.reviews to javafx.fxml;
 
 
     exports org.fx.b2bfront;
@@ -15,6 +18,8 @@ module b2bfront {
     exports org.fx.b2bfront.controller.home;
     exports org.fx.b2bfront.controller.components;
     exports org.fx.b2bfront.controller.categories;
-
+    exports org.fx.b2bfront.controller.product;
+    exports org.fx.b2bfront.controller.cart;
+    exports org.fx.b2bfront.controller.reviews;
 
 }
