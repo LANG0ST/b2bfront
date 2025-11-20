@@ -61,7 +61,7 @@
         <Button styleClass="nav-button" text="Dashboard" />
 
         <!-- Account Button -->
-        <Button styleClass="nav-button" text="👤 Account" />
+        <Button styleClass="nav-button" text="Account" />
 
     </HBox>
 
