@@ -57,6 +57,7 @@
    SIDEBAR
 =========================================================== */
 .sidebar {
+    -fx-alignment:CENTER;
     -fx-background-color: white;
     -fx-padding: 25 18;
     -fx-pref-width: 210;
@@ -142,6 +143,7 @@
 }
 
 .stats-title {
+    -fx-alignment : center;
     -fx-font-size: 14;
     -fx-text-fill: #333333;
 }
@@ -149,7 +151,7 @@
 .stats-value {
     -fx-font-size: 28;
     -fx-font-weight: bold;
-    -fx-text-fill: #FF8A00;
+    -fx-text-fill: green;
 }
 
 /* ===========================================================
@@ -348,8 +350,142 @@
     -fx-background-color: #FFF2E5;
 }
 
+.mini-card {
+    -fx-background-color: white;
+    -fx-padding: 15;
+    -fx-min-width: 220;
+    -fx-min-height: 120;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #d0d0d0;
+}
+
+.section-title-small {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
 
 
 
+/* ===========================================================
+   STATS CARDS
+=========================================================== */
+.stats-card-d {
+    -fx-background-color: #fff7ee;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+    -fx-padding: 22 26;
+    -fx-pref-width: 400;
+    -fx-pref-height: 230;
+    -fx-alignment: CENTER;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 12, 0, 0, 2);
+}
+
+.stats-card-d:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0, 0, 3);
+    -fx-translate-y: -2;
+    -fx-cursor: hand;
+}
+
+.stats-icon-d {
+    -fx-font-size: 40;
+}
+
+.stats-title-d {
+    -fx-font-size: 22;
+    -fx-text-fill: #333333;
+}
+
+.stats-value-d {
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FF8A00;
+}
+
+
+
+.stats-section-card {
+    -fx-background-color: white;
+    -fx-background-radius: 14;
+    -fx-padding: 25 25 30 25;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0.2, 0, 3);
+}
+
+
+.section-more {
+    -fx-text-fill: #FF8A00;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+
+.section-more:hover {
+    -fx-text-fill: #d46d00;
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
+
+.section-separator {
+    -fx-background-color: rgba(0,0,0,0.08);
+    -fx-min-height: 1.5px;
+    -fx-max-height: 1.5px;
+    -fx-background-radius: 2;
+}
+
+
+/* =============================================
+   TOP LIST RANKING PAGE
+============================================= */
+
+.ranking-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-padding: 14 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0.1, 0, 2);
+    -fx-spacing: 20;
+    -fx-focus-traversable: false
+    }
+
+.ranking-card:focused {
+        -fx-focus-color: transparent;
+        -fx-faint-focus-color: transparent
+    }
+
+
+.ranking-card:hover {
+    -fx-background-color: #FFF4E6;
+    -fx-cursor: hand;
+}
+
+.rank-number {
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FF8A00;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.rank-name {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-alignment: CENTER;
+
+}
+
+.rank-value {
+    -fx-font-size: 16;
+    -fx-text-fill: #555555;
+    -fx-alignment: CENTER_RIGHT;
+
+}
+
+.ranking-container {
+    -fx-background-color: #ededed;
+    -fx-background-radius: 18;
+    -fx-padding: 35 35 45 35;
+    -fx-spacing: 18;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0.2, 0, 4);
+    -fx-focus-traversable: false
+}
 
 

@@ -5,10 +5,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.fx.b2bfront.model.Company;
 import org.fx.b2bfront.utils.AppNavigator;
@@ -162,7 +166,29 @@ public class UsersController {
         statusFilter.valueProperty().addListener((obs, oldV, newV) -> applyFilters());
         cityFilter.valueProperty().addListener((obs, oldV, newV) -> applyFilters());
         clearFiltersBtn.setOnAction(e -> resetFilters());
+
+        usersTable.setRowFactory(tv -> {
+            TableRow<Company> row = new TableRow<>();
+
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && !row.isEmpty()) {
+                    Company selected = row.getItem();
+                    openUserDetails(selected);
+                }
+            });
+
+            return row;
+        });
+
+
+
     }
+
+    private void openUserDetails(Company user) {
+            AppNavigator.navigateTo("Admin/UserDetails.fxml");
+    }
+
+
 
 
     // ======================================================
@@ -209,17 +235,17 @@ public class UsersController {
 
     @FXML
     private void openDashboard(MouseEvent event) {
-        AppNavigator.navigateTo("AdminDashBoard.fxml");
+        AppNavigator.navigateTo("Admin/AdminDashBoard.fxml");
     }
 
     @FXML
     private void openUsersModule(MouseEvent event) {
-        AppNavigator.navigateTo("GestionUsers.fxml");
+        AppNavigator.navigateTo("Admin/GestionUsers.fxml");
     }
 
     @FXML
     private void openProductsModule(MouseEvent event) {
-        AppNavigator.navigateTo("GestionProducts.fxml");
+        AppNavigator.navigateTo("Admin/GestionProducts.fxml");
     }
 
     @FXML

@@ -32,7 +32,7 @@ public class AuthController {
         });
         signupButton.setOnAction(e -> {
             System.out.println("GHA DFE3 LKEROSSA BINMA T9AD HADCHI");
-            AppNavigator.navigateTo("AdminDashBoard.fxml");
+            AppNavigator.navigateTo("Admin/AdminDashBoard.fxml");
         });
     }
 

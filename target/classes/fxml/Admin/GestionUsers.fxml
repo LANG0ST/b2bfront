@@ -9,7 +9,7 @@
 <BorderPane xmlns="http://javafx.com/javafx/20"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="org.fx.b2bfront.controller.Admin.UsersController"
-            stylesheets="@../style/dashboard.css"
+            stylesheets="@../../style/dashboard.css"
             prefHeight="900" prefWidth="1600">
 
     <!-- ======================================================== -->
@@ -21,7 +21,7 @@
             <!-- Logo -->
             <ImageView fitHeight="42" fitWidth="42" preserveRatio="true">
                 <image>
-                    <Image url="@../images/logo.png"/>
+                    <Image url="@../../images/logo.png"/>
                 </image>
             </ImageView>
 
@@ -30,17 +30,11 @@
 
             <Region HBox.hgrow="ALWAYS"/>
 
-            <!-- Search bar -->
-            <TextField promptText="Rechercher..."
-                       styleClass="search-bar"
-                       prefWidth="320"/>
-
-            <!-- Profile -->
             <HBox spacing="12" alignment="CENTER_RIGHT">
                 <Label text="Admin" styleClass="profile-name"/>
                 <ImageView fitHeight="36" fitWidth="36" preserveRatio="true" styleClass="profile-avatar">
                     <image>
-                        <Image url="@../images/admin.png"/>
+                        <Image url="@../../images/admin.png"/>
                     </image>
                 </ImageView>
             </HBox>
@@ -53,17 +47,20 @@
     <!-- ======================================================== -->
     <left>
         <VBox spacing="8" styleClass="sidebar">
-
             <Label text="MENU" styleClass="sidebar-section"/>
 
-            <Button text="Dashboard"      styleClass="sidebar-item" onMouseClicked="#openDashboard"/>
-            <Button text="Gestion d'Utilisateurs"   styleClass="sidebar-active" onMouseClicked="#openUsersModule"/>
-            <Button text="Gestion de Produits"       styleClass="sidebar-item" onMouseClicked="#openProductsModule"/>
+            <Region styleClass="section-separator"/>
+            <Button text="Dashboard" styleClass="sidebar-item" onMouseClicked="#openDashboard"/>
+            <Region styleClass="section-separator"/>
+            <Button text="Gestion d'Utilisateurs" styleClass="sidebar-active" onMouseClicked="#openUsersModule"/>
+            <Region styleClass="section-separator"/>
+            <Button text="Gestion de Produits" styleClass="sidebar-item" onMouseClicked="#openProductsModule"/>
+            <Region styleClass="section-separator"/>
 
             <Region VBox.vgrow="ALWAYS"/>
 
-            <Button text="Déconnexion"    styleClass="sidebar-logout" onMouseClicked="#openAuthpage"/>
-
+            <Region styleClass="section-separator"/>
+            <Button text="Déconnexion" styleClass="sidebar-logout" onMouseClicked="#openAuthpage"/>
         </VBox>
     </left>
     <Region VBox.vgrow="ALWAYS"/>

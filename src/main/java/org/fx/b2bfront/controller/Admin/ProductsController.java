@@ -175,20 +175,16 @@ public class ProductsController {
 
     @FXML
     public void openDashboard(MouseEvent event) {
-        System.out.println("Dashboard clicked");
-        AppNavigator.navigateTo("AdminDashboard.fxml");
+        AppNavigator.navigateTo("Admin/AdminDashboard.fxml");
     }
 
     @FXML
     public void openUsersModule(MouseEvent event) {
-        System.out.println("Open Users...");
-        AppNavigator.navigateTo("GestionUsers.fxml");
+        AppNavigator.navigateTo("Admin/GestionUsers.fxml");
     }
 
     @FXML
-    public void openProductsModule(MouseEvent event) {
-        System.out.println("Already in Products.");
-    }
+    public void openProductsModule(MouseEvent event) {AppNavigator.navigateTo("Admin/GestionProducts.fxml");}
 
     @FXML
     private void openAuthpage(MouseEvent event) {
