@@ -4,10 +4,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 import org.fx.b2bfront.model.*;
 import org.fx.b2bfront.utils.AppNavigator;
@@ -73,11 +76,9 @@ public class ProductsController {
             public TableCell<Produit, Void> call(TableColumn<Produit, Void> param) {
                 return new TableCell<>() {
 
-                    private final Button editBtn = new Button("Modifier");
                     private final Button deleteBtn = new Button("Supprimer");
 
                     {
-                        editBtn.setStyle("-fx-background-color:#FF8A00; -fx-text-fill:white;");
                         deleteBtn.setStyle("-fx-background-color:#FF4747; -fx-text-fill:white;");
 
                         // DELETE action
@@ -93,7 +94,8 @@ public class ProductsController {
                         super.updateItem(item, empty);
                         if (empty) setGraphic(null);
                         else {
-                            HBox box = new HBox(10, editBtn, deleteBtn);
+                            HBox box = new HBox(10, deleteBtn);
+                            box.getStyleClass().add("action-buttons-box");
                             setGraphic(box);
                         }
                     }
@@ -111,6 +113,39 @@ public class ProductsController {
         searchField.textProperty().addListener((obs, oldV, newV) -> applyFilters());
         filterCategorie.valueProperty().addListener((obs, oldV, newV) -> applyFilters());
         filterCompany.valueProperty().addListener((obs, oldV, newV) -> applyFilters());
+
+        productsTable.setRowFactory(tv -> {
+            TableRow<Produit> row = new TableRow<>();
+
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && !row.isEmpty()) {
+                    Produit selectedProduct = row.getItem();
+                    openProductDetails(selectedProduct);
+                }
+            });
+
+            return row;
+        });
+    }
+
+    @FXML
+    private StackPane mainContent;
+
+    private void openProductDetails(Produit prod) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Admin/ProductDetails.fxml"));
+            Parent detailsRoot = loader.load();
+
+            // Récupérer le controller de la nouvelle page
+            ProductDetailsController controller = loader.getController();
+            controller.setProd(prod);
+
+            // Remplacer le contenu du center
+            mainContent.getChildren().setAll(detailsRoot);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // FILTRAGE LOGIQUE

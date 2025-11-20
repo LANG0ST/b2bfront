@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.fx.b2bfront.model.Company;
+import org.fx.b2bfront.utils.AppNavigator;
 
 public class UserDetailsController {
 
@@ -30,8 +31,9 @@ public class UserDetailsController {
     }
 
     @FXML
-    private void closeWindow() {
-        Stage stage = (Stage) title.getScene().getWindow();
-        stage.close();
+    private void goBack() {
+        AppNavigator.navigateTo("Admin/GestionUsers.fxml");
     }
+
+
 }

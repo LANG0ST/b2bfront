@@ -67,7 +67,8 @@
 
     <!-- CONTENT -->
     <center>
-        <VBox spacing="30" styleClass="main-content">
+        <StackPane fx:id="mainContent">
+        <VBox spacing="30" styleClass="main-content" fx:id="usersPage">
 
             <Label text="Gestion des utilisateurs" styleClass="section-title"/>
 
@@ -125,6 +126,7 @@
             </TableView>
 
         </VBox>
+        </StackPane>
     </center>
 
     <!-- ======================================================== -->

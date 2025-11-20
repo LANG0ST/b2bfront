@@ -68,7 +68,8 @@
 
     <!-- CONTENT -->
     <center>
-        <VBox spacing="30" styleClass="main-content">
+        <StackPane fx:id="mainContent">
+        <VBox spacing="30" styleClass="main-content" fx:id="productsPage">
 
             <Label text="Gestion des produits" styleClass="section-title"/>
 
@@ -96,6 +97,7 @@
             </VBox>
 
         </VBox>
+        </StackPane>
     </center>
     <!-- ======================================================== -->
     <!--                          FOOTER                           -->

@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.fx.b2bfront.model.Company;
@@ -172,21 +173,36 @@ public class UsersController {
 
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && !row.isEmpty()) {
-                    Company selected = row.getItem();
-                    openUserDetails(selected);
+                    Company selectedUser = row.getItem();
+                    openUserDetails(selectedUser);
                 }
             });
 
             return row;
         });
 
-
-
     }
+
+    @FXML
+    private StackPane mainContent;
 
     private void openUserDetails(Company user) {
-            AppNavigator.navigateTo("Admin/UserDetails.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Admin/UserDetails.fxml"));
+            Parent detailsRoot = loader.load();
+
+            // Récupérer le controller de la nouvelle page
+            UserDetailsController controller = loader.getController();
+            controller.setUser(user);
+
+            // Remplacer le contenu du center
+            mainContent.getChildren().setAll(detailsRoot);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 
 
 

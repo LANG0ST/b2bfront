@@ -22,6 +22,7 @@ public class MainApp extends Application {
         stage.setTitle("B2B Platform");
         stage.setScene(scene);
         stage.show();
+        stage.setResizable(false);
     }
 
     public static void main(String[] args) {

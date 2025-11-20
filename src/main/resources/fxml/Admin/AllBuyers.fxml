@@ -1,32 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.geometry.*?>
 
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<BorderPane xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.fx.b2bfront.controller.Admin.AllBuyersController"
-            stylesheets="@../../style/dashboard.css"
-            prefHeight="900" prefWidth="1600">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="900" prefWidth="1600" stylesheets="@../../style/dashboard.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fx.b2bfront.controller.Admin.AllBuyersController">
 
     <!-- SAME TOP -->
     <top>
         <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-header">
 
             <ImageView fitHeight="42" fitWidth="42" preserveRatio="true">
-                <image><Image url="@../../images/logo.png"/></image>
+                <image><Image url="@../../images/logo.png" /></image>
             </ImageView>
 
-            <Label text="B2B Admin Dashboard" styleClass="header-title"/>
-            <Region HBox.hgrow="ALWAYS"/>
+            <Label styleClass="header-title" text="B2B Admin Dashboard" />
+            <Region HBox.hgrow="ALWAYS" />
 
 
-            <HBox spacing="12" alignment="CENTER_RIGHT">
-                <Label text="Admin" styleClass="profile-name"/>
+            <HBox alignment="CENTER_RIGHT" spacing="12">
+                <Label styleClass="profile-name" text="Admin" />
                 <ImageView fitHeight="36" fitWidth="36" preserveRatio="true" styleClass="profile-avatar">
-                    <image><Image url="@../../images/admin.png"/></image>
+                    <image><Image url="@../../images/admin.png" /></image>
                 </ImageView>
             </HBox>
 
@@ -36,20 +32,20 @@
     <!-- SAME SIDEBAR -->
     <left>
         <VBox spacing="8" styleClass="sidebar">
-            <Label text="MENU" styleClass="sidebar-section"/>
+            <Label styleClass="sidebar-section" text="MENU" />
 
-            <Region styleClass="section-separator"/>
-            <Button text="Dashboard" styleClass="sidebar-item" onMouseClicked="#openDashboard"/>
-            <Region styleClass="section-separator"/>
-            <Button text="Gestion d'Utilisateurs" styleClass="sidebar-item" onMouseClicked="#openUsersModule"/>
-            <Region styleClass="section-separator"/>
-            <Button text="Gestion de Produits" styleClass="sidebar-item" onMouseClicked="#openProductsModule"/>
-            <Region styleClass="section-separator"/>
+            <Region styleClass="section-separator" />
+            <Button onMouseClicked="#openDashboard" styleClass="sidebar-item" text="Dashboard" />
+            <Region styleClass="section-separator" />
+            <Button onMouseClicked="#openUsersModule" styleClass="sidebar-item" text="Gestion d'Utilisateurs" />
+            <Region styleClass="section-separator" />
+            <Button onMouseClicked="#openProductsModule" styleClass="sidebar-item" text="Gestion de Produits" />
+            <Region styleClass="section-separator" />
 
-            <Region VBox.vgrow="ALWAYS"/>
+            <Region VBox.vgrow="ALWAYS" />
 
-            <Region styleClass="section-separator"/>
-            <Button text="Déconnexion" styleClass="sidebar-logout" onMouseClicked="#openAuthpage"/>
+            <Region styleClass="section-separator" />
+            <Button onMouseClicked="#openAuthpage" styleClass="sidebar-logout" text="Déconnexion" />
         </VBox>
     </left>
 
@@ -58,10 +54,13 @@
             <VBox alignment="TOP_CENTER" spacing="30" style="-fx-padding: 40 70;">
 
                 <!-- PAGE TITLE -->
-                <Label text="Ranking Of All Buyers" styleClass="section-title"/>
+                <Label contentDisplay="CENTER" styleClass="section-title" text="Ranking Of All Buyers" textOverrun="CLIP">
+               <font>
+                  <Font name="Bell MT Bold" size="12.0" />
+               </font></Label>
 
                 <!-- BIG WRAPPER -->
-                <VBox fx:id="rankingContainer" styleClass="ranking-container"/>
+                <VBox fx:id="rankingContainer" styleClass="ranking-container" />
 
             </VBox>
         </ScrollPane>
@@ -70,7 +69,7 @@
     <!-- SAME FOOTER -->
     <bottom>
         <HBox alignment="CENTER" styleClass="footer">
-            <Label text="© 2025 B2B Platform | All rights reserved" styleClass="footer-text"/>
+            <Label styleClass="footer-text" text="© 2025 B2B Platform | All rights reserved" />
         </HBox>
     </bottom>
 

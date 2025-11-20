@@ -30,19 +30,6 @@
     -fx-text-fill: #333333;
 }
 
-.search-bar {
-    -fx-background-radius: 8;
-    -fx-border-radius: 8;
-    -fx-background-color: #F2F2F2;
-    -fx-padding: 6 12;
-    -fx-font-size: 13;
-}
-
-.search-bar:focused {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #FF8A00;
-}
-
 .profile-name {
     -fx-font-size: 14;
     -fx-font-weight: 600;
@@ -50,7 +37,7 @@
 }
 
 .profile-avatar {
-    -fx-background-radius: 50%;
+    -fx-background-radius: 100%;
 }
 
 /* ===========================================================
@@ -230,7 +217,7 @@
 .users-table .table-cell {
     -fx-text-fill: #333333;
     -fx-font-size: 14px;
-    -fx-alignment: CENTER_LEFT;
+    -fx-alignment : CENTER;
 }
 
 /* Header (ligne des titres) */
@@ -248,12 +235,6 @@
 /* Hover row */
 .table-row-cell:hover {
     -fx-background-color: #FFF5EB;
-}
-
-/* Selected row */
-.table-row-cell:selected {
-    -fx-background-color: #FFE7D1 !important;
-    -fx-text-fill: #222222;
 }
 
 /* CheckBox colonne gauche */
@@ -306,7 +287,7 @@
 
 /* Alignement des boutons d'action */
 .action-buttons-box {
-    -fx-alignment: CENTER_LEFT;
+    -fx-alignment: CENTER;
     -fx-spacing: 10;
 }
 
@@ -321,10 +302,6 @@
     -fx-font-size: 14;
     -fx-border-color: #DDDDDD;
     -fx-border-radius: 8;
-}
-
-.search-bar-users:focused {
-    -fx-border-color: #FF8A00;
 }
 
 /* Filter combo boxes */
@@ -446,12 +423,6 @@
     -fx-focus-traversable: false
     }
 
-.ranking-card:focused {
-        -fx-focus-color: transparent;
-        -fx-faint-focus-color: transparent
-    }
-
-
 .ranking-card:hover {
     -fx-background-color: #FFF4E6;
     -fx-cursor: hand;
@@ -487,5 +458,75 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0.2, 0, 4);
     -fx-focus-traversable: false
 }
+
+
+
+/* PAGE DETAILS */
+
+/* Avatar rond avec fond orange clair */
+.user-avatar {
+    -fx-font-size: 50;
+    -fx-background-color: #FFE5CC;
+    -fx-background-radius: 50%;
+    -fx-min-width: 90;
+    -fx-min-height: 90;
+    -fx-alignment: center;
+}
+
+/* Nom */
+.user-title {
+    -fx-font-size: 22;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+/* Sous texte */
+.user-subtitle {
+    -fx-font-size: 13;
+    -fx-text-fill: #777777;
+}
+
+/* Ligne séparatrice */
+.separator-line {
+    -fx-background-color: rgba(0,0,0,0.12);
+    -fx-pref-height: 1.3px;
+    -fx-background-radius: 2;
+}
+
+/* Labels à gauche */
+.details-label {
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-text-fill: #555555;
+}
+
+/* Valeurs */
+.details-value {
+    -fx-font-size: 14;
+    -fx-text-fill: #2d2d2d;
+}
+
+/* Ligne des champs */
+.form-field {
+    -fx-background-color: #F7F7F7;
+    -fx-padding: 12 15;
+    -fx-background-radius: 10;
+}
+
+/* Bouton Retour simple */
+.back-btn-text {
+    -fx-background-color: #FF8A00;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 24;
+    -fx-background-radius: 10;
+    -fx-font-size: 14;
+}
+
+.back-btn-text:hover {
+    -fx-background-color: #e57a00;
+}
+
+
 
 

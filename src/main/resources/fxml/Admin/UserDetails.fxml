@@ -7,30 +7,71 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.fx.b2bfront.controller.Admin.UserDetailsController"
-      spacing="20" alignment="TOP_LEFT">
-    <padding><Insets top="30" right="30" bottom="30" left="30"/></padding>
+      spacing="25" alignment="TOP_CENTER"
+      style="-fx-background-color: #FFFFFF; -fx-background-radius: 14;">
 
-    <Label fx:id="title" style="-fx-font-size: 22; -fx-font-weight: bold;"/>
+    <padding>
+        <Insets top="30" right="40" bottom="30" left="40"/>
+    </padding>
 
-    <GridPane hgap="20" vgap="12">
-        <Label text="Nom :" />
-        <Label fx:id="nameLabel"/>
+    <!-- ===================== AVATAR + NAME ===================== -->
+    <VBox alignment="CENTER" spacing="12">
 
-        <Label text="Téléphone :" GridPane.rowIndex="1"/>
-        <Label fx:id="phoneLabel" GridPane.rowIndex="1"/>
+        <!-- AVATAR CIRCLE -->
+        <Label text="👥" styleClass="user-avatar"/>
 
-        <Label text="Email :" GridPane.rowIndex="2"/>
-        <Label fx:id="emailLabel" GridPane.rowIndex="2"/>
+        <!-- USER NAME -->
+        <Label fx:id="title" styleClass="user-title"/>
 
-        <Label text="Ville :" GridPane.rowIndex="3"/>
-        <Label fx:id="cityLabel" GridPane.rowIndex="3"/>
+        <!-- Small Description -->
+        <Label text="Profil utilisateur" styleClass="user-subtitle"/>
+    </VBox>
 
-        <Label text="Créé le :" GridPane.rowIndex="4"/>
-        <Label fx:id="createdAtLabel" GridPane.rowIndex="4"/>
+    <!-- ===================== SEPARATOR ===================== -->
+    <Region maxHeight="1" prefHeight="1" styleClass="separator-line"/>
 
-        <Label text="Statut :" GridPane.rowIndex="5"/>
-        <Label fx:id="statusLabel" GridPane.rowIndex="5"/>
-    </GridPane>
+    <!-- ===================== FORM-LIKE FIELDS ===================== -->
+    <VBox spacing="18" alignment="TOP_LEFT" style="-fx-padding: 10 0 0 0;">
+
+        <!-- Nom -->
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="form-field">
+            <Label text="Nom :" styleClass="details-label"/>
+            <Label fx:id="nameLabel" styleClass="details-value"/>
+        </HBox>
+
+        <!-- Tel -->
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="form-field">
+            <Label text="Téléphone :" styleClass="details-label"/>
+            <Label fx:id="phoneLabel" styleClass="details-value"/>
+        </HBox>
+
+        <!-- Email -->
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="form-field">
+            <Label text="Email :" styleClass="details-label"/>
+            <Label fx:id="emailLabel" styleClass="details-value"/>
+        </HBox>
+
+        <!-- Ville -->
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="form-field">
+            <Label text="Ville :" styleClass="details-label"/>
+            <Label fx:id="cityLabel" styleClass="details-value"/>
+        </HBox>
+
+        <!-- Created At -->
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="form-field">
+            <Label text="Créé le :" styleClass="details-label"/>
+            <Label fx:id="createdAtLabel" styleClass="details-value"/>
+        </HBox>
+
+        <!-- Status -->
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="form-field">
+            <Label text="Statut :" styleClass="details-label"/>
+            <Label fx:id="statusLabel" styleClass="details-value"/>
+        </HBox>
+
+    </VBox>
+
+    <!-- ===================== BACK BUTTON ===================== -->
+    <Button text="Retour" onAction="#goBack" styleClass="back-btn-text"/>
+
 </VBox>
-
-

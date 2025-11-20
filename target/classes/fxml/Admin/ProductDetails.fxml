@@ -6,7 +6,7 @@
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.fx.b2bfront.controller.Admin.UserDetailsController"
+      fx:controller="org.fx.b2bfront.controller.Admin.ProductDetailsController"
       spacing="25" alignment="TOP_CENTER"
       style="-fx-background-color: #FFFFFF; -fx-background-radius: 14;">
 
@@ -14,23 +14,23 @@
         <Insets top="30" right="40" bottom="30" left="40"/>
     </padding>
 
-    <!-- ===================== AVATAR + NAME ===================== -->
+    <!-- ===================== AVATAR + TITLE ===================== -->
     <VBox alignment="CENTER" spacing="12">
 
-        <!-- AVATAR CIRCLE -->
-        <Label text="👥" styleClass="user-avatar"/>
+        <!-- PRODUCT ICON -->
+        <Label text="📦" styleClass="user-avatar"/>
 
-        <!-- USER NAME -->
+        <!-- PRODUCT TITLE -->
         <Label fx:id="title" styleClass="user-title"/>
 
         <!-- Small Description -->
-        <Label text="Profil utilisateur" styleClass="user-subtitle"/>
+        <Label text="Fiche produit" styleClass="user-subtitle"/>
     </VBox>
 
     <!-- ===================== SEPARATOR ===================== -->
     <Region maxHeight="1" prefHeight="1" styleClass="separator-line"/>
 
-    <!-- ===================== FORM-LIKE FIELDS ===================== -->
+    <!-- ===================== PRODUCT FIELDS ===================== -->
     <VBox spacing="18" alignment="TOP_LEFT" style="-fx-padding: 10 0 0 0;">
 
         <!-- Nom -->
@@ -39,34 +39,34 @@
             <Label fx:id="nameLabel" styleClass="details-value"/>
         </HBox>
 
-        <!-- Tel -->
+        <!-- Description -->
         <HBox spacing="10" alignment="CENTER_LEFT" styleClass="form-field">
-            <Label text="Téléphone :" styleClass="details-label"/>
-            <Label fx:id="phoneLabel" styleClass="details-value"/>
+            <Label text="Description :" styleClass="details-label"/>
+            <Label fx:id="description" styleClass="details-value"/>
         </HBox>
 
-        <!-- Email -->
+        <!-- Catégorie -->
         <HBox spacing="10" alignment="CENTER_LEFT" styleClass="form-field">
-            <Label text="Email :" styleClass="details-label"/>
-            <Label fx:id="emailLabel" styleClass="details-value"/>
+            <Label text="Catégorie :" styleClass="details-label"/>
+            <Label fx:id="categorieLable" styleClass="details-value"/>
         </HBox>
 
-        <!-- Ville -->
+        <!-- Prix -->
         <HBox spacing="10" alignment="CENTER_LEFT" styleClass="form-field">
-            <Label text="Ville :" styleClass="details-label"/>
-            <Label fx:id="cityLabel" styleClass="details-value"/>
+            <Label text="Prix :" styleClass="details-label"/>
+            <Label fx:id="price" styleClass="details-value"/>
         </HBox>
 
-        <!-- Created At -->
+        <!-- Stock -->
         <HBox spacing="10" alignment="CENTER_LEFT" styleClass="form-field">
-            <Label text="Créé le :" styleClass="details-label"/>
-            <Label fx:id="createdAtLabel" styleClass="details-value"/>
+            <Label text="Stock :" styleClass="details-label"/>
+            <Label fx:id="stock" styleClass="details-value"/>
         </HBox>
 
-        <!-- Status -->
+        <!-- Entreprise -->
         <HBox spacing="10" alignment="CENTER_LEFT" styleClass="form-field">
-            <Label text="Statut :" styleClass="details-label"/>
-            <Label fx:id="statusLabel" styleClass="details-value"/>
+            <Label text="Entreprise :" styleClass="details-label"/>
+            <Label fx:id="company" styleClass="details-value"/>
         </HBox>
 
     </VBox>
