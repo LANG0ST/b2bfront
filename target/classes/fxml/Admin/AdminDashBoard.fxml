@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/20"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.fx.b2bfront.controller.Admin.AdminDashBoardController"
+            stylesheets="@../../style/dashboard.css"
+            prefHeight="900" prefWidth="1600">
+
+    <!-- SAME TOP -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-header">
+
+            <ImageView fitHeight="42" fitWidth="42" preserveRatio="true">
+                <image><Image url="@../../images/logo.png"/></image>
+            </ImageView>
+
+            <Label text="B2B Admin Dashboard" styleClass="header-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <HBox spacing="12" alignment="CENTER_RIGHT">
+                <Label text="Admin" styleClass="profile-name"/>
+                <ImageView fitHeight="36" fitWidth="36" preserveRatio="true" styleClass="profile-avatar">
+                    <image><Image url="@../../images/admin.png"/></image>
+                </ImageView>
+            </HBox>
+
+        </HBox>
+    </top>
+
+    <!-- SAME SIDEBAR -->
+    <left>
+        <VBox spacing="8" styleClass="sidebar">
+            <Label text="MENU" styleClass="sidebar-section"/>
+
+            <Region styleClass="section-separator"/>
+            <Button text="Dashboard" styleClass="sidebar-active" onMouseClicked="#openDashboard"/>
+            <Region styleClass="section-separator"/>
+            <Button text="Gestion d'Utilisateurs" styleClass="sidebar-item" onMouseClicked="#openUsersModule"/>
+            <Region styleClass="section-separator"/>
+            <Button text="Gestion de Produits" styleClass="sidebar-item" onMouseClicked="#openProductsModule"/>
+            <Region styleClass="section-separator"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Region styleClass="section-separator"/>
+            <Button text="Déconnexion" styleClass="sidebar-logout" onMouseClicked="#openAuthpage"/>
+        </VBox>
+    </left>
+
+    <!-- ===================== MAIN CENTER ===================== -->
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="scroll-center">
+            <VBox spacing="60" styleClass="main-content">
+                <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+                <HBox alignment="CENTER" spacing="12" styleClass="section-header">
+                    <Label text="Vue d’ensemble" styleClass="section-title"/>
+                </HBox>
+
+                <!-- ================= CARDS ================= -->
+                <HBox spacing="30" alignment="CENTER">
+                    <VBox spacing="10" styleClass="stats-card" onMouseClicked="#openUsersModule" >
+                        <Label text="👥" styleClass="stats-icon"/>
+                        <Label text="Utilisateurs" styleClass="stats-title"/>
+                        <Label fx:id="usersCount" text="0" styleClass="stats-value"/>
+
+                    </VBox>
+
+                    <VBox spacing="10" styleClass="stats-card" onMouseClicked="#openProductsModule">
+                        <Label text="📦" styleClass="stats-icon"/>
+                        <Label text="Produits" styleClass="stats-title"/>
+                        <Label fx:id="productsCount" text="0" styleClass="stats-value"/>
+                    </VBox>
+
+                    <VBox spacing="10" styleClass="stats-card">
+                        <Label text="🚚" styleClass="stats-icon"/>
+                        <Label text="Commandes" styleClass="stats-title"/>
+                        <Label fx:id="ordersCount" text="0" styleClass="stats-value"/>
+                    </VBox>
+                </HBox>
+
+
+                <!-- ============ TOP 3 SELLERS ============ -->
+                <VBox spacing="25" styleClass="stats-section-card">
+
+                    <HBox alignment="CENTER" spacing="12" styleClass="section-header">
+                        <Label text="Top 3 Sellers" styleClass="section-title"/>
+                    </HBox>
+
+                    <Region styleClass="section-separator"/>
+
+                    <HBox spacing="25" alignment="CENTER">
+                        <VBox fx:id="sellerBox1" styleClass="stats-card-d" />
+                        <VBox fx:id="sellerBox2" styleClass="stats-card-d"/>
+                        <VBox fx:id="sellerBox3" styleClass="stats-card-d"/>
+                    </HBox>
+
+                    <HBox alignment="CENTER" spacing="12" styleClass="section-header">
+                        <Hyperlink text="More →" onAction="#openAllSellers" styleClass="section-more"/>
+                    </HBox>
+
+                </VBox>
+
+
+                <!-- ============ TOP 3 BUYERS ============ -->
+                <VBox spacing="30" styleClass="stats-section-card">
+
+                    <HBox alignment="CENTER" spacing="12" styleClass="section-header">
+                        <Label text="Top 3 Buyers" styleClass="section-title"/>
+                    </HBox>
+
+                    <Region styleClass="section-separator"/>
+
+                    <HBox spacing="25" alignment="CENTER">
+                        <VBox fx:id="buyerBox1" styleClass="stats-card-d" />
+                        <VBox fx:id="buyerBox2" styleClass="stats-card-d"/>
+                        <VBox fx:id="buyerBox3" styleClass="stats-card-d"/>
+                    </HBox>
+
+                    <HBox alignment="CENTER" spacing="12" styleClass="section-header">
+                        <Hyperlink text="More →" onAction="#openAllBuyers" styleClass="section-more"/>
+
+                    </HBox>
+
+                </VBox>
+
+
+                <!-- ============ TOP 3 PRODUCTS ============ -->
+                <VBox spacing="30" styleClass="stats-section-card">
+
+                    <HBox alignment="CENTER" spacing="12" styleClass="section-header">
+                        <Label text="Top 3 Products" styleClass="section-title"/>
+                    </HBox>
+
+                    <Region styleClass="section-separator"/>
+
+                    <HBox spacing="25" alignment="CENTER">
+                        <VBox fx:id="productBox1" styleClass="stats-card-d"/>
+                        <VBox fx:id="productBox2" styleClass="stats-card-d"/>
+                        <VBox fx:id="productBox3" styleClass="stats-card-d"/>
+                    </HBox>
+
+                    <HBox alignment="CENTER" spacing="12" styleClass="section-header">
+                        <Hyperlink text="More →" onAction="#openAllProducts" styleClass="section-more"/>
+                    </HBox>
+
+                </VBox>
+
+
+                <!-- ============ TOP 3 CATEGORIES ============ -->
+                <VBox spacing="30" styleClass="stats-section-card">
+
+                    <HBox alignment="CENTER" spacing="12" styleClass="section-header">
+                        <Label text="Top 3 Categories" styleClass="section-title"/>
+                    </HBox>
+
+                    <Region styleClass="section-separator"/>
+
+                    <HBox spacing="25" alignment="CENTER">
+                        <VBox fx:id="catBox1" styleClass="stats-card-d"/>
+                        <VBox fx:id="catBox2" styleClass="stats-card-d"/>
+                        <VBox fx:id="catBox3" styleClass="stats-card-d"/>
+                    </HBox>
+
+                    <HBox alignment="CENTER" spacing="12" styleClass="section-header">
+                        <Hyperlink text="More →" onAction="#openAllCategories" styleClass="section-more"/>
+                    </HBox>
+
+                </VBox>
+
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+
+    <!-- SAME FOOTER -->
+    <bottom>
+        <HBox alignment="CENTER" styleClass="footer">
+            <Label text="© 2025 B2B Platform | All rights reserved" styleClass="footer-text"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.fx.b2bfront.controller.Admin.UserDetailsController"
+      spacing="20" alignment="TOP_LEFT">
+    <padding><Insets top="30" right="30" bottom="30" left="30"/></padding>
+
+    <Label fx:id="title" style="-fx-font-size: 22; -fx-font-weight: bold;"/>
+
+    <GridPane hgap="20" vgap="12">
+        <Label text="Nom :" />
+        <Label fx:id="nameLabel"/>
+
+        <Label text="Téléphone :" GridPane.rowIndex="1"/>
+        <Label fx:id="phoneLabel" GridPane.rowIndex="1"/>
+
+        <Label text="Email :" GridPane.rowIndex="2"/>
+        <Label fx:id="emailLabel" GridPane.rowIndex="2"/>
+
+        <Label text="Ville :" GridPane.rowIndex="3"/>
+        <Label fx:id="cityLabel" GridPane.rowIndex="3"/>
+
+        <Label text="Créé le :" GridPane.rowIndex="4"/>
+        <Label fx:id="createdAtLabel" GridPane.rowIndex="4"/>
+
+        <Label text="Statut :" GridPane.rowIndex="5"/>
+        <Label fx:id="statusLabel" GridPane.rowIndex="5"/>
+    </GridPane>
+</VBox>
+
+

@@ -2,6 +2,7 @@ module b2bfront {
 
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
     opens org.fx.b2bfront to javafx.fxml;
     opens org.fx.b2bfront.controller.auth to javafx.fxml;
@@ -11,6 +12,10 @@ module b2bfront {
     opens org.fx.b2bfront.controller.product to javafx.fxml;
     opens org.fx.b2bfront.controller.cart to javafx.fxml;
     opens org.fx.b2bfront.controller.reviews to javafx.fxml;
+    opens org.fx.b2bfront.controller.Admin to javafx.fxml;
+    opens org.fx.b2bfront.model to javafx.base, javafx.fxml;
+
+
 
 
     exports org.fx.b2bfront;
@@ -21,5 +26,8 @@ module b2bfront {
     exports org.fx.b2bfront.controller.product;
     exports org.fx.b2bfront.controller.cart;
     exports org.fx.b2bfront.controller.reviews;
+    exports org.fx.b2bfront.controller.Admin;
+
+
 
 }
