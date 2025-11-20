@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.fx.b2bfront.controller.reviews.ReviewsController"
+            prefWidth="1600" prefHeight="900"
+            stylesheets="@../style/reviews.css">
+
+    <!-- TOP NAVBAR -->
+    <top>
+        <fx:include source="components/Navbar.fxml"/>
+    </top>
+
+    <!-- MAIN CONTENT -->
+    <center>
+        <HBox alignment="TOP_LEFT">
+
+            <!-- LEFT FILTER / SUMMARY -->
+            <VBox spacing="20" prefWidth="250">
+
+                <Label text="Reviews" styleClass="page-title"/>
+
+                <VBox spacing="10" styleClass="rating-summary">
+
+                    <Label text="★★★★★" styleClass="big-stars"/>
+
+                    <Label text="5 reviews" styleClass="rating-count"/>
+
+                    <VBox spacing="6">
+                        <HBox spacing="10">
+                            <Label text="5 stars"/>   <Pane HBox.hgrow="ALWAYS"/> <Label text="(5)"/>
+                        </HBox>
+                        <HBox spacing="10">
+                            <Label text="4 stars"/>   <Pane HBox.hgrow="ALWAYS"/> <Label text="(1)"/>
+                        </HBox>
+                        <HBox spacing="10">
+                            <Label text="3 stars"/>   <Pane HBox.hgrow="ALWAYS"/> <Label text="(0)"/>
+                        </HBox>
+                        <HBox spacing="10">
+                            <Label text="2 stars"/>   <Pane HBox.hgrow="ALWAYS"/> <Label text="(0)"/>
+                        </HBox>
+                        <HBox spacing="10">
+                            <Label text="1 star"/>    <Pane HBox.hgrow="ALWAYS"/> <Label text="(0)"/>
+                        </HBox>
+                    </VBox>
+
+                </VBox>
+
+            </VBox>
+
+            <!-- RIGHT LIST OF REVIEWS -->
+            <VBox spacing="40" prefWidth="900" fx:id="reviewsContainer">
+
+                <!-- Review Example -->
+                <VBox spacing="10" styleClass="review-box">
+
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="★★★★★" styleClass="review-stars"/>
+                        <Pane HBox.hgrow="ALWAYS"/>
+                        <Label text="October 21, 2020" styleClass="review-date"/>
+                    </HBox>
+
+                    <Label text="Amazing and durable excavator"
+                           styleClass="review-title"/>
+
+                    <Label wrapText="true"
+                           text="Reliable industrial machine. Works perfectly on difficult terrain, fuel efficient, and strong build quality."
+                           styleClass="review-body"/>
+
+                    <HBox spacing="20" styleClass="review-footer">
+                        <Label text="Was this review helpful? Yes (4)  No (0)"/>
+                        <Label text="Flag as inappropriate" styleClass="flag-link"/>
+                    </HBox>
+
+                </VBox>
+
+                <!-- More reviews dynamically added later -->
+
+            </VBox>
+
+        </HBox>
+    </center>
+
+</BorderPane>

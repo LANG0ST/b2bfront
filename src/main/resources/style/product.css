@@ -1,0 +1,209 @@
+/* =========================
+   Base background
+========================= */
+.root {
+    -fx-background-color: #F4F4F4;
+    -fx-font-family: "Segoe UI", system-ui;
+}
+
+.product-root {
+    -fx-background-color: #F4F4F4;
+}
+
+/* =========================
+   Main product layout
+========================= */
+.product-main {
+    -fx-alignment: TOP_LEFT;
+}
+
+.product-image-wrapper {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 3);
+    -fx-padding: 16;
+}
+
+.product-image-pane {
+    -fx-pref-width: 520;
+    -fx-pref-height: 420;
+    -fx-background-color: #E0E0E0; /* placeholder */
+    -fx-background-radius: 10;
+}
+
+/* Arrows */
+.image-nav-button {
+    -fx-background-color: #111111;
+    -fx-text-fill: white;
+    -fx-background-radius: 18;
+    -fx-min-width: 36;
+    -fx-min-height: 36;
+    -fx-max-width: 36;
+    -fx-max-height: 36;
+    -fx-opacity: 0.85;
+}
+
+.image-nav-button:hover {
+    -fx-opacity: 1;
+}
+
+/* =========================
+   Info section
+========================= */
+.product-info {
+    -fx-padding: 10 0 0 0;
+}
+
+.product-title {
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1A1A1A;
+}
+
+.product-price {
+    -fx-font-size: 22;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFB000; /* Caterpillar yellow */
+}
+
+.product-description {
+    -fx-font-size: 13;
+    -fx-text-fill: #555555;
+}
+
+/* Specs grid */
+.product-specs {
+    -fx-padding: 10 0 10 0;
+}
+
+.spec-label {
+    -fx-font-size: 12;
+    -fx-text-fill: #777777;
+}
+
+.spec-value {
+    -fx-font-size: 13;
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold;
+}
+
+/* =========================
+   Quantity + buttons
+========================= */
+.qty-box {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DDDDDD;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.02), 4, 0, 0, 1);
+}
+
+.qty-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #333333;
+    -fx-font-size: 14;
+    -fx-min-width: 32;
+    -fx-min-height: 32;
+    -fx-border-width: 0;
+}
+
+.qty-button:hover {
+    -fx-background-color: #F2F2F2;
+    -fx-background-radius: 20;
+}
+
+.qty-value {
+    -fx-padding: 0 10 0 10;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222222;
+}
+
+/* Buttons */
+.primary-button {
+    -fx-background-color: #FFB000; /* Caterpillar yellow */
+    -fx-text-fill: #1A1A1A;
+    -fx-font-weight: bold;
+    -fx-padding: 10 18 10 18;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+}
+
+.primary-button:hover {
+    -fx-background-color: #FFA000;
+}
+
+.secondary-button {
+    -fx-background-color: #1A1A1A;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-padding: 10 18 10 18;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #000000;
+}
+
+/* =========================
+   Reviews
+========================= */
+.reviews-section {
+    -fx-padding: 10 0 0 0;
+}
+
+.reviews-title {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1A1A1A;
+}
+
+.review-write-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #FFB000;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-text-fill: #FFB000;
+    -fx-padding: 6 16 6 16;
+    -fx-font-size: 12;
+}
+
+.review-write-button:hover {
+    -fx-background-color: #FFF5D6;
+}
+
+.reviews-container {
+    -fx-padding: 5 0 0 0;
+}
+
+.review-card {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-padding: 10 14 10 14;
+    -fx-pref-width: 230;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 8, 0, 0, 2);
+}
+
+.review-stars {
+    -fx-font-size: 13;
+    -fx-text-fill: #FFB000;
+}
+
+.review-title {
+    -fx-font-size: 13;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222222;
+}
+
+.review-body {
+    -fx-font-size: 12;
+    -fx-text-fill: #555555;
+}
+
+.review-author {
+    -fx-font-size: 11;
+    -fx-text-fill: #777777;
+}
