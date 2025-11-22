@@ -23,7 +23,7 @@ public class NavbarController {
         // Notifications button stays visible but no dropdown anymore
         btnNotifications.setOnAction(e -> {
             System.out.println("Notifications clicked!");
-            AppNavigator.navigateTo("reviews.fxml");
+            AppNavigator.navigateTo("categories.fxml");
 
         });
     }

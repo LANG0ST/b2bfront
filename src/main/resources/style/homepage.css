@@ -1,6 +1,6 @@
 /* ===========================
    GLOBAL
-   =========================== */
+=========================== */
 .root {
     -fx-font-family: "Inter", "Segoe UI", sans-serif;
     -fx-background-color: #F5F6FA;
@@ -8,7 +8,7 @@
 
 /* ===========================
    NAVBAR
-   =========================== */
+=========================== */
 .navbar {
     -fx-background-color: #FFFFFF;
     -fx-padding: 0 40;
@@ -19,14 +19,14 @@
 .logo {
     -fx-font-size: 26px;
     -fx-font-weight: bold;
-    -fx-text-fill: #6A4DFF;
+    -fx-text-fill: #FF8A00;   /* vivid industrial orange */
 }
 
 /* Search Bar */
 .search-bar {
-    -fx-background-color: #EFEAFF;
+    -fx-background-color: #FFF2E6;  /* very light orange tint */
     -fx-background-radius: 25;
-    -fx-padding: 0 15 0 15;
+    -fx-padding: 0 15;
     -fx-font-size: 14px;
     -fx-border-radius: 25;
     -fx-border-color: transparent;
@@ -34,8 +34,8 @@
 }
 
 .search-bar:focused {
-    -fx-background-color: #E6E0FF;
-    -fx-border-color: #B4A4FF;
+    -fx-background-color: #FFE6CC;
+    -fx-border-color: #FFB266; /* soft orange border */
 }
 
 /* Top Right Buttons */
@@ -48,12 +48,12 @@
 }
 
 .icon-button:hover {
-    -fx-background-color: #EFEAFF;
+    -fx-background-color: #FFF2E6; /* match search bar */
 }
 
 /* ===========================
    SIDEBAR
-   =========================== */
+=========================== */
 .sidebar {
     -fx-background-color: #FFFFFF;
     -fx-border-color: #E8E8E8;
@@ -80,13 +80,13 @@
 }
 
 .sidebar-item:hover {
-    -fx-background-color: #EFEAFF;
-    -fx-border-color: #C4B3FF;
+    -fx-background-color: #FFF2E6; /* light orange */
+    -fx-border-color: #FFC080;
 }
 
 /* ===========================
    FEATURED CARD
-   =========================== */
+=========================== */
 .featured-card {
     -fx-background-color: white;
     -fx-background-radius: 20;
@@ -102,27 +102,27 @@
 }
 
 .featured-image {
-    -fx-background-color: #F3F0FF;
+    -fx-background-color: #FFF0E0; /* soft warm neutral */
     -fx-background-radius: 15;
     -fx-border-radius: 15;
-    -fx-border-color: #EAE5FF;
+    -fx-border-color: #FFD9B3; /* pale orange */
     -fx-alignment: CENTER;
 }
 
 .placeholder {
-    -fx-text-fill: #A39CD6;
+    -fx-text-fill: #E69540; /* muted orange */
     -fx-font-size: 14px;
 }
 
 .featured-price {
     -fx-font-size: 16px;
-    -fx-text-fill: #6A4DFF;
+    -fx-text-fill: #FF8A00; /* MAIN ORANGE */
     -fx-font-weight: bold;
 }
 
 /* ===========================
    TRENDING TITLE
-   =========================== */
+=========================== */
 .section-title {
     -fx-font-size: 20px;
     -fx-font-weight: bold;
@@ -131,7 +131,7 @@
 
 /* ===========================
    PRODUCT CARDS
-   =========================== */
+=========================== */
 .product-card {
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 18;
@@ -143,14 +143,14 @@
 }
 
 .product-card:hover {
-    -fx-effect: dropshadow(gaussian, rgba(106,77,255,0.25), 25, 0.2, 0, 4);
+    -fx-effect: dropshadow(gaussian, rgba(255,138,0,0.25), 25, 0.2, 0, 4); /* orange glow */
 }
 
 .product-image {
-    -fx-background-color: #F5F1FF;
+    -fx-background-color: #FFF4E6; /* light warm industrial */
     -fx-background-radius: 12;
     -fx-border-radius: 12;
-    -fx-border-color: #E6DEFF;
+    -fx-border-color: #FFD9B3; /* pale orange border */
     -fx-alignment: CENTER;
 }
 
@@ -162,6 +162,6 @@
 
 .product-price {
     -fx-font-size: 13px;
-    -fx-text-fill: #6A4DFF;
+    -fx-text-fill: #FF8A00; /* main orange */
     -fx-font-weight: bold;
 }

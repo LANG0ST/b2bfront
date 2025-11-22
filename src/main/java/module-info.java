@@ -13,6 +13,7 @@ module b2bfront {
     opens org.fx.b2bfront.controller.cart to javafx.fxml;
     opens org.fx.b2bfront.controller.reviews to javafx.fxml;
     opens org.fx.b2bfront.controller.Admin to javafx.fxml;
+    opens org.fx.b2bfront.controller.checkout to javafx.fxml;
     opens org.fx.b2bfront.model to javafx.base, javafx.fxml;
 
 
@@ -27,6 +28,7 @@ module b2bfront {
     exports org.fx.b2bfront.controller.cart;
     exports org.fx.b2bfront.controller.reviews;
     exports org.fx.b2bfront.controller.Admin;
+    exports org.fx.b2bfront.controller.checkout;
 
 
 
