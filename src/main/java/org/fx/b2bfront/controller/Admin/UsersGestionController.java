@@ -7,14 +7,11 @@ import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import javafx.util.Callback;
 import org.fx.b2bfront.model.Company;
 import org.fx.b2bfront.utils.AppNavigator;
 
@@ -22,7 +19,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
-public class UsersController {
+public class UsersGestionController {
 
     // ======= FILTRES =======
     @FXML private TextField searchField;

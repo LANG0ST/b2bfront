@@ -16,7 +16,7 @@ import org.fx.b2bfront.model.*;
 import org.fx.b2bfront.utils.AppNavigator;
 import java.math.BigDecimal;
 
-public class ProductsController {
+public class ProductsGestionController {
 
     @FXML private TableView<Produit> productsTable;
     @FXML private TableColumn<Produit, Boolean> selectCol;
@@ -33,6 +33,7 @@ public class ProductsController {
     @FXML private TextField searchField;
     @FXML private ComboBox<String> filterCategorie;
     @FXML private ComboBox<String> filterCompany;
+    @FXML private Button clearFiltersBtn;
 
     // Data
     private final ObservableList<Produit> products = FXCollections.observableArrayList();
@@ -113,6 +114,8 @@ public class ProductsController {
         searchField.textProperty().addListener((obs, oldV, newV) -> applyFilters());
         filterCategorie.valueProperty().addListener((obs, oldV, newV) -> applyFilters());
         filterCompany.valueProperty().addListener((obs, oldV, newV) -> applyFilters());
+        clearFiltersBtn.setOnAction(e -> resetFilters());
+
 
         productsTable.setRowFactory(tv -> {
             TableRow<Produit> row = new TableRow<>();
@@ -126,6 +129,13 @@ public class ProductsController {
 
             return row;
         });
+    }
+
+    private void resetFilters() {
+        searchField.clear();
+        filterCategorie.getSelectionModel().select("Toutes");
+        filterCompany.getSelectionModel().select("Toutes");
+        applyFilters();
     }
 
     @FXML
