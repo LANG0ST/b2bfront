@@ -148,8 +148,11 @@ public class UsersController {
         //   FILTER LOGIC
         // ===============================
 
+
         filteredUsers = new FilteredList<>(users, u -> true);
         usersTable.setItems(filteredUsers);
+
+
 
         // Status filter
         statusFilter.getItems().addAll("Tous", "Activés", "Désactivés");

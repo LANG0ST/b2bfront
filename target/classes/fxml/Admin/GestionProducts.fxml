@@ -16,31 +16,7 @@
     <!--                         TOP HEADER                        -->
     <!-- ======================================================== -->
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-header">
-
-            <!-- Logo -->
-            <ImageView fitHeight="42" fitWidth="42" preserveRatio="true">
-                <image>
-                    <Image url="@../../images/logo.png"/>
-                </image>
-            </ImageView>
-
-            <!-- App Title -->
-            <Label text="B2B Admin Dashboard" styleClass="header-title"/>
-
-            <Region HBox.hgrow="ALWAYS"/>
-
-            <!-- Profile -->
-            <HBox spacing="12" alignment="CENTER_RIGHT">
-                <Label text="Admin" styleClass="profile-name"/>
-                <ImageView fitHeight="36" fitWidth="36" preserveRatio="true" styleClass="profile-avatar">
-                    <image>
-                        <Image url="@../../images/admin.png"/>
-                    </image>
-                </ImageView>
-            </HBox>
-
-        </HBox>
+        <fx:include source="../components/TopBar.fxml"/>
     </top>
 
     <!-- ======================================================== -->
@@ -75,15 +51,19 @@
 
             <VBox spacing="20">
                 <HBox spacing="20" alignment="CENTER_LEFT">
-                    <TextField fx:id="searchField" promptText="Rechercher produit..." styleClass="search-bar-users" />
+                    <TextField fx:id="searchField" promptText="Rechercher produit..." styleClass="search-bar"/>
                     <ComboBox fx:id="filterCategorie"  styleClass="filter-box"/>
                     <ComboBox fx:id="filterCompany"  styleClass="filter-box"/>
                     <Button text="Réinitialiser" fx:id="clearFiltersBtn" styleClass="clear-filters-btn"/>
                 </HBox>
 
-                <TableView fx:id="productsTable" styleClass="users-table">
+                <HBox spacing="15">
+                    <Button text="Supprimer sélection" styleClass="action-btn-red"/>
+                </HBox>
+
+                <TableView fx:id="productsTable" styleClass="table">
                     <columns>
-                        <TableColumn fx:id="selectCol" text="Select" prefWidth="50"/>
+                        <TableColumn fx:id="selectCol" text="✔" prefWidth="50"/>
                         <TableColumn fx:id="idCol" text="ID" prefWidth="100"/>
                         <TableColumn fx:id="nameCol" text="Nom" prefWidth="150"/>
                         <TableColumn fx:id="descriptionCol" text="Description" prefWidth="325"/>

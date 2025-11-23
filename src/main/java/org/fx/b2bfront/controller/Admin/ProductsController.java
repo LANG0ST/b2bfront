@@ -79,7 +79,7 @@ public class ProductsController {
                     private final Button deleteBtn = new Button("Supprimer");
 
                     {
-                        deleteBtn.setStyle("-fx-background-color:#FF4747; -fx-text-fill:white;");
+                        deleteBtn.getStyleClass().add("action-btn-red");
 
                         // DELETE action
                         deleteBtn.setOnAction(e -> {
@@ -197,7 +197,37 @@ public class ProductsController {
         products.addAll(
                 new Produit(1L, "Câble 380V", "Cable haute tension", new BigDecimal("149.99"), 120, c1, cat2, null, null, null),
                 new Produit(2L, "Sable 25kg", "Qualité premium", new BigDecimal("59.99"), 300, c1, cat3, null, null, null),
-                new Produit(3L, "Gravier 50kg", "Pour chantiers lourds", new BigDecimal("79.99"), 80, c2, cat1, null, null, null)
+                new Produit(3L, "Gravier 50kg", "Pour chantiers lourds", new BigDecimal("79.99"), 80, c2, cat1, null, null, null),
+                new Produit(1L,  "Câble 380V","Câble haute tension industriel",new BigDecimal("149.99"), 120, c1, cat2, null, null, null),
+                new Produit(2L,  "Sable 25kg","Sable lavé qualité premium",new BigDecimal("59.99"), 300, c1, cat3, null, null, null),
+                new Produit(3L,  "Gravier 50kg",            "Granulométrie certifiée pour chantiers",     new BigDecimal("79.99"), 80,  c2, cat1, null, null, null),
+
+                new Produit(4L,  "Plaque acier 8mm","Acier renforcé norme EN10025",new BigDecimal("299.90"), 45,  c2, cat1, null, null, null),
+                new Produit(5L,  "Tube PVC 50mm","Tube résistant haute pression",new BigDecimal("24.50"),  400, c2, cat3, null, null, null),
+                new Produit(6L,  "Béton prêt 30kg","Béton de construction CAT Industrial",new BigDecimal("44.95"),  200, c1, cat3, null, null, null),
+                new Produit(7L,  "Tôle galvanisée","Anti-corrosion, usage extérieur",new BigDecimal("129.99"), 67,  c1, cat1, null, null, null),
+                new Produit(8L,  "Fer à béton 12mm", "Barre acier nervuré",new BigDecimal("13.99"),  800, c1, cat1, null, null, null),
+                new Produit(9L,  "Peinture industrielle","Résistance extrême UV et chaleur",new BigDecimal("89.99"),  56,  c2, cat1, null, null, null),
+                new Produit(10L, "Huile hydraulique 20L",  "Spéciale engins de chantier",new BigDecimal("249.99"), 30,  c1, cat2, null, null, null),
+                new Produit(11L, "Câble souterrain","Isolation triple couche",                     new BigDecimal("189.99"), 140, c2, cat2, null, null, null),
+                new Produit(12L, "Mortier 25kg","Haute adhérence",                             new BigDecimal("39.99"),  250, c1, cat3, null, null, null),
+                new Produit(14L, "Filtre moteur CAT","Compatible machines industrielles",           new BigDecimal("99.99"),  60,  c2, cat3, null, null, null),
+                new Produit(15L, "Galet convoyeur","Pour ligne de production",                    new BigDecimal("79.90"),  100, c1, cat2, null, null, null),
+                new Produit(16L, "Béton fibré 30kg",        "Renforcé fibres métalliques",                 new BigDecimal("54.99"),  180, c1, cat3, null, null, null),
+                new Produit(17L, "Peinture époxy",          "Usage industriel haute résistance",           new BigDecimal("129.90"), 75,  c2, cat1, null, null, null),
+                new Produit(19L, "Tube acier 30mm",         "Tube rond haute résistance",                  new BigDecimal("59.99"),  210, c2, cat1, null, null, null),
+                new Produit(20L, "Ciment 50kg",             "Qualité premium S2",                          new BigDecimal("99.99"),  150, c1, cat3, null, null, null),
+                new Produit(21L, "Gravier noir 25kg",       "Drainage et fondations",                      new BigDecimal("64.99"),  90,  c1, cat3, null, null, null),
+                new Produit(23L, "Roue industrielle",       "Roulement renforcé 300kg",                    new BigDecimal("119.90"), 70,  c1, cat3, null, null, null),
+                new Produit(24L, "Câble blindé",            "Protection EMI/EMF",                          new BigDecimal("199.99"), 50,  c2, cat2, null, null, null),
+                new Produit(26L, "Compresseur portable",    "Pression 12 bars",                            new BigDecimal("899.99"), 12,  c2, cat1, null, null, null),
+                new Produit(27L, "Clé dynamométrique",      "Couple réglable 70-350 Nm",                    new BigDecimal("349.99"), 28,  c1, cat2, null, null, null),
+                new Produit(28L, "Bobine cuivre 50m",       "Pour installation électrique",                new BigDecimal("599.90"), 25,  c2, cat2, null, null, null),
+                new Produit(30L, "Béton autonivelant",      "Usage sol industriel",                        new BigDecimal("129.99"), 90,  c1, cat3, null, null, null),
+                new Produit(36L, "Câble 220V renforcé",     "Isolation épaisse",                           new BigDecimal("89.99"),  140, c2, cat2, null, null, null),
+                new Produit(41L, "Sable rouge 30kg",        "Finition décorative",                         new BigDecimal("69.99"),  120, c1, cat3, null, null, null),
+                new Produit(42L, "Câble inox 8mm",          "Résistance traction 4 tonnes",                new BigDecimal("159.99"), 50,  c2, cat2, null, null, null),
+                new Produit(43L, "Fer plat 20mm",           "Acier laminé à chaud",                        new BigDecimal("74.99"),  180, c1, cat1, null, null, null)
         );
 
         // Charger les filtres

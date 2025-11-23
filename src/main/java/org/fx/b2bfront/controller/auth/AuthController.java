@@ -31,7 +31,6 @@ public class AuthController {
             AppNavigator.navigateTo("homepage.fxml");
         });
         signupButton.setOnAction(e -> {
-            System.out.println("GHA DFE3 LKEROSSA BINMA T9AD HADCHI");
             AppNavigator.navigateTo("Admin/AdminDashBoard.fxml");
         });
     }
