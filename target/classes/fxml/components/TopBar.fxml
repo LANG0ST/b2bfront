@@ -1,0 +1,22 @@
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Region?>
+<HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-header">
+
+    <ImageView fitHeight="42" fitWidth="42" preserveRatio="true">
+        <image><Image url="@../../images/logo.png"/></image>
+    </ImageView>
+
+    <Label text="B2B Admin Dashboard" styleClass="header-title"/>
+    <Region HBox.hgrow="ALWAYS"/>
+
+    <HBox spacing="12" alignment="CENTER_RIGHT">
+        <Label text="Admin" styleClass="profile-name"/>
+        <ImageView fitHeight="36" fitWidth="36" preserveRatio="true" styleClass="profile-avatar">
+            <image><Image url="@../../images/admin.png"/></image>
+        </ImageView>
+    </HBox>
+
+</HBox>

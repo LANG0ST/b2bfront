@@ -39,7 +39,7 @@
                         prefWidth="350" prefHeight="48"
                         styleClass="primary-button"/>
 
-                <Hyperlink text="Forgot password?"/>
+                <Hyperlink text="Forgot password?" style="-fx-text-fill: #111;"/>
             </VBox>
         </VBox>
 
@@ -50,7 +50,13 @@
 
             <Label text="SIGN UP" styleClass="label-title"/>
 
-            <VBox spacing="15" maxWidth="350">
+            <VBox spacing="10" maxWidth="350">
+
+                <Label text="Company Name"/>
+                <TextField fx:id="signupName" prefHeight="45" styleClass="text-input"/>
+
+                <Label text="ICE (Identifiant Commun de l'Entreprise)"/>
+                <TextField fx:id="signupIce" prefHeight="45" styleClass="text-input"/>
 
                 <Label text="Email"/>
                 <TextField fx:id="signupEmail" prefHeight="45" styleClass="text-input"/>
@@ -58,13 +64,23 @@
                 <Label text="Password"/>
                 <PasswordField fx:id="signupPassword" prefHeight="45" styleClass="text-input"/>
 
-                <CheckBox text="Remember me"/>
+                <Label text="Address"/>
+                <TextField fx:id="signupAddress" prefHeight="45" styleClass="text-input"/>
+
+                <Label text="City"/>
+                <TextField fx:id="signupCity" prefHeight="45" styleClass="text-input"/>
+
+                <Label text="Phone"/>
+                <TextField fx:id="signupPhone" prefHeight="45" styleClass="text-input"/>
 
                 <Button fx:id="signupButton"
                         text="Register"
                         prefWidth="350" prefHeight="48"
-                        styleClass="primary-button"/>
+                        styleClass="primary-button"
+                        onAction="#registerCompany"
+                />
             </VBox>
+
         </VBox>
 
     </HBox>
@@ -85,7 +101,7 @@
                 opacity="1"
                 pickOnBounds="false">
             <image>
-                <Image url="@../images/auth_bg.png" />
+                <Image url="@../images/auth_bg2.png" />
             </image>
         </ImageView>
 

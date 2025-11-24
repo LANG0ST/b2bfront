@@ -1,0 +1,189 @@
+/* ===========================
+   GLOBAL CHECKOUT LAYOUT
+=========================== */
+.checkout-root {
+    -fx-padding: 40 60;
+    -fx-background-color: #FFFFFF;
+    -fx-font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+.checkout-title {
+    -fx-font-size: 26;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222222;
+}
+
+.section-title {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222222;
+}
+
+/* ===========================
+   STEPS BAR
+=========================== */
+.checkout-steps {
+    -fx-font-size: 14;
+    -fx-spacing: 6;
+}
+
+.step-current {
+    -fx-text-fill: #FF8A00;
+    -fx-font-weight: bold;
+}
+
+.step-next {
+    -fx-text-fill: #999999;
+}
+
+.step-done {
+    -fx-text-fill: #BBBBBB;
+}
+
+/* ===========================
+   INPUT FIELDS
+=========================== */
+TextField {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DDDDDD;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 10 12;
+    -fx-font-size: 14;
+}
+
+TextField:focused {
+    -fx-border-color: #FF8A00;
+}
+
+/* Small checkbox label */
+.small-label {
+    -fx-font-size: 12;
+    -fx-text-fill: #555555;
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+.primary-button {
+    -fx-background-color: #FF8A00;
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-padding: 12 22;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.primary-button:hover {
+    -fx-background-color: #E67A00;
+}
+
+/* ===========================
+   SHIPPING OPTIONS
+=========================== */
+.shipping-option {
+    -fx-font-size: 15;
+    -fx-text-fill: #222222;
+}
+
+.shipping-option:selected {
+    -fx-text-fill: #FF8A00;
+}
+
+/* ===========================
+   CART SUMMARY (RIGHT SIDE)
+=========================== */
+.cart-summary-root {
+    -fx-pref-width: 380;
+}
+
+.cart-title {
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222222;
+    -fx-padding: 0 0 10 0;
+}
+
+.cart-item-box {
+    -fx-padding: 10 0;
+    -fx-spacing: 10;
+}
+
+.cart-item-image {
+    -fx-background-color: #D9D9D9;
+    -fx-pref-width: 100;
+    -fx-pref-height: 100;
+    -fx-background-radius: 8;
+}
+
+.cart-item-name {
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222222;
+}
+
+.cart-item-size,
+.cart-item-qty {
+    -fx-font-size: 13;
+    -fx-text-fill: #555555;
+}
+
+.cart-item-price {
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222222;
+}
+
+.cart-divider {
+    -fx-border-color: #DDDDDD;
+    -fx-border-width: 1 0 0 0;
+}
+
+.remove-link {
+    -fx-font-size: 12;
+    -fx-text-fill: #FF8A00;
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
+
+/* ===========================
+   COUPON INPUT
+=========================== */
+.coupon-field {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DDDDDD;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 10;
+    -fx-font-size: 13;
+}
+
+.coupon-field:focused {
+    -fx-border-color: #FF8A00;
+}
+
+/* ===========================
+   CART TOTAL SECTION
+=========================== */
+.total-label {
+    -fx-font-size: 14;
+    -fx-text-fill: #555555;
+}
+
+.total-price {
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222222;
+}
+
+.total-final {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222222;
+}
+
+/* Make layout look balanced */
+VBox, HBox {
+    -fx-fill-width: false;
+}

@@ -3,6 +3,9 @@ module b2bfront {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
+    requires com.google.gson;
+    requires okhttp3;
+    requires static lombok;
 
     opens org.fx.b2bfront to javafx.fxml;
     opens org.fx.b2bfront.controller.auth to javafx.fxml;
@@ -15,6 +18,7 @@ module b2bfront {
     opens org.fx.b2bfront.controller.Admin to javafx.fxml;
     opens org.fx.b2bfront.controller.checkout to javafx.fxml;
     opens org.fx.b2bfront.model to javafx.base, javafx.fxml;
+    opens org.fx.b2bfront.dto to com.google.gson;
 
 
 
