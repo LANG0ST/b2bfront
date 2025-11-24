@@ -4,7 +4,10 @@
 .root {
     -fx-font-family: "Segoe UI", system-ui;
     -fx-background-color: #F5F5F5;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
+
 
 /* ScrollPane (center) */
 .scroll-center {
@@ -200,11 +203,10 @@
    USERS TABLE — DESIGN COMPLET
 =========================================================== */
 
-.users-table {
+.table {
     -fx-background-color: white;
     -fx-background-radius: 12;
     -fx-padding: 10;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);
     -fx-border-radius: 12;
 }
 
@@ -214,22 +216,19 @@
 }
 
 /* Texte des cellules */
-.users-table .table-cell {
+.table .table-cell {
     -fx-text-fill: #333333;
     -fx-font-size: 14px;
     -fx-alignment : CENTER;
 }
 
 /* Header (ligne des titres) */
-.users-table .column-header-background {
-    -fx-background-color: #F2F2F2;
-    -fx-background-radius: 8 8 0 0;
-}
 
-.users-table .column-header .label {
-    -fx-text-fill: #555555;
+.table .column-header .label {
+    -fx-text-fill: white;
+    -fx-background-color : #000;
     -fx-font-weight: bold;
-    -fx-font-size: 13px;
+    -fx-font-size: 15px;
 }
 
 /* Hover row */
@@ -253,6 +252,7 @@
     -fx-background-radius: 6;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
+    -fx-cursor: hand;
 }
 
 .action-btn:hover {
@@ -266,6 +266,7 @@
     -fx-background-radius: 6;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
+    -fx-cursor: hand;
 }
 
 .action-btn-green:hover {
@@ -279,6 +280,8 @@
     -fx-background-radius: 6;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
+    -fx-cursor: hand;
+
 }
 
 .action-btn-red:hover {
@@ -295,7 +298,7 @@
    SEARCH + FILTERS
 =========================================================== */
 
-.search-bar-users {
+.search-bar {
     -fx-background-color: #ffffff;
     -fx-background-radius: 8;
     -fx-padding: 8 12;
@@ -303,6 +306,11 @@
     -fx-border-color: #DDDDDD;
     -fx-border-radius: 8;
 }
+
+.search-bar:focused {
+    -fx-border-color: #ffb85c;
+}
+
 
 /* Filter combo boxes */
 .filter-box {
@@ -312,8 +320,12 @@
     -fx-background-color: #ffffff;
     -fx-border-color: #DDDDDD;
     -fx-border-radius: 8;
+    -fx-cursor: hand;
 }
 
+.filter-box:hover {
+     -fx-background-color: #FFF4E6;
+ }
 .clear-filters-btn {
     -fx-background-color: transparent;
     -fx-border-color: #FF8A00;
@@ -321,6 +333,7 @@
     -fx-text-fill: #FF8A00;
     -fx-padding: 6 14;
     -fx-font-weight: bold;
+    -fx-cursor: hand;
 }
 
 .clear-filters-btn:hover {
@@ -420,7 +433,30 @@
     -fx-padding: 14 20;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0.1, 0, 2);
     -fx-spacing: 20;
-    -fx-focus-traversable: false
+    }
+.ranking-card-1 {
+    -fx-background-color: #EFBF04;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-padding: 14 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0.1, 0, 2);
+    -fx-spacing: 20;
+    }
+.ranking-card-2 {
+    -fx-background-color: #C4C4C4;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-padding: 14 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0.1, 0, 2);
+    -fx-spacing: 20;
+    }
+.ranking-card-3 {
+    -fx-background-color: #CD7F32;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-padding: 14 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0.1, 0, 2);
+    -fx-spacing: 20;
     }
 
 .ranking-card:hover {
@@ -428,10 +464,23 @@
     -fx-cursor: hand;
 }
 
+.ranking-card-1:hover {
+    -fx-background-color: #A88603;
+    -fx-cursor: hand;
+}
+.ranking-card-2:hover {
+    -fx-background-color: #8C8C8C;
+    -fx-cursor: hand;
+}
+.ranking-card-3:hover {
+    -fx-background-color: #965D25;
+    -fx-cursor: hand;
+}
+
 .rank-number {
     -fx-font-size: 20;
     -fx-font-weight: bold;
-    -fx-text-fill: #FF8A00;
+    -fx-text-fill: #333333;
     -fx-alignment: CENTER_LEFT;
 }
 
@@ -445,7 +494,7 @@
 
 .rank-value {
     -fx-font-size: 16;
-    -fx-text-fill: #555555;
+    -fx-text-fill: #333333;
     -fx-alignment: CENTER_RIGHT;
 
 }
@@ -456,8 +505,8 @@
     -fx-padding: 35 35 45 35;
     -fx-spacing: 18;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0.2, 0, 4);
-    -fx-focus-traversable: false
 }
+
 
 
 
@@ -521,6 +570,7 @@
     -fx-padding: 10 24;
     -fx-background-radius: 10;
     -fx-font-size: 14;
+    -fx-cursor: hand;
 }
 
 .back-btn-text:hover {

@@ -25,9 +25,32 @@ public class AllSellersController {
         for (CompanyStats s : statsService.getAllSellers()) {
 
             HBox card = new HBox();
-            card.getStyleClass().add("ranking-card");
+            if(rank == 1) {
+                card.getStyleClass().add("ranking-card-1");
+            } else if (rank == 2) {
+                card.getStyleClass().add("ranking-card-2");
+            } else if (rank == 3) {
+                card.getStyleClass().add("ranking-card-3");
+            }else{
+                card.getStyleClass().add("ranking-card");
+            }
 
-            Label rankLabel = new Label("#" + rank);
+
+            Label rankLabel;
+            if(rank == 1) {
+                rankLabel = new Label("\uD83E\uDD47");
+
+            } else if (rank == 2) {
+                rankLabel = new Label("\uD83E\uDD48");
+
+            } else if (rank == 3) {
+                rankLabel = new Label("\uD83E\uDD49");
+
+            }else{
+                rankLabel = new Label("#" + rank);
+
+            }
+
             rankLabel.getStyleClass().add("rank-number");
 
             Label name = new Label(s.getCompanyName());

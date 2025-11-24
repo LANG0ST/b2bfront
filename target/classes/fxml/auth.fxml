@@ -39,7 +39,7 @@
                         prefWidth="350" prefHeight="48"
                         styleClass="primary-button"/>
 
-                <Hyperlink text="Forgot password?"/>
+                <Hyperlink text="Forgot password?" style="-fx-text-fill: #111;"/>
             </VBox>
         </VBox>
 
@@ -101,7 +101,7 @@
                 opacity="1"
                 pickOnBounds="false">
             <image>
-                <Image url="@../images/auth_bg.png" />
+                <Image url="@../images/auth_bg2.png" />
             </image>
         </ImageView>
 
