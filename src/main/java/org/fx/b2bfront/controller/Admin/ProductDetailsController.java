@@ -2,12 +2,8 @@ package org.fx.b2bfront.controller.Admin;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import org.fx.b2bfront.model.Produit;
+import org.fx.b2bfront.model.Product;
 import org.fx.b2bfront.utils.AppNavigator;
-
-import java.math.BigDecimal;
 
 
 public class ProductDetailsController {
@@ -21,9 +17,9 @@ public class ProductDetailsController {
     @FXML private Label company;
 
 
-    private Produit prod;
+    private Product prod;
 
-    public void setProd(Produit prod) {
+    public void setProd(Product prod) {
         this.prod = prod;
 
         title.setText("Détails de " + prod.getName());

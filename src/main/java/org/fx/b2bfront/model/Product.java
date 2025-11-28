@@ -3,7 +3,7 @@ package org.fx.b2bfront.model;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class Produit {
+public class Product {
 
     private Long id;
     private String name;
@@ -11,23 +11,23 @@ public class Produit {
     private BigDecimal price;
     private Integer stock;
     private Company company;
-    private Categorie categorie;
+    private Category category;
     private List<Avis> avis;
     private List<LigneCommande> lignesCommande;
     private List<LignePanier> lignesPanier;
 
-    public Produit() {
+    public Product() {
         super();
     }
 
-    public Produit(Long id, String name, String description, BigDecimal price, Integer stock, Company company, Categorie categorie, List<Avis> avis, List<LigneCommande> lignesCommande, List<LignePanier> lignesPanier) {
+    public Product(Long id, String name, String description, BigDecimal price, Integer stock, Company company, Category category, List<Avis> avis, List<LigneCommande> lignesCommande, List<LignePanier> lignesPanier) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.stock = stock;
         this.company = company;
-        this.categorie = categorie;
+        this.category = category;
         this.avis = avis;
         this.lignesCommande = lignesCommande;
         this.lignesPanier = lignesPanier;
@@ -81,12 +81,12 @@ public class Produit {
         this.company = company;
     }
 
-    public Categorie getCategorie() {
-        return categorie;
+    public Category getCategorie() {
+        return category;
     }
 
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
+    public void setCategorie(Category category) {
+        this.category = category;
     }
 
     public List<Avis> getAvis() {
@@ -122,7 +122,7 @@ public class Produit {
                 ", price=" + price +
                 ", stock=" + stock +
                 ", company=" + company +
-                ", categorie=" + categorie +
+                ", categorie=" + category +
                 ", avis=" + avis +
                 ", lignesCommande=" + lignesCommande +
                 ", lignesPanier=" + lignesPanier +

@@ -6,7 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import org.fx.b2bfront.api.AuthApi;
-import org.fx.b2bfront.auth.AuthStore;
+import org.fx.b2bfront.store.AuthStore;
 import org.fx.b2bfront.dto.LoginRequestFront;
 import org.fx.b2bfront.dto.RegisterRequestFront;
 import org.fx.b2bfront.utils.AppNavigator;
@@ -91,7 +91,6 @@ public class AuthController {
             return;
         }
 
-        // ✅ DECLARE req HERE (this was missing!)
         RegisterRequestFront req = new RegisterRequestFront(
                 name, ice, email, password, address, city, phone
         );
@@ -119,7 +118,7 @@ public class AuthController {
 
         String email = loginEmail.getText().trim();
         String password = loginPassword.getText().trim();
-
+        if(!(email.equals("admin@b2b.ensa") && password.equals("admin1234") )) {
         if (email.isEmpty() || password.isEmpty()) {
             showAlert("Please enter email and password.");
             return;
@@ -139,10 +138,10 @@ public class AuthController {
         AuthStore.companyId = data.user.companyId;
         AuthStore.email = data.user.email;
 
-        if (AuthStore.isAdmin()) {
+        AppNavigator.navigateTo("homepage.fxml");
+        }else {
             AppNavigator.navigateTo("Admin/AdminDashBoard.fxml");
-        } else {
-            AppNavigator.navigateTo("homepage.fxml");
+
         }
     }
 

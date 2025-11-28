@@ -24,7 +24,7 @@
         <Label fx:id="title" styleClass="user-title"/>
 
         <!-- Small Description -->
-        <Label text="Fiche produit" styleClass="user-subtitle"/>
+        <Label text="Fiche product" styleClass="user-subtitle"/>
     </VBox>
 
     <!-- ===================== SEPARATOR ===================== -->

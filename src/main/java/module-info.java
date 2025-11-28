@@ -17,7 +17,7 @@ module b2bfront {
     opens org.fx.b2bfront.controller.reviews to javafx.fxml;
     opens org.fx.b2bfront.controller.Admin to javafx.fxml;
     opens org.fx.b2bfront.controller.checkout to javafx.fxml;
-    opens org.fx.b2bfront.model to javafx.base, javafx.fxml;
+    opens org.fx.b2bfront.model to javafx.base, javafx.fxml,com.google.gson;
     opens org.fx.b2bfront.dto to com.google.gson;
 
 

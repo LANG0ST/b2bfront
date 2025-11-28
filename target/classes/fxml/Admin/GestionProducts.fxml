@@ -47,11 +47,11 @@
         <StackPane fx:id="mainContent">
         <VBox spacing="30" styleClass="main-content" fx:id="productsPage">
 
-            <Label text="Gestion des produits" styleClass="section-title"/>
+            <Label text="Gestion des products" styleClass="section-title"/>
 
             <VBox spacing="20">
                 <HBox spacing="20" alignment="CENTER_LEFT">
-                    <TextField fx:id="searchField" promptText="Rechercher produit..." styleClass="search-bar"/>
+                    <TextField fx:id="searchField" promptText="Rechercher product..." styleClass="search-bar"/>
                     <ComboBox fx:id="filterCategorie"  styleClass="filter-box"/>
                     <ComboBox fx:id="filterCompany"  styleClass="filter-box"/>
                     <Button text="Réinitialiser" fx:id="clearFiltersBtn" styleClass="clear-filters-btn"/>

@@ -9,20 +9,20 @@ public class Avis {
     private int note;
     private LocalDate dateCreation;
     private Company company;
-    private Produit produit;
+    private Product product;
     private EtatAvis etat;
 
     public Avis() {
         super();
     }
 
-    public Avis(Long idAvis, String feedback, int note, LocalDate dateCreation, Company company, Produit produit, EtatAvis etat) {
+    public Avis(Long idAvis, String feedback, int note, LocalDate dateCreation, Company company, Product product, EtatAvis etat) {
         this.idAvis = idAvis;
         this.feedback = feedback;
         this.note = note;
         this.dateCreation = dateCreation;
         this.company = company;
-        this.produit = produit;
+        this.product = product;
         this.etat = etat;
     }
 
@@ -66,12 +66,12 @@ public class Avis {
         this.company = company;
     }
 
-    public Produit getProduit() {
-        return produit;
+    public Product getProduit() {
+        return product;
     }
 
-    public void setProduit(Produit produit) {
-        this.produit = produit;
+    public void setProduit(Product product) {
+        this.product = product;
     }
 
     public EtatAvis getEtat() {
@@ -90,7 +90,7 @@ public class Avis {
                 ", note=" + note +
                 ", dateCreation=" + dateCreation +
                 ", company=" + company +
-                ", produit=" + produit +
+                ", produit=" + product +
                 ", etat=" + etat +
                 '}';
     }

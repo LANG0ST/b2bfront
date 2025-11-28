@@ -1,4 +1,4 @@
-package org.fx.b2bfront.auth;
+package org.fx.b2bfront.store;
 
 public class AuthStore {
     public static String jwt;
