@@ -1,5 +1,7 @@
 package org.fx.b2bfront.controller.Admin;
 
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -12,22 +14,31 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
+import org.fx.b2bfront.api.CategoryApi;
+import org.fx.b2bfront.api.CompanyApi;
+import org.fx.b2bfront.api.ProductsApi;
+import org.fx.b2bfront.dto.CategoryDto;
+import org.fx.b2bfront.dto.CompanyDto;
+import org.fx.b2bfront.dto.ProductDto;
 import org.fx.b2bfront.model.*;
 import org.fx.b2bfront.utils.AppNavigator;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class ProductsGestionController {
 
-    @FXML private TableView<Product> productsTable;
-    @FXML private TableColumn<Product, Boolean> selectCol;
-    @FXML private TableColumn<Product, Long> idCol;
-    @FXML private TableColumn<Product, String> nameCol;
-    @FXML private TableColumn<Product, String> descriptionCol;
-    @FXML private TableColumn<Product, BigDecimal> priceCol;
-    @FXML private TableColumn<Product, Integer> stockCol;
-    @FXML private TableColumn<Product, String> categorieCol;
-    @FXML private TableColumn<Product, String> companyCol;
-    @FXML private TableColumn<Product, Void> actionsCol;
+    @FXML private TableView<ProductDto> productsTable;
+    @FXML private TableColumn<ProductDto, Boolean> selectCol;
+    @FXML private TableColumn<ProductDto, Long> idCol;
+    @FXML private TableColumn<ProductDto, String> nameCol;
+    @FXML private TableColumn<ProductDto, String> descriptionCol;
+    @FXML private TableColumn<ProductDto, BigDecimal> priceCol;
+    @FXML private TableColumn<ProductDto, Integer> stockCol;
+    @FXML private TableColumn<ProductDto, String> categorieCol;
+    @FXML private TableColumn<ProductDto, String> companyCol;
+    @FXML private TableColumn<ProductDto, Void> actionsCol;
 
     // Filtres
     @FXML private TextField searchField;
@@ -36,27 +47,39 @@ public class ProductsGestionController {
     @FXML private Button clearFiltersBtn;
 
     // Data
-    private final ObservableList<Product> products = FXCollections.observableArrayList();
-    private FilteredList<Product> filteredProducts;
+    private final ObservableList<ProductDto> products = FXCollections.observableArrayList();
+    private FilteredList<ProductDto> filteredProducts;
+    private  final CategoryApi categoryApi = new CategoryApi();
+    private  final CompanyApi companyApi = new CompanyApi();
+    private  final ProductsApi productsApi = new ProductsApi();
 
     @FXML
     public void initialize() {
-
         // MAPPINGS
-        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
-        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-        stockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        idCol.setCellValueFactory(cell ->
+                new SimpleObjectProperty<>(cell.getValue().getId()));
+
+        nameCol.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().getName()));
+
+        descriptionCol.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().getDescription()));
+
+        priceCol.setCellValueFactory(cell ->
+                new SimpleObjectProperty<>(BigDecimal.valueOf(cell.getValue().getPrice())));
+
+        stockCol.setCellValueFactory(cell ->
+                new SimpleObjectProperty<>(cell.getValue().getStock()));
+
 
         categorieCol.setCellValueFactory(cell ->
                 new javafx.beans.property.SimpleStringProperty(
-                        cell.getValue().getCategorie() != null ? cell.getValue().getCategorie().getName() : ""
+                        cell.getValue().getCategoryId() != null ? categoryApi.findById(cell.getValue().getCategoryId()).getName() : ""
                 ));
 
         companyCol.setCellValueFactory(cell ->
                 new javafx.beans.property.SimpleStringProperty(
-                        cell.getValue().getCompany() != null ? cell.getValue().getCompany().getName() : ""
+                        cell.getValue().getCompanyId() != null ? companyApi.getById(cell.getValue().getCompanyId()).getName() : ""
                 ));
 
         // CHECKBOX
@@ -74,7 +97,7 @@ public class ProductsGestionController {
         // ACTIONS (Modifier / Supprimer)
         actionsCol.setCellFactory(new Callback<>() {
             @Override
-            public TableCell<Product, Void> call(TableColumn<Product, Void> param) {
+            public TableCell<ProductDto, Void> call(TableColumn<ProductDto, Void> param) {
                 return new TableCell<>() {
 
                     private final Button deleteBtn = new Button("Supprimer");
@@ -84,8 +107,10 @@ public class ProductsGestionController {
 
                         // DELETE action
                         deleteBtn.setOnAction(e -> {
-                            Product p = getTableView().getItems().get(getIndex());
-                            products.remove(p);   // IMPORTANT : supprimer dans la vraie liste
+                            ProductDto p = getTableView().getItems().get(getIndex());
+                            productsApi.delete(p.getId());
+                            products.clear();
+                            products.addAll(productsApi.findAll());
                             applyFilters();
                         });
                     }
@@ -118,11 +143,11 @@ public class ProductsGestionController {
 
 
         productsTable.setRowFactory(tv -> {
-            TableRow<Product> row = new TableRow<>();
+            TableRow<ProductDto> row = new TableRow<>();
 
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && !row.isEmpty()) {
-                    Product selectedProduct = row.getItem();
+                    ProductDto selectedProduct = row.getItem();
                     openProductDetails(selectedProduct);
                 }
             });
@@ -141,7 +166,7 @@ public class ProductsGestionController {
     @FXML
     private StackPane mainContent;
 
-    private void openProductDetails(Product prod) {
+    private void openProductDetails(ProductDto prod) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Admin/ProductDetails.fxml"));
             Parent detailsRoot = loader.load();
@@ -173,8 +198,8 @@ public class ProductsGestionController {
             if (filterCategorie.getValue() != null &&
                     !filterCategorie.getValue().equals("Toutes")) {
 
-                if (p.getCategorie() == null ||
-                        !p.getCategorie().getName().equalsIgnoreCase(filterCategorie.getValue()))
+                if (p.getCategoryId() == null ||
+                        ! categoryApi.findById(p.getCategoryId()).getName().equalsIgnoreCase(filterCategorie.getValue()))
                     return false;
             }
 
@@ -182,8 +207,8 @@ public class ProductsGestionController {
             if (filterCompany.getValue() != null &&
                     !filterCompany.getValue().equals("Toutes")) {
 
-                if (p.getCompany() == null ||
-                        !p.getCompany().getName().equalsIgnoreCase(filterCompany.getValue()))
+                if (p.getCompanyId() == null ||
+                        !companyApi.getById(p.getCompanyId()).getName().equalsIgnoreCase(filterCompany.getValue()))
                     return false;
             }
 
@@ -194,58 +219,40 @@ public class ProductsGestionController {
     // TEST DATA
     private void loadTestProducts() {
 
-        Category cat1 = new Category(1, "Gravats","",null);
-        Category cat2 = new Category(2, "Câbles","",null);
-        Category cat3 = new Category(3, "Matériaux","",null);
+        List<CategoryDto> categories = categoryApi.getAll();
 
-        Company c1 = new Company(1L, null, "Safia corp", "adr", "Marrakech",
-                "066666", "website", "email", "pass", true);
+        List<String> categoriesNames = new ArrayList<>();
+        for(CategoryDto category : categories ){
+            categoriesNames.add(category.getName());
+        }
 
-        Company c2 = new Company(2L, null, "Taha industries", "adr2", "Casa",
-                "077777", "website2", "mail2", "pass", true);
+        List<CompanyDto> companies = companyApi.findAll();
 
-        products.addAll(
-                new Product(1L, "Câble 380V", "Cable haute tension", new BigDecimal("149.99"), 120, c1, cat2, null, null, null),
-                new Product(2L, "Sable 25kg", "Qualité premium", new BigDecimal("59.99"), 300, c1, cat3, null, null, null),
-                new Product(3L, "Gravier 50kg", "Pour chantiers lourds", new BigDecimal("79.99"), 80, c2, cat1, null, null, null),
-                new Product(1L,  "Câble 380V","Câble haute tension industriel",new BigDecimal("149.99"), 120, c1, cat2, null, null, null),
-                new Product(2L,  "Sable 25kg","Sable lavé qualité premium",new BigDecimal("59.99"), 300, c1, cat3, null, null, null),
-                new Product(3L,  "Gravier 50kg",            "Granulométrie certifiée pour chantiers",     new BigDecimal("79.99"), 80,  c2, cat1, null, null, null),
+        List<String> compagniesNames = new ArrayList<>();
+        for(CompanyDto company : companies ){
+            compagniesNames.add(company.getName());
+        }
 
-                new Product(4L,  "Plaque acier 8mm","Acier renforcé norme EN10025",new BigDecimal("299.90"), 45,  c2, cat1, null, null, null),
-                new Product(5L,  "Tube PVC 50mm","Tube résistant haute pression",new BigDecimal("24.50"),  400, c2, cat3, null, null, null),
-                new Product(6L,  "Béton prêt 30kg","Béton de construction CAT Industrial",new BigDecimal("44.95"),  200, c1, cat3, null, null, null),
-                new Product(7L,  "Tôle galvanisée","Anti-corrosion, usage extérieur",new BigDecimal("129.99"), 67,  c1, cat1, null, null, null),
-                new Product(8L,  "Fer à béton 12mm", "Barre acier nervuré",new BigDecimal("13.99"),  800, c1, cat1, null, null, null),
-                new Product(9L,  "Peinture industrielle","Résistance extrême UV et chaleur",new BigDecimal("89.99"),  56,  c2, cat1, null, null, null),
-                new Product(10L, "Huile hydraulique 20L",  "Spéciale engins de chantier",new BigDecimal("249.99"), 30,  c1, cat2, null, null, null),
-                new Product(11L, "Câble souterrain","Isolation triple couche",                     new BigDecimal("189.99"), 140, c2, cat2, null, null, null),
-                new Product(12L, "Mortier 25kg","Haute adhérence",                             new BigDecimal("39.99"),  250, c1, cat3, null, null, null),
-                new Product(14L, "Filtre moteur CAT","Compatible machines industrielles",           new BigDecimal("99.99"),  60,  c2, cat3, null, null, null),
-                new Product(15L, "Galet convoyeur","Pour ligne de production",                    new BigDecimal("79.90"),  100, c1, cat2, null, null, null),
-                new Product(16L, "Béton fibré 30kg",        "Renforcé fibres métalliques",                 new BigDecimal("54.99"),  180, c1, cat3, null, null, null),
-                new Product(17L, "Peinture époxy",          "Usage industriel haute résistance",           new BigDecimal("129.90"), 75,  c2, cat1, null, null, null),
-                new Product(19L, "Tube acier 30mm",         "Tube rond haute résistance",                  new BigDecimal("59.99"),  210, c2, cat1, null, null, null),
-                new Product(20L, "Ciment 50kg",             "Qualité premium S2",                          new BigDecimal("99.99"),  150, c1, cat3, null, null, null),
-                new Product(21L, "Gravier noir 25kg",       "Drainage et fondations",                      new BigDecimal("64.99"),  90,  c1, cat3, null, null, null),
-                new Product(23L, "Roue industrielle",       "Roulement renforcé 300kg",                    new BigDecimal("119.90"), 70,  c1, cat3, null, null, null),
-                new Product(24L, "Câble blindé",            "Protection EMI/EMF",                          new BigDecimal("199.99"), 50,  c2, cat2, null, null, null),
-                new Product(26L, "Compresseur portable",    "Pression 12 bars",                            new BigDecimal("899.99"), 12,  c2, cat1, null, null, null),
-                new Product(27L, "Clé dynamométrique",      "Couple réglable 70-350 Nm",                    new BigDecimal("349.99"), 28,  c1, cat2, null, null, null),
-                new Product(28L, "Bobine cuivre 50m",       "Pour installation électrique",                new BigDecimal("599.90"), 25,  c2, cat2, null, null, null),
-                new Product(30L, "Béton autonivelant",      "Usage sol industriel",                        new BigDecimal("129.99"), 90,  c1, cat3, null, null, null),
-                new Product(36L, "Câble 220V renforcé",     "Isolation épaisse",                           new BigDecimal("89.99"),  140, c2, cat2, null, null, null),
-                new Product(41L, "Sable rouge 30kg",        "Finition décorative",                         new BigDecimal("69.99"),  120, c1, cat3, null, null, null),
-                new Product(42L, "Câble inox 8mm",          "Résistance traction 4 tonnes",                new BigDecimal("159.99"), 50,  c2, cat2, null, null, null),
-                new Product(43L, "Fer plat 20mm",           "Acier laminé à chaud",                        new BigDecimal("74.99"),  180, c1, cat1, null, null, null)
-        );
+        products.addAll(productsApi.findAll());
+
 
         // Charger les filtres
-        filterCategorie.setItems(FXCollections.observableArrayList("Toutes", "Gravats", "Câbles", "Matériaux"));
+        filterCategorie.setItems(
+                FXCollections.observableArrayList(
+                        Stream.concat(Stream.of("Toutes"), categoriesNames.stream()).toList()
+                )
+        );
         filterCategorie.setValue("Toutes");
 
-        filterCompany.setItems(FXCollections.observableArrayList("Toutes", "Safia corp", "Taha industries"));
+        filterCompany.setItems(
+                FXCollections.observableArrayList(
+                        Stream.concat(Stream.of("Toutes"), compagniesNames.stream()).toList()
+                )
+        );
         filterCompany.setValue("Toutes");
+
+
+
     }
 
     @FXML

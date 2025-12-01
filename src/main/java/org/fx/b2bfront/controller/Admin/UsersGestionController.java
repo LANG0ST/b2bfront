@@ -1,6 +1,6 @@
 package org.fx.b2bfront.controller.Admin;
 
-import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -8,15 +8,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import org.fx.b2bfront.model.Company;
+import org.fx.b2bfront.api.CompanyApi;
+import org.fx.b2bfront.dto.CompanyDto;
 import org.fx.b2bfront.utils.AppNavigator;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
 public class UsersGestionController {
@@ -28,22 +26,25 @@ public class UsersGestionController {
     @FXML private Button clearFiltersBtn;
 
     // ======= TABLE =======
-    @FXML private TableView<Company> usersTable;
-    @FXML private TableColumn<Company, Boolean> selectCol;
-    @FXML private TableColumn<Company, Long> idCol;
-    @FXML private TableColumn<Company, String> nameCol;
-    @FXML private TableColumn<Company, String> phoneCol;
-    @FXML private TableColumn<Company, String> emailCol;
-    @FXML private TableColumn<Company, String> cityCol;
-    @FXML private TableColumn<Company, String> createdAtCol;
-    @FXML private TableColumn<Company, Boolean> enabledCol;
-    @FXML private TableColumn<Company, Void> actionsCol;
+    @FXML private TableView<CompanyDto> usersTable;
+    @FXML private TableColumn<CompanyDto, Boolean> selectCol;
+    @FXML private TableColumn<CompanyDto, Long> idCol;
+    @FXML private TableColumn<CompanyDto, String> nameCol;
+    @FXML private TableColumn<CompanyDto, String> phoneCol;
+    @FXML private TableColumn<CompanyDto, String> emailCol;
+    @FXML private TableColumn<CompanyDto, String> createdAtCol;
+    @FXML private TableColumn<CompanyDto, String> cityCol;
+    @FXML private TableColumn<CompanyDto, Boolean> enabledCol;
+    @FXML private TableColumn<CompanyDto, Void> actionsCol;
 
     // ======= DATA SOURCE =======
-    private ObservableList<Company> users = FXCollections.observableArrayList();
-    private FilteredList<Company> filteredUsers;
+    private ObservableList<CompanyDto> users = FXCollections.observableArrayList();
+    private FilteredList<CompanyDto> filteredUsers;
 
-    private final DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    private  final CompanyApi companyApi = new CompanyApi();
+
+
+
 
     @FXML
     public void initialize() {
@@ -52,19 +53,29 @@ public class UsersGestionController {
         //   TABLE COLUMN BINDINGS
         // ===============================
 
-        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
-        emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-        cityCol.setCellValueFactory(new PropertyValueFactory<>("city"));
-        enabledCol.setCellValueFactory(new PropertyValueFactory<>("enabled"));
+        idCol.setCellValueFactory(cell ->
+                new SimpleObjectProperty<>(cell.getValue().getId()));
 
+        nameCol.setCellValueFactory(cell ->
+                new SimpleObjectProperty<>(cell.getValue().getName()));
+
+        phoneCol.setCellValueFactory(cell ->
+                new SimpleObjectProperty<>(cell.getValue().getPhone()));
+
+        emailCol.setCellValueFactory(cell ->
+                new SimpleObjectProperty<>(cell.getValue().getEmail()));
+
+        cityCol.setCellValueFactory(cell ->
+                new SimpleObjectProperty<>(cell.getValue().getCity()));
+
+        enabledCol.setCellValueFactory(cell ->
+                new SimpleObjectProperty<>(cell.getValue().isEnabled()));
         createdAtCol.setCellValueFactory(cell ->
-                new ReadOnlyObjectWrapper<>(
-                        cell.getValue().getCreatedAt() != null ?
-                                cell.getValue().getCreatedAt().format(fmt) : ""
-                )
-        );
+                new SimpleObjectProperty<>(cell.getValue().getCreatedAt()));
+
+
+
+
 
         // ===============================
         //   CHECKBOX SELECTION COLUMN
@@ -93,19 +104,19 @@ public class UsersGestionController {
                 deleteBtn.getStyleClass().add("action-btn-red");
 
                 blockBtn.setOnAction(e -> {
-                    Company u = getTableView().getItems().get(getIndex());
+                    CompanyDto u = getTableView().getItems().get(getIndex());
                     u.setEnabled(false);
                     usersTable.refresh();
                 });
 
                 unblockBtn.setOnAction(e -> {
-                    Company u = getTableView().getItems().get(getIndex());
+                    CompanyDto u = getTableView().getItems().get(getIndex());
                     u.setEnabled(true);
                     usersTable.refresh();
                 });
 
                 deleteBtn.setOnAction(e -> {
-                    Company u = getTableView().getItems().get(getIndex());
+                    CompanyDto u = getTableView().getItems().get(getIndex());
                     users.remove(u);
                     applyFilters();
                 });
@@ -129,17 +140,7 @@ public class UsersGestionController {
         // ===============================
         //   TEST DATA
         // ===============================
-        users.addAll(
-                new Company(1L, LocalDateTime.now(), "Safia", "Hay Riad", "Marrakech", "06000001", "Safia.ma", "sa@ma.com", "pass", true),
-                new Company(2L, LocalDateTime.now(), "Meriem", "Hay Sidi Youssef", "Marrakech", "06000002", "Meriem.ma", "me@ma.com", "pass", true),
-                new Company(3L, LocalDateTime.now(), "Ziad", "Hay Charaf", "Marrakech", "06000003", "Ziad.ma", "z@ma.com", "pass", true),
-                new Company(4L, LocalDateTime.now(), "Alaa", "Hay Sinko", "Settat", "06000004", "Alaa.ma", "a@ma.com", "pass", false),
-                new Company(5L, LocalDateTime.now(), "Soufiane", "Al Massira 3", "Marrakech", "06000005", "Soufiane.ma", "so@ma.com", "pass", true),
-                new Company(6L, LocalDateTime.now(), "Taha", "Hay Riad", "Marrakech", "06000006", "Taha.ma", "t@ma.com", "pass", true),
-                new Company(7L, LocalDateTime.now(), "Rokaya", "Hay Riad", "Dakar", "06000007", "Rokaya.ma", "r@ma.com", "pass", true),
-                new Company(8L, LocalDateTime.now(), "Maroua", "Al Massira", "Marrakech", "06000008", "Maroua.ma", "mar@ma.com", "pass", true),
-                new Company(9L, LocalDateTime.now(), "Malak", "Hay Riad", "Marrakech", "06000009", "Malak.ma", "mal@ma.com", "pass", true)
-        );
+        users.addAll(companyApi.findAll());
 
         // ===============================
         //   FILTER LOGIC
@@ -158,7 +159,7 @@ public class UsersGestionController {
         // City filter auto
         cityFilter.getItems().add("Toutes");
         cityFilter.getItems().addAll(
-                users.stream().map(Company::getCity).distinct().collect(Collectors.toList())
+                users.stream().map(CompanyDto::getCity).distinct().collect(Collectors.toList())
         );
         cityFilter.getSelectionModel().select("Toutes");
 
@@ -169,11 +170,11 @@ public class UsersGestionController {
         clearFiltersBtn.setOnAction(e -> resetFilters());
 
         usersTable.setRowFactory(tv -> {
-            TableRow<Company> row = new TableRow<>();
+            TableRow<CompanyDto> row = new TableRow<>();
 
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && !row.isEmpty()) {
-                    Company selectedUser = row.getItem();
+                    CompanyDto selectedUser = row.getItem();
                     openUserDetails(selectedUser);
                 }
             });
@@ -186,14 +187,14 @@ public class UsersGestionController {
     @FXML
     private StackPane mainContent;
 
-    private void openUserDetails(Company user) {
+    private void openUserDetails(CompanyDto user) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Admin/UserDetails.fxml"));
             Parent detailsRoot = loader.load();
 
             // Récupérer le controller de la nouvelle page
             UserDetailsController controller = loader.getController();
-            controller.setUser(user);
+            controller.setCompany(user);
 
             // Remplacer le contenu du center
             mainContent.getChildren().setAll(detailsRoot);

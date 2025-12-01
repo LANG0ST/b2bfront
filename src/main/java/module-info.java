@@ -6,6 +6,7 @@ module b2bfront {
     requires com.google.gson;
     requires okhttp3;
     requires static lombok;
+    requires java.net.http;
 
     opens org.fx.b2bfront to javafx.fxml;
     opens org.fx.b2bfront.controller.auth to javafx.fxml;

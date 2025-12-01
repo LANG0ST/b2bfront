@@ -64,12 +64,12 @@
                 <TableView fx:id="productsTable" styleClass="table">
                     <columns>
                         <TableColumn fx:id="selectCol" text="✔" prefWidth="50"/>
-                        <TableColumn fx:id="idCol" text="ID" prefWidth="100"/>
-                        <TableColumn fx:id="nameCol" text="Nom" prefWidth="150"/>
+                        <TableColumn fx:id="idCol" text="ID" prefWidth="50"/>
+                        <TableColumn fx:id="nameCol" text="Nom" prefWidth="200"/>
                         <TableColumn fx:id="descriptionCol" text="Description" prefWidth="325"/>
-                        <TableColumn fx:id="priceCol" text="Prix" prefWidth="100"/>
-                        <TableColumn fx:id="stockCol" text="Stock" prefWidth="100"/>
-                        <TableColumn fx:id="categorieCol" text="Categorie" prefWidth="100"/>
+                        <TableColumn fx:id="priceCol" text="Prix" prefWidth="85"/>
+                        <TableColumn fx:id="stockCol" text="Stock" prefWidth="50"/>
+                        <TableColumn fx:id="categorieCol" text="Categorie" prefWidth="150"/>
                         <TableColumn fx:id="companyCol" text="Entreprise" prefWidth="150"/>
                         <TableColumn fx:id="actionsCol" text="Actions" prefWidth="175"/>
                     </columns>

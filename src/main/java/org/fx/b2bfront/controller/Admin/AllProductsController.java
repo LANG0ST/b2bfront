@@ -8,24 +8,22 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import org.fx.b2bfront.model.CategoryStats;
-import org.fx.b2bfront.model.CompanyStats;
+import org.fx.b2bfront.api.StatsApi;
 import org.fx.b2bfront.model.ProductStats;
-import org.fx.b2bfront.service.StatsService;
 import org.fx.b2bfront.utils.AppNavigator;
 
 public class AllProductsController {
 
     @FXML private VBox rankingContainer;
 
-    private final StatsService statsService = new StatsService();
+    private final StatsApi statsApi = new StatsApi();
 
     @FXML
     public void initialize() {
 
         int rank = 1;
 
-        for (ProductStats s : statsService.getAllProducts()) {
+        for (ProductStats s : statsApi.bestProducts()) {
             HBox card = new HBox();
             if(rank == 1) {
                 card.getStyleClass().add("ranking-card-1");

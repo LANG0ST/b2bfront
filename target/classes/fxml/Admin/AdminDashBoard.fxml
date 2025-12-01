@@ -51,8 +51,8 @@
                 <!-- ================= CARDS ================= -->
                 <HBox spacing="30" alignment="CENTER">
                     <VBox spacing="10" styleClass="stats-card" onMouseClicked="#openUsersModule" >
-                        <Label text="👥" styleClass="stats-icon"/>
-                        <Label text="Utilisateurs" styleClass="stats-title"/>
+                        <Label text="🏢" styleClass="stats-icon"/>
+                        <Label text="Active Companies" styleClass="stats-title"/>
                         <Label fx:id="usersCount" text="0" styleClass="stats-value"/>
 
                     </VBox>
