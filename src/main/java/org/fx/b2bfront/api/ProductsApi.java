@@ -7,6 +7,9 @@ import org.fx.b2bfront.dto.FilterRequest;
 import org.fx.b2bfront.dto.ProductDto;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -117,4 +120,28 @@ public class ProductsApi {
             throw new RuntimeException("Failed to load product: " + e.getMessage(), e);
         }
     }
+
+    public static void addToCart(long companyId, long productId, int qty) {
+        try {
+            String url = "http://localhost:8082/api/cart/add"
+                    + "?companyId=" + companyId
+                    + "&productId=" + productId
+                    + "&qty=" + qty;
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(RequestBody.create(new byte[0]))   // empty POST body
+                    .build();
+
+            Response response = client.newCall(request).execute();
+
+            if (!response.isSuccessful()) {
+                throw new RuntimeException("Failed to add to cart. Code: " + response.code());
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error adding to cart: " + e.getMessage());
+        }
+    }
+
 }

@@ -12,7 +12,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.fx.b2bfront.api.ProductsApi;
 import org.fx.b2bfront.dto.ProductDto;
+import org.fx.b2bfront.store.AuthStore;
+import org.fx.b2bfront.store.CartStore;
 import org.fx.b2bfront.store.ProductStore;
+import org.fx.b2bfront.utils.AppNavigator;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,7 +30,7 @@ public class ProductController implements Initializable {
     @FXML private Label productPriceLabel;
     @FXML private Label productDescriptionLabel;
 
-    // SPECS (for now we fake / derive them)
+    // SPECS
     @FXML private Label specType;
     @FXML private Label specPower;
     @FXML private Label specWeight;
@@ -47,6 +50,10 @@ public class ProductController implements Initializable {
 
     private int quantity = 1;
 
+    private ProductDto currentProduct;
+    private long currentProductId;
+    private long companyId;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -54,57 +61,91 @@ public class ProductController implements Initializable {
         setupQuantityButtons();
 
         Long productId = ProductStore.getSelectedProductId();
-        System.out.println("Loaded productId: " + productId);  // add this
+        System.out.println("Loaded productId: " + productId);
+
         if (productId != null) {
             loadProductFromBackend(productId);
-            ProductDto dto = ProductsApi.getById(productId);
-            System.out.println("👉 Image URL received: " + dto.getImageUrl());
-
         } else {
-            // fallback: demo data if nothing selected
             loadFallbackDemo();
         }
 
-        loadReviewsDemo();  // still fake for now
+        loadReviewsDemo();
+
+        // ==============================
+        //  GET COMPANY ID SAFELY
+        // ==============================
+        Long companyIdObj = AuthStore.companyId;   // <---- use AuthStore
+        long companyId = (companyIdObj != null) ? companyIdObj : -1;
+
+        // =====================================================
+        //  ADD TO CART
+        // =====================================================
+        btnAddToCart.setOnAction(e -> {
+            if (currentProduct != null) {
+
+                CartStore.add(productId, quantity);            // local store
+                ProductsApi.addToCart(companyId, productId, quantity);   // backend sync
+
+                System.out.println("→ Added to cart: " + currentProduct.getName() +
+                        " x" + quantity);
+            }
+        });
+
+        // =====================================================
+        //  BUY NOW → add then navigate
+        // =====================================================
+        btnBuyNow.setOnAction(e -> {
+            if (currentProduct != null) {
+                CartStore.add(currentProduct.getId(), quantity);
+                AppNavigator.navigateTo("cart.fxml");
+            }
+        });
     }
+
 
     // ============================================================
     // LOAD PRODUCT FROM BACKEND
     // ============================================================
     private void loadProductFromBackend(long productId) {
         try {
-            ProductDto dto = ProductsApi.getById(productId);
-            if (dto == null) {
+            currentProduct = ProductsApi.getById(productId);
+
+            if (currentProduct == null) {
                 loadFallbackDemo();
                 return;
             }
 
-            // Basic fields
-            productNameLabel.setText(dto.getName());
-            productDescriptionLabel.setText(dto.getDescription() != null ? dto.getDescription() : "");
+            productNameLabel.setText(currentProduct.getName());
+            productDescriptionLabel.setText(
+                    currentProduct.getDescription() != null
+                            ? currentProduct.getDescription()
+                            : ""
+            );
 
-            // Price display (you can improve formatting later)
-            productPriceLabel.setText(String.format("%.2f MAD", dto.getPrice()));
+            productPriceLabel.setText(String.format("%.2f MAD", currentProduct.getPrice()));
 
-            // Fake specs for now (you can later extend ProductDto / backend)
-            specType.setText(dto.getFilterTag() != null ? dto.getFilterTag() : "Matériel industriel");
-            specPower.setText("—");  // to be mapped when you have real fields
+            // Fake specs
+            specType.setText(currentProduct.getFilterTag() != null
+                    ? currentProduct.getFilterTag()
+                    : "Matériel industriel");
+            specPower.setText("—");
             specWeight.setText("—");
             specFuel.setText("—");
 
-            // Image
-            if (dto.getImageUrl() != null && !dto.getImageUrl().isBlank()) {
-                loadImageFromUrl(dto.getImageUrl());
+            if (currentProduct.getImageUrl() != null &&
+                    !currentProduct.getImageUrl().isBlank()) {
+
+                loadImageFromUrl(currentProduct.getImageUrl());
             } else {
                 loadPlaceholderImage();
             }
 
         } catch (Exception e) {
-            // If error (backend down, etc.) → show fallback
             e.printStackTrace();
             loadFallbackDemo();
         }
     }
+
 
     // ============================================================
     // IMAGE HANDLING
@@ -112,26 +153,26 @@ public class ProductController implements Initializable {
     private void loadImageFromUrl(String url) {
 
         try {
-            // No URL provided → use placeholder
             if (url == null || url.isBlank()) {
                 loadPlaceholderImage();
                 return;
             }
 
-            // Case 1: The backend gives only filename → use placeholder
-            if (!url.startsWith("http://") && !url.startsWith("https://") &&
+            // Backend returns only filename? → ignore and use placeholder.
+            if (!url.startsWith("http://") &&
+                    !url.startsWith("https://") &&
                     !url.startsWith("/")) {
-                System.out.println("⚠ Not a real URL, using placeholder instead: " + url);
+
+                System.out.println("⚠ Not a valid URL → using placeholder: " + url);
                 loadPlaceholderImage();
                 return;
             }
 
-            // Case 2: Backend gives "/uploads/x.jpg"
             if (url.startsWith("/")) {
                 url = "http://localhost:8082" + url;
             }
 
-            System.out.println("📷 Final resolved URL = " + url);
+            System.out.println("📷 Final resolved image URL = " + url);
 
             Image img = new Image(url, true);
 
@@ -165,12 +206,13 @@ public class ProductController implements Initializable {
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            System.out.println("Placeholder image missing! Add /assets/placeholder.png");
+            System.out.println("❌ Placeholder image missing in /images/placeholder.png");
         }
     }
 
+
     // ============================================================
-    // QUANTITY BUTTONS
+    // QUANTITY
     // ============================================================
     private void setupQuantityButtons() {
         btnMinus.setOnAction(e -> decreaseQuantity());
@@ -178,7 +220,7 @@ public class ProductController implements Initializable {
     }
 
     @FXML
-    private void decreaseQuantity() {
+    public void decreaseQuantity() {
         if (quantity > 1) {
             quantity--;
             quantityLabel.setText(String.valueOf(quantity));
@@ -186,20 +228,26 @@ public class ProductController implements Initializable {
     }
 
     @FXML
-    private void increaseQuantity() {
+    public void increaseQuantity() {
         quantity++;
         quantityLabel.setText(String.valueOf(quantity));
     }
 
+
     // ============================================================
-    // FALLBACK DEMO (if backend fails / no ID)
+    // FALLBACK
     // ============================================================
     private void loadFallbackDemo() {
-        productNameLabel.setText("Pelleteuse Caterpillar 320D");
+
+        currentProduct = new ProductDto();
+        currentProduct.setId(-1L);
+        currentProduct.setName("Pelleteuse Caterpillar 320D");
+        currentProduct.setPrice(350000);
+
+        productNameLabel.setText(currentProduct.getName());
         productPriceLabel.setText("350 000 MAD");
         productDescriptionLabel.setText(
-                "Une machine robuste idéale pour chantiers lourds, " +
-                        "conçue pour offrir stabilité, puissance et précision."
+                "Une machine robuste idéale pour chantiers lourds."
         );
 
         specType.setText("Engin de terrassement");
@@ -210,8 +258,9 @@ public class ProductController implements Initializable {
         loadPlaceholderImage();
     }
 
+
     // ============================================================
-    // REVIEWS (still fake for now)
+    // REVIEWS (FAKE)
     // ============================================================
     private void loadReviewsDemo() {
         reviewsContainer.getChildren().clear();

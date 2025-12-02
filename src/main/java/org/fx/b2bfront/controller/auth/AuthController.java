@@ -9,6 +9,7 @@ import org.fx.b2bfront.api.AuthApi;
 import org.fx.b2bfront.store.AuthStore;
 import org.fx.b2bfront.dto.LoginRequestFront;
 import org.fx.b2bfront.dto.RegisterRequestFront;
+import org.fx.b2bfront.store.CartStore;
 import org.fx.b2bfront.utils.AppNavigator;
 
 public class AuthController {
@@ -137,8 +138,9 @@ public class AuthController {
         AuthStore.role = data.user.role;
         AuthStore.companyId = data.user.companyId;
         AuthStore.email = data.user.email;
+        CartStore.loadCartFromBackend(AuthStore.companyId);
 
-        AppNavigator.navigateTo("homepage.fxml");
+            AppNavigator.navigateTo("homepage.fxml");
         }else {
             AppNavigator.navigateTo("Admin/AdminDashBoard.fxml");
 

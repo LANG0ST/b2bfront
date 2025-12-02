@@ -1,12 +1,14 @@
 package org.fx.b2bfront.controller.cart;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import org.fx.b2bfront.dto.CartItem;
+import org.fx.b2bfront.store.CartStore;
+import org.fx.b2bfront.utils.AppNavigator;
 
 public class CartController {
 
@@ -15,56 +17,137 @@ public class CartController {
     @FXML private Label subtotalLabel;
     @FXML private Label totalLabel;
 
-    private double subtotal = 0;
+    @FXML private TextField couponField;
+    @FXML private Button btnCheckout;
 
     @FXML
     public void initialize() {
-        addCartItem("Pelleteuse Caterpillar 320D", "L", 1, 99000);
-        addCartItem("Génératrice Industrielle CAT GX3500", "XL", 1, 15000);
-        updateTotals();
+        refresh();
+
+        btnCheckout.setOnAction(e ->
+                AppNavigator.navigateTo("checkout.fxml")
+        );
     }
 
-    private void addCartItem(String name, String size, int qty, double price) {
+
+    /* ---------------------------------------------------------
+       LOAD ALL ITEMS
+       --------------------------------------------------------- */
+    private void loadCartItems() {
+        cartItemsContainer.getChildren().clear();
+
+        for (CartItem item : CartStore.getItems()) {
+            cartItemsContainer.getChildren().add(buildCartItem(item));
+        }
+    }
+
+
+    /* ---------------------------------------------------------
+       BUILD A SINGLE CART ITEM (card)
+       --------------------------------------------------------- */
+    private HBox buildCartItem(CartItem item) {
 
         HBox root = new HBox(20);
-        root.getStyleClass().add("cart-item");
-        root.setAlignment(Pos.TOP_LEFT);
+        root.getStyleClass().add("cart-item-card");
+        root.setAlignment(Pos.CENTER_LEFT);
 
-        VBox imageBox = new VBox();
-        imageBox.getStyleClass().add("item-image");
+        /* =====================================
+           IMAGE
+        ===================================== */
+        ImageView img = new ImageView();
+        img.setFitWidth(140);
+        img.setFitHeight(120);
+        img.setPreserveRatio(true);
 
-        VBox details = new VBox(4);
-        details.getStyleClass().add("item-details");
+        try {
+            if (item.getImageUrl() != null && !item.getImageUrl().isBlank()) {
+                img.setImage(new Image("http://localhost:8082/" + item.getImageUrl(), true));
+            } else {
+                img.setImage(new Image(getClass().getResource("/images/placeholder.png").toExternalForm()));
+            }
+        } catch (Exception ex) {
+            img.setImage(new Image(getClass().getResource("/images/placeholder.png").toExternalForm()));
+        }
 
-        Label nameLabel = new Label(name);
-        nameLabel.getStyleClass().add("item-title");
+        VBox imageBox = new VBox(img);
+        imageBox.getStyleClass().add("cart-item-image");
 
-        Label sizeLabel = new Label("Size: " + size);
-        Label qtyLabel = new Label("Quantity: " + qty);
 
-        Label priceLabel = new Label(price + " MAD");
-        priceLabel.getStyleClass().add("item-price");
+        /* =====================================
+           NAME + QUANTITY
+        ===================================== */
+        VBox info = new VBox(10);
 
-        Button removeBtn = new Button("Remove");
-        removeBtn.getStyleClass().add("remove-button");
+        Label name = new Label(item.getName());
+        name.getStyleClass().add("cart-item-title");
 
-        removeBtn.setOnAction(e -> {
-            cartItemsContainer.getChildren().remove(root);
-            subtotal -= price;
-            updateTotals();
+        HBox qtyBox = new HBox(8);
+        qtyBox.setAlignment(Pos.CENTER_LEFT);
+        qtyBox.getStyleClass().add("qty-box");
+
+        Button minus = new Button("-");
+        minus.getStyleClass().add("qty-button");
+        minus.setOnAction(e -> changeQty(item, item.getQuantity() - 1));
+
+        Label qtyValue = new Label(String.valueOf(item.getQuantity()));
+        qtyValue.getStyleClass().add("qty-value");
+
+        Button plus = new Button("+");
+        plus.getStyleClass().add("qty-button");
+        plus.setOnAction(e -> changeQty(item, item.getQuantity() + 1));
+
+        qtyBox.getChildren().addAll(minus, qtyValue, plus);
+
+        info.getChildren().addAll(name, qtyBox);
+
+
+        /* =====================================
+           PRICE
+        ===================================== */
+        Label price = new Label(
+                String.format("%.2f MAD", item.getUnitPrice() * item.getQuantity())
+        );
+        price.getStyleClass().add("cart-item-price");
+
+
+        /* =====================================
+           REMOVE BUTTON
+        ===================================== */
+        Button remove = new Button("✖");
+        remove.getStyleClass().add("remove-button");
+        remove.setOnAction(e -> {
+            CartStore.remove(item.getProductId());
+            refresh();
         });
 
-        details.getChildren().addAll(nameLabel, sizeLabel, qtyLabel, priceLabel, removeBtn);
 
-        root.getChildren().addAll(imageBox, details);
-
-        subtotal += price;
-
-        cartItemsContainer.getChildren().add(root);
+        /* =====================================
+           ASSEMBLE CARD
+        ===================================== */
+        root.getChildren().addAll(imageBox, info, price, remove);
+        return root;
     }
 
-    private void updateTotals() {
-        subtotalLabel.setText(subtotal + " MAD");
-        totalLabel.setText(subtotal + " MAD");
+
+    /* ---------------------------------------------------------
+       UPDATE QTY
+       --------------------------------------------------------- */
+    private void changeQty(CartItem item, int newQty) {
+        if (newQty <= 0) {
+            CartStore.remove(item.getProductId());
+        } else {
+            CartStore.updateQuantity(item.getProductId(), newQty);
+        }
+        refresh();
+    }
+
+
+    /* ---------------------------------------------------------
+       REFRESH UI
+       --------------------------------------------------------- */
+    private void refresh() {
+        loadCartItems();
+        subtotalLabel.setText(String.format("%.2f MAD", CartStore.getSubtotal()));
+        totalLabel.setText(String.format("%.2f MAD", CartStore.getSubtotal()));
     }
 }
