@@ -121,6 +121,50 @@ public class ProductsApi {
         }
     }
 
+    // =======================================================
+
+
+    public static void delete(long id) {
+        try {
+            Request request = new Request.Builder()
+                    .url(BASE_URL + "/" + id)
+                    .delete()
+                    .build();
+
+            Response response = client.newCall(request).execute();
+
+            if (!response.isSuccessful()) {
+                throw new RuntimeException("Failed to delete product: " + response.code());
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to delete product: " + e.getMessage());
+        }
+    }
+
+
+
+    // =======================================================
+
+    public static List<ProductDto> findAll() {
+
+        try {
+            Request request = new Request.Builder()
+                    .url(BASE_URL)
+                    .get()
+                    .build();
+
+            Response response = client.newCall(request).execute();
+            String json = response.body().string();
+
+            return gson.fromJson(json, new TypeToken<List<ProductDto>>(){}.getType());
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to fetch all products: " + e.getMessage());
+        }
+    }
+
+
     public static void addToCart(long companyId, long productId, int qty) {
         try {
             String url = "http://localhost:8082/api/cart/add"

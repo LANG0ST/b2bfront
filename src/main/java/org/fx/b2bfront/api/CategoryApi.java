@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import okhttp3.*;
 import org.fx.b2bfront.dto.CategoryDto;
+import org.fx.b2bfront.dto.ProductDto;
 
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,24 @@ public class CategoryApi {
         }
     }
 
+
+    // =====================================================
+    public static CategoryDto findById( int categoryId ) {
+        try {
+            Request request = new Request.Builder()
+                    .url(BASE_URL + "/" + categoryId)
+                    .get()
+                    .build();
+
+            Response response = client.newCall(request).execute();
+            String json = response.body().string();
+
+            return gson.fromJson(json, CategoryDto.class);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load categories: " + e.getMessage());
+        }
+    }
     // =====================================================
     // 2) GET FILTERS FOR CATEGORY
     // =====================================================
@@ -53,4 +72,5 @@ public class CategoryApi {
             throw new RuntimeException("Failed to load filters: " + e.getMessage());
         }
     }
+
 }

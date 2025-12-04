@@ -24,7 +24,7 @@
         <Label fx:id="title" styleClass="user-title"/>
 
         <!-- Small Description -->
-        <Label text="Profil utilisateur" styleClass="user-subtitle"/>
+        <Label text="Profil Comapanie" styleClass="user-subtitle"/>
     </VBox>
 
     <!-- ===================== SEPARATOR ===================== -->
@@ -57,11 +57,12 @@
             <Label fx:id="cityLabel" styleClass="details-value"/>
         </HBox>
 
-        <!-- Created At -->
+        <!-- createdAt -->
         <HBox spacing="10" alignment="CENTER_LEFT" styleClass="form-field">
-            <Label text="Créé le :" styleClass="details-label"/>
+            <Label text="Crée le :" styleClass="details-label"/>
             <Label fx:id="createdAtLabel" styleClass="details-value"/>
         </HBox>
+
 
         <!-- Status -->
         <HBox spacing="10" alignment="CENTER_LEFT" styleClass="form-field">
