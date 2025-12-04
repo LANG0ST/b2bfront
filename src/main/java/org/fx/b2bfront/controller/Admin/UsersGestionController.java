@@ -19,13 +19,12 @@ import java.util.stream.Collectors;
 
 public class UsersGestionController {
 
-    // ======= FILTRES =======
+
     @FXML private TextField searchField;
     @FXML private ComboBox<String> statusFilter;
     @FXML private ComboBox<String> cityFilter;
     @FXML private Button clearFiltersBtn;
 
-    // ======= TABLE =======
     @FXML private TableView<CompanyDto> usersTable;
     @FXML private TableColumn<CompanyDto, Boolean> selectCol;
     @FXML private TableColumn<CompanyDto, Long> idCol;
@@ -37,61 +36,60 @@ public class UsersGestionController {
     @FXML private TableColumn<CompanyDto, Boolean> enabledCol;
     @FXML private TableColumn<CompanyDto, Void> actionsCol;
 
-    // ======= DATA SOURCE =======
-    private ObservableList<CompanyDto> users = FXCollections.observableArrayList();
+    @FXML private Button bloqueAllBtn;
+    @FXML private Button debloqueAllBtn;
+    @FXML private Button deleteAllBtn;
+
+    private final ObservableList<CompanyDto> users = FXCollections.observableArrayList();
     private FilteredList<CompanyDto> filteredUsers;
 
-    private  final CompanyApi companyApi = new CompanyApi();
-
-
-
+    private final ObservableList<CompanyDto> selectedUsers = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
 
-        // ===============================
-        //   TABLE COLUMN BINDINGS
-        // ===============================
 
-        idCol.setCellValueFactory(cell ->
-                new SimpleObjectProperty<>(cell.getValue().getId()));
-
-        nameCol.setCellValueFactory(cell ->
-                new SimpleObjectProperty<>(cell.getValue().getName()));
-
-        phoneCol.setCellValueFactory(cell ->
-                new SimpleObjectProperty<>(cell.getValue().getPhone()));
-
-        emailCol.setCellValueFactory(cell ->
-                new SimpleObjectProperty<>(cell.getValue().getEmail()));
-
-        cityCol.setCellValueFactory(cell ->
-                new SimpleObjectProperty<>(cell.getValue().getCity()));
-
-        enabledCol.setCellValueFactory(cell ->
-                new SimpleObjectProperty<>(cell.getValue().isEnabled()));
-        createdAtCol.setCellValueFactory(cell ->
-                new SimpleObjectProperty<>(cell.getValue().getCreatedAt()));
+        idCol.setCellValueFactory(cell -> new SimpleObjectProperty<>(cell.getValue().getId()));
+        nameCol.setCellValueFactory(cell -> new SimpleObjectProperty<>(cell.getValue().getName()));
+        phoneCol.setCellValueFactory(cell -> new SimpleObjectProperty<>(cell.getValue().getPhone()));
+        emailCol.setCellValueFactory(cell -> new SimpleObjectProperty<>(cell.getValue().getEmail()));
+        cityCol.setCellValueFactory(cell -> new SimpleObjectProperty<>(cell.getValue().getCity()));
+        enabledCol.setCellValueFactory(cell -> new SimpleObjectProperty<>(cell.getValue().isEnabled()));
+        createdAtCol.setCellValueFactory(cell -> new SimpleObjectProperty<>(cell.getValue().getCreatedAt()));
 
 
-
-
-
-        // ===============================
-        //   CHECKBOX SELECTION COLUMN
-        // ===============================
         selectCol.setCellFactory(col -> new TableCell<>() {
-            private final CheckBox cb = new CheckBox();
+
+            private final CheckBox checkBox = new CheckBox();
+
+            {
+                checkBox.selectedProperty().addListener((obs, oldV, newV) -> {
+                    CompanyDto user = getTableRow().getItem();
+                    if (user == null) return;
+
+                    if (newV) {
+                        if (!selectedUsers.contains(user))
+                            selectedUsers.add(user);
+                    } else {
+                        selectedUsers.remove(user);
+                    }
+                });
+            }
+
             @Override
             protected void updateItem(Boolean item, boolean empty) {
                 super.updateItem(item, empty);
-                setGraphic(empty ? null : cb);
+
+                if (empty || getTableRow().getItem() == null) {
+                    setGraphic(null);
+                } else {
+                    CompanyDto user = getTableRow().getItem();
+                    checkBox.setSelected(selectedUsers.contains(user));
+                    setGraphic(checkBox);
+                }
             }
         });
 
-        // ===============================
-        //   ACTION BUTTONS PER ROW
-        // ===============================
         actionsCol.setCellFactory(col -> new TableCell<>() {
 
             private final Button blockBtn = new Button("Bloquer");
@@ -105,22 +103,21 @@ public class UsersGestionController {
 
                 blockBtn.setOnAction(e -> {
                     CompanyDto u = getTableView().getItems().get(getIndex());
-                    u.setEnabled(false);
-                    usersTable.refresh();
+                    CompanyApi.disable(u.getId());
+                    refreshTable();
                 });
 
                 unblockBtn.setOnAction(e -> {
                     CompanyDto u = getTableView().getItems().get(getIndex());
-                    u.setEnabled(true);
-                    usersTable.refresh();
+                    CompanyApi.enable(u.getId());
+                    refreshTable();
                 });
 
                 deleteBtn.setOnAction(e -> {
                     CompanyDto u = getTableView().getItems().get(getIndex());
-                    users.remove(u);
-                    applyFilters();
+                    CompanyApi.delete(u.getId());
+                    refreshTable();
                 });
-
             }
 
             @Override
@@ -137,66 +134,51 @@ public class UsersGestionController {
             }
         });
 
-        // ===============================
-        //   TEST DATA
-        // ===============================
-        users.addAll(companyApi.findAll());
-
-        // ===============================
-        //   FILTER LOGIC
-        // ===============================
-
+        users.addAll(CompanyApi.findAll());
 
         filteredUsers = new FilteredList<>(users, u -> true);
         usersTable.setItems(filteredUsers);
 
 
-
-        // Status filter
         statusFilter.getItems().addAll("Tous", "Activés", "Désactivés");
         statusFilter.getSelectionModel().select("Tous");
 
-        // City filter auto
         cityFilter.getItems().add("Toutes");
         cityFilter.getItems().addAll(
                 users.stream().map(CompanyDto::getCity).distinct().collect(Collectors.toList())
         );
         cityFilter.getSelectionModel().select("Toutes");
 
-        // Listeners
         searchField.textProperty().addListener((obs, oldV, newV) -> applyFilters());
         statusFilter.valueProperty().addListener((obs, oldV, newV) -> applyFilters());
         cityFilter.valueProperty().addListener((obs, oldV, newV) -> applyFilters());
         clearFiltersBtn.setOnAction(e -> resetFilters());
 
+        bloqueAllBtn.setOnAction(e -> blockSelected());
+        debloqueAllBtn.setOnAction(e -> unblockSelected());
+        deleteAllBtn.setOnAction(e -> deleteSelected());
+
         usersTable.setRowFactory(tv -> {
             TableRow<CompanyDto> row = new TableRow<>();
-
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && !row.isEmpty()) {
-                    CompanyDto selectedUser = row.getItem();
-                    openUserDetails(selectedUser);
+                    openUserDetails(row.getItem());
                 }
             });
-
             return row;
         });
-
     }
 
-    @FXML
-    private StackPane mainContent;
+    @FXML private StackPane mainContent;
 
     private void openUserDetails(CompanyDto user) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Admin/UserDetails.fxml"));
             Parent detailsRoot = loader.load();
 
-            // Récupérer le controller de la nouvelle page
             UserDetailsController controller = loader.getController();
             controller.setCompany(user);
 
-            // Remplacer le contenu du center
             mainContent.getChildren().setAll(detailsRoot);
 
         } catch (Exception e) {
@@ -204,17 +186,9 @@ public class UsersGestionController {
         }
     }
 
-
-
-
-
-    // ======================================================
-    //    FILTER METHODS
-    // ======================================================
-
     private void applyFilters() {
 
-        String search = searchField.getText().trim().toLowerCase();
+        String search = searchField.getText().toLowerCase();
         String status = statusFilter.getValue();
         String city = cityFilter.getValue();
 
@@ -245,10 +219,56 @@ public class UsersGestionController {
         applyFilters();
     }
 
+    private void blockSelected() {
+        if (selectedUsers.isEmpty()) return;
 
-    // ======================================================
-    //    NAVIGATION
-    // ======================================================
+        for (CompanyDto u : selectedUsers)
+            CompanyApi.disable(u.getId());
+
+        showInfo("Les comptes sélectionnés ont été bloqués.");
+        refreshTable();
+    }
+
+    private void unblockSelected() {
+        if (selectedUsers.isEmpty()) return;
+
+        for (CompanyDto u : selectedUsers)
+            CompanyApi.enable(u.getId());
+
+        showInfo("Les comptes sélectionnés ont été débloqués.");
+        refreshTable();
+    }
+
+    private void deleteSelected() {
+        if (selectedUsers.isEmpty()) return;
+
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION,
+                "Supprimer tous les comptes sélectionnés ?",
+                ButtonType.YES, ButtonType.NO);
+
+        if (confirm.showAndWait().orElse(ButtonType.NO) != ButtonType.YES)
+            return;
+
+        for (CompanyDto u : selectedUsers)
+            CompanyApi.delete(u.getId());
+
+        showInfo("Les comptes sélectionnés ont été supprimés.");
+        refreshTable();
+    }
+
+    private void refreshTable() {
+        selectedUsers.clear();
+        users.clear();
+        users.addAll(CompanyApi.findAll());
+        applyFilters();
+    }
+
+    private void showInfo(String msg) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+        alert.show();
+    }
 
     @FXML
     private void openDashboard(MouseEvent event) {
@@ -269,5 +289,4 @@ public class UsersGestionController {
     private void openAuthpage(MouseEvent event) {
         AppNavigator.navigateTo("auth.fxml");
     }
-
 }

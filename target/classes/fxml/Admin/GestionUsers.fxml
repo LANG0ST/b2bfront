@@ -77,9 +77,9 @@
 
             <!-- =================== MASS ACTIONS =================== -->
             <HBox spacing="15">
-                <Button text="Bloquer sélection"  styleClass="action-btn"/>
-                <Button text="Débloquer sélection" styleClass="action-btn-green"/>
-                <Button text="Supprimer sélection" styleClass="action-btn-red"/>
+                <Button fx:id="bloqueAllBtn" text="Bloquer sélection"  styleClass="action-btn"/>
+                <Button fx:id="debloqueAllBtn" text="Débloquer sélection" styleClass="action-btn-green"/>
+                <Button fx:id="deleteAllBtn" text="Supprimer sélection" styleClass="action-btn-red"/>
             </HBox>
 
             <!-- =================== TABLE =================== -->

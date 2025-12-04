@@ -57,8 +57,10 @@
                     <Button text="Réinitialiser" fx:id="clearFiltersBtn" styleClass="clear-filters-btn"/>
                 </HBox>
 
+
+                <!-- MASS ACTIONS -->
                 <HBox spacing="15">
-                    <Button text="Supprimer sélection" styleClass="action-btn-red"/>
+                    <Button fx:id="deleteAllBtn" text="Supprimer sélection" styleClass="action-btn-red"/>
                 </HBox>
 
                 <TableView fx:id="productsTable" styleClass="table">

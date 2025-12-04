@@ -55,25 +55,80 @@ public class AdminDashBoardController {
     private void loadTop3Sellers() {
         var sellers = statsApi.top3CompaniesVendeuses();
 
-        fillMiniCard(sellerBox1, sellers.get(0).getCompanyName(), sellers.get(0).getTotal() + " MAD","compa");
-        fillMiniCard(sellerBox2, sellers.get(1).getCompanyName(), sellers.get(1).getTotal() + " MAD","compa");
-        fillMiniCard(sellerBox3, sellers.get(2).getCompanyName(), sellers.get(2).getTotal() + " MAD","compa");
+        if (sellers == null || sellers.isEmpty()) {
+            fillMiniCard(sellerBox1, "Aucun", "0 MAD", "compa");
+            fillMiniCard(sellerBox2, "Aucun", "0 MAD", "compa");
+            fillMiniCard(sellerBox3, "Aucun", "0 MAD", "compa");
+            return;
+        }
+
+        // Seller 1
+        if (sellers.size() > 0) {
+            fillMiniCard(sellerBox1,
+                    sellers.get(0).getCompanyName(),
+                    sellers.get(0).getTotal() + " MAD",
+                    "compa"
+            );
+        } else {
+            fillMiniCard(sellerBox1, "Aucun", "0 MAD", "compa");
+        }
+
+        // Seller 2
+        if (sellers.size() > 1) {
+            fillMiniCard(sellerBox2,
+                    sellers.get(1).getCompanyName(),
+                    sellers.get(1).getTotal() + " MAD",
+                    "compa"
+            );
+        } else {
+            fillMiniCard(sellerBox2, "Aucun", "0 MAD", "compa");
+        }
+
+        // Seller 3
+        if (sellers.size() > 2) {
+            fillMiniCard(sellerBox3,
+                    sellers.get(2).getCompanyName(),
+                    sellers.get(2).getTotal() + " MAD",
+                    "compa"
+            );
+        } else {
+            fillMiniCard(sellerBox3, "Aucun", "0 MAD", "compa");
+        }
     }
 
-    // ============================================
-    //                TOP 3 BUYERS
-    // ============================================
     private void loadTop3Buyers() {
         var buyers = statsApi.top3CompaniesAcheteuses();
 
-        fillMiniCard(buyerBox1, buyers.get(0).getCompanyName(), buyers.get(0).getTotal() + " MAD","compa");
-        fillMiniCard(buyerBox2, buyers.get(1).getCompanyName(), buyers.get(1).getTotal() + " MAD","compa");
-        fillMiniCard(buyerBox3, buyers.get(2).getCompanyName(), buyers.get(2).getTotal() + " MAD","compa");
+        if (buyers == null || buyers.isEmpty()) {
+            // Aucune donnée
+            fillMiniCard(buyerBox1, "Aucun", "0 MAD", "compa");
+            fillMiniCard(buyerBox2, "Aucun", "0 MAD", "compa");
+            fillMiniCard(buyerBox3, "Aucun", "0 MAD", "compa");
+            return;
+        }
+
+        if (buyers.size() > 0) {
+            fillMiniCard(buyerBox1, buyers.get(0).getCompanyName(),
+                    buyers.get(0).getTotal() + " MAD", "compa");
+        } else {
+            fillMiniCard(buyerBox1, "Aucun", "0 MAD", "compa");
+        }
+
+        if (buyers.size() > 1) {
+            fillMiniCard(buyerBox2, buyers.get(1).getCompanyName(),
+                    buyers.get(1).getTotal() + " MAD", "compa");
+        } else {
+            fillMiniCard(buyerBox2, "Aucun", "0 MAD", "compa");
+        }
+
+        if (buyers.size() > 2) {
+            fillMiniCard(buyerBox3, buyers.get(2).getCompanyName(),
+                    buyers.get(2).getTotal() + " MAD", "compa");
+        } else {
+            fillMiniCard(buyerBox3, "Aucun", "0 MAD", "compa");
+        }
     }
 
-    // ============================================
-    //                TOP 3 PRODUCTS
-    // ============================================
     private void loadTop3Products() {
         var products = statsApi.top3Products();
 
@@ -82,9 +137,6 @@ public class AdminDashBoardController {
         fillMiniCard(productBox3, products.get(2).getProductName(), products.get(2).getTotal() + " MAD","prod");
     }
 
-    // ============================================
-    //                TOP 3 CATEGORIES
-    // ============================================
     private void loadTop3Categories() {
         var categories = statsApi.top3Categories();
 
@@ -93,9 +145,6 @@ public class AdminDashBoardController {
         fillMiniCard(catBox3, categories.get(2).getCategoryName(), categories.get(2).getTotal() + " MAD","cat");
     }
 
-    // ============================================
-    //                MINI CARD BUILDER
-    // ============================================
     private void fillMiniCard(VBox card, String title, String value , String type) {
         card.getChildren().clear();
         Label icon ;
@@ -116,9 +165,7 @@ public class AdminDashBoardController {
         card.getChildren().addAll(icon , name, val);
     }
 
-    // ============================================
-    //                NAVIGATION (More →)
-    // ============================================
+
     @FXML private void openAllSellers() {
         AppNavigator.navigateTo("Admin/AllSellers.fxml");
     }
@@ -135,9 +182,7 @@ public class AdminDashBoardController {
         AppNavigator.navigateTo("Admin/AllCategories.fxml");
     }
 
-    // ============================================
-    //                NAVIGATION (Sidebar)
-    // ============================================
+
     @FXML
     private void openDashboard(MouseEvent event) {
         AppNavigator.navigateTo("Admin/AdminDashBoard.fxml");
