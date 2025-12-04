@@ -1,99 +1,53 @@
-/* ------------ GENERAL ------------ */
-.page-title {
+.reviews-root {
+    -fx-background-color: #fafafa;
+}
+
+.reviews-title {
     -fx-font-size: 32px;
     -fx-font-weight: bold;
-    -fx-text-fill: #222;
 }
 
-.big-stars {
-    -fx-font-size: 26px;
-    -fx-text-fill: #FFB400; /* CAT Yellow */
+.review-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0.1, 0, 2);
 }
 
-.rating-count {
+.review-author {
     -fx-font-size: 14px;
-    -fx-text-fill: #666;
-}
-
-/* ------------ REVIEW BOX ------------ */
-.review-box {
-    -fx-background-color: #FFFFFF;
-    -fx-background-radius: 12;
-    -fx-padding: 20;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.10), 12, 0, 0, 4);
+    -fx-text-fill: #444;
+    -fx-font-weight: bold;
 }
 
 .review-stars {
     -fx-font-size: 18px;
-    -fx-text-fill: #FFB400;
+    -fx-text-fill: #F4B400;
 }
 
-.review-title {
-    -fx-font-size: 20px;
+.review-content {
+    -fx-font-size: 16px;
+}
+
+.write-review-box {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-padding: 20;
+}
+
+.submit-review-btn {
+    -fx-background-color: #F4B400;
+    -fx-background-radius: 8;
+    -fx-padding: 10 20;
     -fx-font-weight: bold;
-    -fx-text-fill: #222;
 }
 
-.review-body {
-    -fx-font-size: 14px;
-    -fx-text-fill: #444;
+.submit-review-btn:hover {
+    -fx-background-color: #e0a200;
 }
 
-.review-date {
-    -fx-font-size: 12px;
-    -fx-text-fill: #777;
-}
-
-/* ------------ FOOTER ------------ */
-.review-footer {
-    -fx-font-size: 13px;
-    -fx-text-fill: #444;
-}
-
-.flag-link {
-    -fx-text-fill: #d9534f;
-    -fx-cursor: hand;
-}
-
-.flag-link:hover {
-    -fx-underline: true;
-}
-/* ======================================
-   CATERPILLAR TOP BAR STYLING
-   ====================================== */
-
-.cat-topbar {
-    -fx-padding: 12 20;
-    -fx-background-color: #f2c212;   /* CAT yellow */
-    -fx-border-color: #1a1a1a;       /* deep black */
-    -fx-border-width: 0 0 4 0;       /* thick bottom line */
-    -fx-alignment: center-left;
-}
-
-/* =====================
-   BACK BUTTON (CAT style)
-   ===================== */
-.cat-back-btn {
+.see-all-reviews-btn {
     -fx-background-color: transparent;
-    -fx-text-fill: #1a1a1a;
-    -fx-font-size: 18px;
+    -fx-text-fill: #F4B400;
     -fx-font-weight: bold;
-    -fx-padding: 5 10;
-    -fx-cursor: hand;
-    -fx-border-color: transparent;   /* no border initially */
-}
-
-.cat-back-btn:hover {
-    -fx-border-color: #1a1a1a;
-    -fx-border-width: 2;
-    -fx-background-color: rgba(0,0,0,0.05);
-}
-
-/* ===========================
-   TITLE (CAT industrial style)
-   =========================== */
-.cat-title {
-    -fx-font-size: 22px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #1a1a1a;           /* CAT black */
 }

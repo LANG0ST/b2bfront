@@ -44,6 +44,7 @@ public class ProductController implements Initializable {
     // ACTION BUTTONS
     @FXML private Button btnAddToCart;
     @FXML private Button btnBuyNow;
+    @FXML private Button btnSeeAllReviews;
 
     // REVIEWS
     @FXML private HBox reviewsContainer;
@@ -100,6 +101,12 @@ public class ProductController implements Initializable {
                 AppNavigator.navigateTo("cart.fxml");
             }
         });
+
+        btnSeeAllReviews.setOnAction(e -> {
+            ProductStore.setSelectedProductId(currentProduct.getId());
+            AppNavigator.navigateTo("reviews.fxml");
+        });
+
     }
 
 
@@ -206,7 +213,7 @@ public class ProductController implements Initializable {
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            System.out.println("❌ Placeholder image missing in /images/placeholder.png");
+            System.out.println("Placeholder image missing in /images/placeholder.png");
         }
     }
 

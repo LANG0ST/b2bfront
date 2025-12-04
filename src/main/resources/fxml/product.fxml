@@ -147,8 +147,10 @@
                                 <Label text="Avis récents"
                                        styleClass="reviews-title"/>
 
-                                <Button text="Rédiger un avis"
-                                        styleClass="review-write-button"/>
+                                <Button text="Voir tous les avis →"
+                                        fx:id="btnSeeAllReviews"
+                                        styleClass="see-all-reviews-btn"/>
+
                             </HBox>
 
                             <HBox fx:id="reviewsContainer"
