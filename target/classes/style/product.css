@@ -188,3 +188,15 @@ ScrollPane > .viewport {
     -fx-text-fill: #555;
     -fx-line-spacing: 1.5;
 }
+
+.see-all-reviews-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FF9F1C;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+    -fx-padding: 6 10;
+}
+
+.see-all-reviews-btn:hover {
+    -fx-underline: true;
+}

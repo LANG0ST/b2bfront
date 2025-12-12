@@ -41,15 +41,9 @@
                 text="Home"
                 styleClass="nav-button"/>
 
-
         <!-- DASHBOARD -->
         <Button fx:id="btnDashboard"
                 text="Dashboard"
-                styleClass="nav-button"/>
-
-        <!-- ACCOUNT -->
-        <Button fx:id="btnAccount"
-                text="Account"
                 styleClass="nav-button"/>
 
         <!-- NOTIFICATIONS ICON -->
@@ -57,11 +51,8 @@
                 styleClass="icon-button"
                 prefWidth="40" prefHeight="40">
             <graphic>
-                <ImageView fitHeight="22" fitWidth="22" preserveRatio="true">
-                    <image>
-                        <Image url="@../../icons/bell.png"/>
-                    </image>
-                </ImageView>
+                <ImageView fx:id="notifIcon"
+                           fitHeight="22" fitWidth="22" preserveRatio="true"/>
             </graphic>
         </Button>
 

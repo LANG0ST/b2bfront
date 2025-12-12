@@ -166,7 +166,11 @@ public class ProductsGestionController {
 
                 deleteBtn.setOnAction(e -> {
                     ProductDto p = getTableView().getItems().get(getIndex());
-                    ProductsApi.delete(p.getId());
+                    try {
+                        ProductsApi.delete(p.getId());
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
                     refresh();
                 });
             }
@@ -197,7 +201,13 @@ public class ProductsGestionController {
 
         if (confirm.showAndWait().orElse(ButtonType.NO) == ButtonType.YES) {
 
-            selectedProducts.forEach(p -> ProductsApi.delete(p.getId()));
+            selectedProducts.forEach(p -> {
+                try {
+                    ProductsApi.delete(p.getId());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
 
             showInfo("Produits supprimés avec succès.");
             refresh();

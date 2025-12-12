@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.fx.b2bfront.controller.search.SearchResultsController"
+            prefWidth="1600" prefHeight="900"
+            stylesheets="@../../style/categories.css">
+
+    <!-- NAVBAR -->
+    <top>
+        <fx:include source="../components/Navbar.fxml"/>
+    </top>
+
+    <!-- CENTER MAIN AREA -->
+    <center>
+        <ScrollPane fitToWidth="true"
+                    fitToHeight="true"
+                    hbarPolicy="NEVER"
+                    styleClass="products-scroll">
+
+            <VBox spacing="30"
+                  styleClass="products-root">
+
+                <padding>
+                    <Insets top="20" left="20" right="20" bottom="30"/>
+                </padding>
+
+                <!-- TITLE ROW -->
+                <VBox spacing="8">
+                    <Label fx:id="resultTitle"
+                           styleClass="products-title"
+                           text="Results" />
+
+                    <Label fx:id="resultCount"
+                           style="-fx-text-fill: #666; -fx-font-size: 14px;"
+                           text="0 products found"/>
+                </VBox>
+
+                <!-- PRODUCTS TILE GRID -->
+                <TilePane fx:id="resultsTile"
+                          hgap="20" vgap="20"
+                          prefColumns="3"
+                          styleClass="products-tile"/>
+
+            </VBox>
+
+        </ScrollPane>
+    </center>
+
+</BorderPane>

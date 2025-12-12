@@ -101,7 +101,7 @@
     -fx-padding: 14;
     -fx-spacing: 10;
     -fx-cursor: hand;
-    -fx-pref-width: 250;
+    -fx-pref-width: 240;
     -fx-pref-height: 290;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 15, 0.1, 0, 2);
     -fx-transition: all 0.25s ease-in-out;
@@ -119,6 +119,7 @@
     -fx-background-radius: 12;
     -fx-border-radius: 12;
     -fx-background-color: #F3F3F3;
+    -fx-pref-width: 220;
     -fx-pref-height: 160;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 3, 0.1, 0, 1);
 }

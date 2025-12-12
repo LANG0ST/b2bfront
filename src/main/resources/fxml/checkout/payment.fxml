@@ -7,7 +7,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane stylesheets="@../../style/checkout.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fx.b2bfront.controller.checkout.PaymentController">
+<BorderPane stylesheets="@../../style/checkout.css" xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.fx.b2bfront.controller.checkout.PaymentController"
+            prefWidth="1600" prefHeight="900">
 
     <!-- NAVBAR -->
     <top>
@@ -20,7 +23,7 @@
             <HBox spacing="200">
 
                 <!-- LEFT SIDE -->
-                <VBox prefWidth="600" spacing="20">
+                <VBox prefWidth="600" spacing="20" styleClass="checkout-card">
 
                     <Label styleClass="checkout-title" text="Payment" />
 

@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import org.fx.b2bfront.api.ProductsApi;
 import org.fx.b2bfront.dto.ProductDto;
 import org.fx.b2bfront.store.AuthStore;
@@ -155,8 +156,8 @@ public class ProductController implements Initializable {
 
 
     // ============================================================
-    // IMAGE HANDLING
-    // ============================================================
+// IMAGE HANDLING (COVER MODE)
+// ============================================================
     private void loadImageFromUrl(String url) {
 
         try {
@@ -165,7 +166,6 @@ public class ProductController implements Initializable {
                 return;
             }
 
-            // Backend returns only filename? → ignore and use placeholder.
             if (!url.startsWith("http://") &&
                     !url.startsWith("https://") &&
                     !url.startsWith("/")) {
@@ -179,17 +179,12 @@ public class ProductController implements Initializable {
                 url = "http://localhost:8082" + url;
             }
 
-            System.out.println("📷 Final resolved image URL = " + url);
-
             Image img = new Image(url, true);
-
             ImageView iv = new ImageView(img);
-            iv.setPreserveRatio(true);
-            iv.setFitWidth(500);
-            iv.setFitHeight(400);
 
-            imagePane.getChildren().clear();
-            imagePane.getChildren().add(iv);
+            applyCover(iv);
+
+            imagePane.getChildren().setAll(iv);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -204,12 +199,9 @@ public class ProductController implements Initializable {
             );
 
             ImageView iv = new ImageView(img);
-            iv.setPreserveRatio(true);
-            iv.setFitWidth(500);
-            iv.setFitHeight(400);
+            applyCover(iv);
 
-            imagePane.getChildren().clear();
-            imagePane.getChildren().add(iv);
+            imagePane.getChildren().setAll(iv);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -297,4 +289,28 @@ public class ProductController implements Initializable {
         root.getChildren().addAll(name, content);
         return root;
     }
+
+    /**
+     * Makes the ImageView behave like CSS object-fit: cover.
+     * It fills the pane completely, cropping overflow.
+     */
+    private void applyCover(ImageView iv) {
+
+        iv.setPreserveRatio(false);   // allow stretching
+        iv.setSmooth(true);
+
+        // Let ImageView expand with the pane
+        iv.fitWidthProperty().bind(imagePane.widthProperty());
+        iv.fitHeightProperty().bind(imagePane.heightProperty());
+
+        // Rounded clipping mask
+        Rectangle clip = new Rectangle();
+        clip.widthProperty().bind(imagePane.widthProperty());
+        clip.heightProperty().bind(imagePane.heightProperty());
+        clip.setArcWidth(20);
+        clip.setArcHeight(20);
+
+        iv.setClip(clip);
+    }
+
 }

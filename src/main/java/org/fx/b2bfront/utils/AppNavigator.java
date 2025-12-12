@@ -4,12 +4,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.fx.b2bfront.controller.components.NavbarController;
 
 import java.util.Map;
 
 public class AppNavigator {
 
     private static Stage mainStage;
+    private static NavbarController navbarController;
 
     public static void setStage(Stage stage) {
         mainStage = stage;
@@ -46,4 +48,13 @@ public class AppNavigator {
             throw new RuntimeException("Failed to load FXML: " + fxml);
         }
     }
+
+    public static void setNavbarController(NavbarController controller) {
+        navbarController = controller;
+    }
+
+    public static NavbarController getNavbarController() {
+        return navbarController;
+    }
+
 }

@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.fx.b2bfront.api.CategoryApi;
 import org.fx.b2bfront.api.ProductsApi;
@@ -13,6 +13,7 @@ import org.fx.b2bfront.dto.CategoryDto;
 import org.fx.b2bfront.dto.ProductDto;
 import org.fx.b2bfront.store.ProductStore;
 import org.fx.b2bfront.utils.AppNavigator;
+import org.fx.b2bfront.utils.ProductCardFactory;  // Added import
 
 import java.util.List;
 import java.util.Map;
@@ -21,9 +22,7 @@ public class HomepageController {
 
     @FXML private VBox sidebarCategories;
     @FXML private FlowPane productsContainer;
-    @FXML private HBox featuredContainer;
-    @FXML private Label trendingLabel;
-
+    @FXML private Pane featuredBanner;  // Fixed to match FXML
 
     // --------------------------------------------------
     // INITIALIZATION
@@ -122,44 +121,8 @@ public class HomepageController {
     // 4) BUILD PRODUCT CARD
     // ==================================================
     private void addProductCard(ProductDto product) {
-
-        VBox card = new VBox();
-        card.getStyleClass().add("product-card");
-        card.setSpacing(10);
-        card.setPrefWidth(250);
-
-        // ---------------------------------------
-        // IMAGE (placeholder for now)
-        // ---------------------------------------
-        VBox img = new VBox();
-        img.getStyleClass().add("product-image");
-        img.setPrefHeight(160);
-
-        // ---------------------------------------
-        // NAME
-        // ---------------------------------------
-        Label nameLabel = new Label(product.getName());
-        nameLabel.getStyleClass().add("product-name");
-
-        // ---------------------------------------
-        // PRICE
-        // ---------------------------------------
-        Label priceLabel = new Label(product.getPrice() + " DH");
-        priceLabel.getStyleClass().add("product-price");
-
-        // ---------------------------------------
-        // STOCK
-        // ---------------------------------------
-        Label stockLabel = new Label("Stock: " + product.getStock());
-        stockLabel.getStyleClass().add("product-stock");
-
-        card.getChildren().addAll(img, nameLabel, priceLabel, stockLabel);
-
-        // ---------------------------------------
-        // CLICK → OPEN PRODUCT PAGE ✔ FIXED
-        // ---------------------------------------
+        VBox card = ProductCardFactory.buildSmall(product);
         card.setOnMouseClicked(event -> openProductPage(product));
-
         productsContainer.getChildren().add(card);
     }
 

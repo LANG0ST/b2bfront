@@ -6,7 +6,8 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.fx.b2bfront.controller.checkout.ShippingController"
-            stylesheets="@../../style/checkout.css">
+            stylesheets="@../../style/checkout.css"
+            prefWidth="1600" prefHeight="900">
 
     <!-- NAVBAR -->
     <top>
@@ -19,7 +20,7 @@
             <HBox spacing="200">
 
                 <!-- LEFT SIDE -->
-                <VBox spacing="20" prefWidth="600">
+                <VBox prefWidth="600" spacing="20" styleClass="checkout-card">
 
                     <Label text="Livraison" styleClass="checkout-title"/>
 
@@ -36,17 +37,14 @@
                     <VBox spacing="12">
                         <RadioButton fx:id="optionAmana"
                                      text="Amana Classic — 29 MAD"
-                                     toggleGroup="$group"
                                      styleClass="shipping-option"/>
 
                         <RadioButton fx:id="optionAramex"
                                      text="Aramex Express — 49 MAD"
-                                     toggleGroup="$group"
                                      styleClass="shipping-option"/>
 
                         <RadioButton fx:id="optionDHL"
                                      text="DHL International — 99 MAD"
-                                     toggleGroup="$group"
                                      styleClass="shipping-option"/>
                     </VBox>
 

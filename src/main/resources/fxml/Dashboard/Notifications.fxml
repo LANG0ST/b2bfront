@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.fx.b2bfront.controller.dashboard.NotificationsController"
+            stylesheets="@../../style/Udashboard.css">
+
+    <top>
+        <fx:include source="../components/Navbar.fxml"/>
+    </top>
+
+    <center>
+        <VBox spacing="20" styleClass="dashboard-root">
+            <Label text="Notifications" styleClass="dashboard-title"/>
+            <ListView fx:id="notificationsList" prefHeight="700"/>
+        </VBox>
+    </center>
+
+</BorderPane>

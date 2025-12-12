@@ -141,7 +141,7 @@ public class CategoriesController implements ParamReceiver {
 
         for (ProductDto p : products) {
 
-            VBox card = ProductCardFactory.build(p);
+            VBox card = ProductCardFactory.buildLarge(p);
 
             // Make card clickable → open product page
             card.setOnMouseClicked(e -> {

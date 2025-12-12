@@ -3,52 +3,72 @@ package org.fx.b2bfront.controller.components;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import org.fx.b2bfront.store.AppStore;
 import org.fx.b2bfront.utils.AppNavigator;
+
+import java.util.Map;
 
 public class NavbarController {
 
     @FXML private TextField searchBar;
     @FXML private Button btnHome;
-    @FXML private Button btnCategories;
     @FXML private Button btnNotifications;
     @FXML private Button btnCart;
     @FXML private Button btnDashboard;
-    @FXML private Button btnAccount;
+
+    @FXML private ImageView notifIcon;
 
     @FXML
     public void initialize() {
 
-        // HOME
-        btnHome.setOnAction(e ->
-                AppNavigator.navigateTo("homepage.fxml")
-        );
+        btnHome.setOnAction(e -> AppNavigator.navigateTo("homepage.fxml"));
+        btnDashboard.setOnAction(e -> AppNavigator.navigateTo("dashboard/Dashboard.fxml"));
+        btnCart.setOnAction(e -> AppNavigator.navigateTo("cart.fxml"));
 
-
-        // NOTIFICATIONS (simple click)
-        btnNotifications.setOnAction(e ->
-                System.out.println("Notifications clicked!")
-        );
-
-        // CART / PANIER
-        btnCart.setOnAction(e ->
-                AppNavigator.navigateTo("cart.fxml")
-        );
-
-        // DASHBOARD
-        btnDashboard.setOnAction(e ->
-                AppNavigator.navigateTo("Admin/AdminDashboard.fxml")
-        );
-
-        // ACCOUNT
-        btnAccount.setOnAction(e ->
-                AppNavigator.navigateTo("Account.fxml")
-        );
-
-        // SEARCH (optional)
-        searchBar.setOnAction(e -> {
-            String query = searchBar.getText().trim();
-            System.out.println("Searching: " + query);
-            // AppNavigator.navigateToWithParams("search.fxml", Map.of("q", query));
+        btnNotifications.setOnAction(e -> {
+            AppNavigator.navigateToWithParams(
+                    "dashboard/Dashboard.fxml",
+                    Map.of("section", "notif")   // <-- this is the key
+            );
         });
+
+
+        updateNotificationIcon();
+
+        searchBar.setOnAction(e -> {
+            String q = searchBar.getText().trim();
+            if (!q.isEmpty()) {
+                AppStore.setSearchQuery(q);
+                AppNavigator.navigateTo("search/SearchResults.fxml");
+            }
+        });
+
     }
+
+    private void updateNotificationIcon() {
+
+        String iconPath;
+
+        if (AppStore.hasNotifications()) {
+            iconPath = "/images/notification.png";
+        } else {
+            iconPath = "/images/nonotification.png";
+        }
+
+        var res = getClass().getResource(iconPath);
+        if (res == null) {
+            System.out.println("Cannot load icon: " + iconPath);
+            return;
+        }
+
+        notifIcon.setImage(new Image(res.toExternalForm()));
+    }
+
+    public void refreshNotificationIcon() {
+        updateNotificationIcon();
+    }
+
+
 }

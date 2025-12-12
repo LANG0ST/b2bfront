@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<VBox spacing="20" styleClass="dashboard-root"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.fx.b2bfront.controller.dashboard.SellerOrdersController"
+      stylesheets="@../../style/Udashboard.css">
+
+    <Label text="Commandes reçues" styleClass="section-title"/>
+
+    <TableView fx:id="ordersTable" prefHeight="650">
+        <columns>
+            <TableColumn fx:id="colRef" text="Référence" prefWidth="150"/>
+            <TableColumn fx:id="colBuyer" text="Client" prefWidth="200"/>
+            <TableColumn fx:id="colDate" text="Date" prefWidth="150"/>
+            <TableColumn fx:id="colStatut" text="Statut" prefWidth="120"/>
+            <TableColumn fx:id="colActions" text="Actions" prefWidth="250"/>
+        </columns>
+    </TableView>
+</VBox>

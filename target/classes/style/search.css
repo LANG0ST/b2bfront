@@ -1,0 +1,112 @@
+/* =========================================================
+   PAGE ROOT
+   ========================================================= */
+.search-root {
+    -fx-background-color: #ffffff;
+    -fx-padding: 20 20 40 20;
+}
+
+/* =========================================================
+   TITLES
+   ========================================================= */
+.search-title {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222;
+}
+
+.search-count {
+    -fx-font-size: 16px;
+    -fx-text-fill: #666;
+}
+
+.search-empty {
+    -fx-font-size: 18px;
+    -fx-text-fill: #999;
+    -fx-padding: 20 0 0 0;
+}
+
+/* =========================================================
+   SCROLL AREA
+   ========================================================= */
+.search-scroll {
+    -fx-background-color: transparent;
+}
+
+.search-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+/* =========================================================
+   RESULTS GRID (FlowPane)
+   ========================================================= */
+.search-products-grid {
+    -fx-hgap: 20;
+    -fx-vgap: 20;
+    -fx-padding: 10 0 0 0;
+}
+
+/* =========================================================
+   PRODUCT CARD — MATCHES categories.css
+   ========================================================= */
+.product-card {
+    -fx-background-color: #ffffff;
+    -fx-padding: 10;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.03), 10, 0, 0, 3);
+
+    -fx-cursor: hand;
+
+    -fx-pref-width: 260;
+    -fx-pref-height: 160;
+    -fx-min-width: 260;
+    -fx-max-width: 260;
+
+    -fx-spacing: 8;
+}
+
+/* Hover effect (SAME as categories) */
+.product-card:hover {
+    -fx-border-color: #c9c9c9;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 12, 0, 0, 3);
+}
+
+/* =========================================================
+   IMAGE WRAPPER
+   ========================================================= */
+.product-image {
+    -fx-background-color: #f4f4f4;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+
+    -fx-pref-width: 200;
+    -fx-pref-height: 130;
+    -fx-min-width: 230;
+    -fx-min-height: 130;
+    -fx-max-width: 230;
+    -fx-max-height: 130;
+
+    -fx-alignment: center;
+}
+
+/* =========================================================
+   PRODUCT INFO
+   ========================================================= */
+.product-name {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.search-products-grid .product-price {
+    -fx-text-fill: #ff7a00;
+    -fx-font-weight: bold;
+}
+
+.product-stock {
+    -fx-font-size: 12px;
+    -fx-text-fill: #666;
+}

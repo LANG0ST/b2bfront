@@ -3,12 +3,12 @@ package org.fx.b2bfront.controller.cart;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import org.fx.b2bfront.dto.CartItem;
 import org.fx.b2bfront.store.CartStore;
 import org.fx.b2bfront.utils.AppNavigator;
+import org.fx.b2bfront.utils.ImageUtils;
 
 public class CartController {
 
@@ -25,10 +25,9 @@ public class CartController {
         refresh();
 
         btnCheckout.setOnAction(e ->
-                AppNavigator.navigateTo("checkout.fxml")
+                AppNavigator.navigateTo("checkout/adress.fxml")
         );
     }
-
 
     /* ---------------------------------------------------------
        LOAD ALL ITEMS
@@ -41,7 +40,6 @@ public class CartController {
         }
     }
 
-
     /* ---------------------------------------------------------
        BUILD A SINGLE CART ITEM (card)
        --------------------------------------------------------- */
@@ -52,21 +50,33 @@ public class CartController {
         root.setAlignment(Pos.CENTER_LEFT);
 
         /* =====================================
-           IMAGE
+           IMAGE (Cloudinary + auto resize)
         ===================================== */
         ImageView img = new ImageView();
-        img.setFitWidth(140);
-        img.setFitHeight(120);
-        img.setPreserveRatio(true);
+        double W = 140;
+        double H = 120;
 
         try {
-            if (item.getImageUrl() != null && !item.getImageUrl().isBlank()) {
-                img.setImage(new Image("http://localhost:8082/" + item.getImageUrl(), true));
+            String url = item.getImageUrl();
+
+            if (url != null && !url.isBlank()) {
+                ImageUtils.loadImage(img, url, W, H);
             } else {
-                img.setImage(new Image(getClass().getResource("/images/placeholder.png").toExternalForm()));
+                ImageUtils.loadImage(
+                        img,
+                        getClass().getResource("/images/placeholder.png").toExternalForm(),
+                        W,
+                        H
+                );
             }
+
         } catch (Exception ex) {
-            img.setImage(new Image(getClass().getResource("/images/placeholder.png").toExternalForm()));
+            ImageUtils.loadImage(
+                    img,
+                    getClass().getResource("/images/placeholder.png").toExternalForm(),
+                    W,
+                    H
+            );
         }
 
         VBox imageBox = new VBox(img);
@@ -128,7 +138,6 @@ public class CartController {
         return root;
     }
 
-
     /* ---------------------------------------------------------
        UPDATE QTY
        --------------------------------------------------------- */
@@ -140,7 +149,6 @@ public class CartController {
         }
         refresh();
     }
-
 
     /* ---------------------------------------------------------
        REFRESH UI

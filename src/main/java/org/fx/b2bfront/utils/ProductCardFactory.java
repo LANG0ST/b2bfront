@@ -6,91 +6,144 @@ import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import org.fx.b2bfront.dto.ProductDto;
 
 public class ProductCardFactory {
 
-    private static ImageView loadCardImage(ProductDto product) {
+    // ----------------------------------------
+    // SMALL CARD → HOMEPAGE
+    // ----------------------------------------
+    public static VBox buildSmall(ProductDto product) {
+        return build(product, 230, 130, 260);
+    }
+
+    // ----------------------------------------
+    // LARGE CARD → CATEGORIES PAGE
+    // ----------------------------------------
+    public static VBox buildLarge(ProductDto product) {
+        return build(product, 275, 160, 300);
+    }
+
+
+    // ----------------------------------------
+    // INTERNAL UNIVERSAL BUILDER
+    // ----------------------------------------
+    private static VBox build(ProductDto product, double imgW, double imgH, double cardWidth) {
+
+        VBox card = new VBox(8);
+        card.getStyleClass().add("product-card");
+        card.setPadding(new Insets(10));
+        card.setCursor(Cursor.HAND);
+        card.setAlignment(Pos.TOP_LEFT);
+
+        // FIX CARD WIDTH (height is auto)
+        card.setPrefWidth(cardWidth);
+        card.setMinWidth(cardWidth);
+        card.setMaxWidth(cardWidth);
+
+        // =======================
+        // IMAGE WRAPPER
+        // =======================
+        Pane imageWrapper = new Pane();
+        imageWrapper.getStyleClass().add("product-image");
+
+        imageWrapper.setPrefSize(imgW, imgH);
+        imageWrapper.setMinSize(imgW, imgH);
+        imageWrapper.setMaxSize(imgW, imgH);
+
+        // load image
+        ImageView iv = loadImage(product);
+        applyCover(iv, imgW, imgH);
+
+        iv.setLayoutX(0);
+        iv.setLayoutY(0);
+        imageWrapper.getChildren().add(iv);
+
+        // =======================
+        // NAME
+        // =======================
+        Label name = new Label(product.getName());
+        name.getStyleClass().add("product-name");
+
+        // =======================
+        // PRICE
+        // =======================
+        Label price = new Label(product.getPrice() + " DH");
+        price.getStyleClass().add("product-price");
+
+        // =======================
+        // STOCK
+        // =======================
+        Label stock = new Label("Stock: " + product.getStock());
+        stock.getStyleClass().add("product-stock");
+
+        card.getChildren().addAll(imageWrapper, name, price, stock);
+
+        return card;
+    }
+
+
+    // ----------------------------------------
+    // LOAD IMAGE (Cloudinary or placeholder)
+    // ----------------------------------------
+    private static ImageView loadImage(ProductDto product) {
 
         String url = product.getImageUrl();
 
-        // Always use placeholder if:
-        // - null
-        // - blank
-        // - just a filename
-        // - not http/https
-        boolean invalid =
-                (url == null || url.isBlank()
-                        || !(url.startsWith("http://") || url.startsWith("https://")));
+        Image img;
 
-        if (invalid) {
-            Image placeholder = new Image(
-                    ProductCardFactory.class.getResource("/images/placeholder.png").toExternalForm()
+        if (url == null || url.isBlank() ||
+                !(url.startsWith("http://") || url.startsWith("https://"))) {
+
+            img = new Image(
+                    ProductCardFactory.class.getResource("/images/placeholder.png")
+                            .toExternalForm()
             );
 
-            ImageView iv = new ImageView(placeholder);
-            iv.setFitWidth(180);
-            iv.setFitHeight(130);
-            iv.setPreserveRatio(true);
-
-            return iv;
+        } else {
+            img = new Image(url, true);
         }
 
-        // Future: real backend images
-        Image networkImage = new Image(url, true);
-        ImageView iv = new ImageView(networkImage);
-        iv.setFitWidth(180);
-        iv.setFitHeight(130);
-        iv.setPreserveRatio(true);
+        ImageView iv = new ImageView(img);
+        iv.setPreserveRatio(false);
+        iv.setSmooth(true);
 
         return iv;
     }
 
-    public static VBox build(ProductDto product) {
 
-        VBox card = new VBox();
-        card.getStyleClass().add("product-card");
-        card.setSpacing(10);
-        card.setPadding(new Insets(10));
-        card.setAlignment(Pos.TOP_LEFT);
-        card.setCursor(Cursor.HAND);
 
-        // =====================================================
-        //               PRODUCT IMAGE
-        // =====================================================
-        Pane imageWrapper = new Pane();
-        imageWrapper.getStyleClass().add("product-image");
-        imageWrapper.setPrefHeight(150);
+    // ----------------------------------------
+    // COVER MODE
+    // ----------------------------------------
+    private static void applyCover(ImageView iv, double w, double h) {
 
-        ImageView imgView = loadCardImage(product);
-        imgView.setFitHeight(150);
-        imgView.setPreserveRatio(true);
+        if (iv.getImage() == null) {
+            iv.setFitWidth(w);
+            iv.setFitHeight(h);
+            return;
+        }
 
-        // ensure it sits at (0,0)
-        imgView.setLayoutX(0);
-        imgView.setLayoutY(0);
+        double imgW = iv.getImage().getWidth();
+        double imgH = iv.getImage().getHeight();
 
-        imageWrapper.getChildren().add(imgView);
+        if (imgW <= 0 || imgH <= 0) {
+            iv.setFitWidth(w);
+            iv.setFitHeight(h);
+            return;
+        }
 
-        // =====================================================
-        //               PRODUCT NAME
-        // =====================================================
-        Label nameLabel = new Label(product.getName());
-        nameLabel.getStyleClass().add("product-name");
+        double scale = Math.max(w / imgW, h / imgH);
 
-        // =====================================================
-        //               PRODUCT PRICE
-        // =====================================================
-        Label priceLabel = new Label(product.getPrice() + " DH");
-        priceLabel.getStyleClass().add("product-price");
+        iv.setFitWidth(imgW * scale);
+        iv.setFitHeight(imgH * scale);
 
-        // =====================================================
-        //               COMPOSE CARD
-        // =====================================================
-        card.getChildren().addAll(imageWrapper, nameLabel, priceLabel);
-
-        return card;
+        Rectangle clip = new Rectangle(w, h);
+        clip.setArcWidth(12);
+        clip.setArcHeight(12);
+        iv.setClip(clip);
     }
 }

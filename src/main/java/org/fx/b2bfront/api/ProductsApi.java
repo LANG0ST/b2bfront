@@ -6,6 +6,7 @@ import okhttp3.*;
 import org.fx.b2bfront.dto.FilterRequest;
 import org.fx.b2bfront.dto.ProductDto;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpRequest;
@@ -13,6 +14,8 @@ import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.fx.b2bfront.utils.GsonProvider.gson;
 
 public class ProductsApi {
 
@@ -124,24 +127,20 @@ public class ProductsApi {
     // =======================================================
 
 
-    public static void delete(long id) {
-        try {
-            Request request = new Request.Builder()
-                    .url(BASE_URL + "/" + id)
-                    .delete()
-                    .build();
+    public static void delete(long id) throws Exception {
 
-            Response response = client.newCall(request).execute();
+        Request request = new Request.Builder()
+                .url(BASE_URL + "/" + id)
+                .delete()
+                .build();
 
-            if (!response.isSuccessful()) {
-                throw new RuntimeException("Failed to delete product: " + response.code());
-            }
+        Response response = client.newCall(request).execute();
 
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to delete product: " + e.getMessage());
+        if (!response.isSuccessful()) {
+            String msg = response.body() != null ? response.body().string() : "";
+            throw new Exception("Impossible de supprimer : " + msg);
         }
     }
-
 
 
     // =======================================================
@@ -187,5 +186,75 @@ public class ProductsApi {
             throw new RuntimeException("Error adding to cart: " + e.getMessage());
         }
     }
+
+    public static void createProduct(ProductDto dto) {
+        try {
+            String jsonBody = gson.toJson(dto);
+
+            RequestBody body = RequestBody.create(
+                    jsonBody,
+                    MediaType.parse("application/json")
+            );
+
+            Request request = new Request.Builder()
+                    .url(BASE_URL)
+                    .post(body)
+                    .build();
+
+            Response response = client.newCall(request).execute();
+
+            if (!response.isSuccessful()) {
+                throw new RuntimeException("Failed to create product: " + response.code());
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error creating product: " + e.getMessage());
+        }
+    }
+
+    public static void update(ProductDto p) throws Exception {
+        String json = gson.toJson(p);
+
+        RequestBody body = RequestBody.create(
+                json, MediaType.parse("application/json")
+        );
+
+        Request req = new Request.Builder()
+                .url(BASE_URL + "/" + p.getId())
+                .put(body)
+                .build();
+
+        client.newCall(req).execute().close();
+    }
+    public static String uploadImage(File file) throws Exception {
+
+        String url = "http://localhost:8082/api/images/upload";
+
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart(
+                        "file",
+                        file.getName(),
+                        RequestBody.create(file, MediaType.parse("image/*"))
+                )
+                .build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+
+            if (!response.isSuccessful()) {
+                throw new RuntimeException("Upload failed: HTTP " + response.code());
+            }
+
+            return response.body().string(); // THIS IS THE URL
+        }
+    }
+
+
+
 
 }
