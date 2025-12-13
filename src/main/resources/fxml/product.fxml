@@ -3,13 +3,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.*?>
-<?import javafx.fxml.FXML?>
-<?import javafx.fxml.FXMLLoader?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.fx.b2bfront.controller.product.ProductController"
-            prefWidth="1600" prefHeight="900"
+            prefWidth="1400" prefHeight="900"
             stylesheets="@../style/product.css">
 
     <!-- TOP NAVBAR -->
@@ -19,131 +17,146 @@
 
     <!-- MAIN CONTENT -->
     <center>
-        <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
             <content>
-                <VBox spacing="30" styleClass="product-root">
-                    <padding>
-                        <Insets top="30" right="60" bottom="40" left="60"/>
-                    </padding>
 
-                    <!-- MAIN PRODUCT AREA -->
-                    <HBox spacing="40" styleClass="product-main">
+                <!-- Center everything -->
+                <VBox alignment="TOP_CENTER" spacing="30">
 
-                        <!-- LEFT: IMAGE / GALLERY -->
-                        <StackPane styleClass="product-image-wrapper">
-                            <Pane fx:id="imagePane" styleClass="product-image-pane"/>
+                    <!-- Responsive width wrapper -->
+                    <VBox styleClass="product-root"
+                          maxWidth="1200"
+                          alignment="TOP_CENTER"
+                          spacing="30">
+                        <padding>
+                            <Insets top="30" right="20" bottom="50" left="20"/>
+                        </padding>
 
-                            <!-- Right arrow (fake for now) -->
-                            <Button styleClass="image-nav-button" text="›"
-                                    StackPane.alignment="CENTER_RIGHT"/>
-                            <!-- Left arrow -->
-                            <Button styleClass="image-nav-button" text="‹"
-                                    StackPane.alignment="CENTER_LEFT"/>
-                        </StackPane>
+                        <!-- MAIN PRODUCT AREA -->
+                        <HBox spacing="30" alignment="TOP_CENTER"
+                              styleClass="product-main">
 
-                        <!-- RIGHT: INFO -->
-                        <VBox spacing="18" styleClass="product-info">
+                            <!-- LEFT: IMAGE / GALLERY -->
+                            <StackPane styleClass="product-image-wrapper"
+                                       alignment="CENTER">
+                                <Pane fx:id="imagePane"
+                                      styleClass="product-image-pane"/>
 
-                            <Label fx:id="productNameLabel"
-                                   text="Pelleteuse Caterpillar 320D"
-                                   styleClass="product-title"/>
+                                <!-- Arrows (not functional yet) -->
+                                <Button styleClass="image-nav-button"
+                                        text="‹"
+                                        StackPane.alignment="CENTER_LEFT"/>
+                                <Button styleClass="image-nav-button"
+                                        text="›"
+                                        StackPane.alignment="CENTER_RIGHT"/>
+                            </StackPane>
 
-                            <Label fx:id="productPriceLabel"
-                                   text="350 000 MAD"
-                                   styleClass="product-price"/>
+                            <!-- RIGHT: INFO -->
+                            <VBox spacing="18" prefWidth="450"
+                                  styleClass="product-info">
 
-                            <Label fx:id="productDescriptionLabel"
-                                   text="Description chantier…"
-                                   wrapText="true"
-                                   styleClass="product-description"/>
+                                <Label fx:id="productNameLabel"
+                                       text="Machine"
+                                       styleClass="product-title"/>
 
-                            <!-- SPECS -->
-                            <GridPane hgap="20" vgap="6" styleClass="product-specs">
-                                <columnConstraints>
-                                    <ColumnConstraints halignment="RIGHT" percentWidth="30"/>
-                                    <ColumnConstraints halignment="LEFT" percentWidth="70"/>
-                                </columnConstraints>
+                                <Label fx:id="productPriceLabel"
+                                       text="0.00 MAD"
+                                       styleClass="product-price"/>
 
-                                <Label text="Type :" styleClass="spec-label" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                                <Label fx:id="specType" text="Engin de terrassement"
-                                       styleClass="spec-value"
-                                       GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                                <Label fx:id="productDescriptionLabel"
+                                       text=""
+                                       wrapText="true"
+                                       styleClass="product-description"/>
 
-                                <Label text="Puissance :" styleClass="spec-label" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                                <Label fx:id="specPower" text="162 kW"
-                                       styleClass="spec-value"
-                                       GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                <!-- SPECIFICATIONS -->
+                                <GridPane hgap="20" vgap="6" styleClass="product-specs"
+                                          prefWidth="450">
 
-                                <Label text="Poids :" styleClass="spec-label" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                                <Label fx:id="specWeight" text="21 tonnes"
-                                       styleClass="spec-value"
-                                       GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                                    <columnConstraints>
+                                        <ColumnConstraints halignment="RIGHT" percentWidth="35"/>
+                                        <ColumnConstraints halignment="LEFT" percentWidth="65"/>
+                                    </columnConstraints>
 
-                                <Label text="Carburant :" styleClass="spec-label" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                                <Label fx:id="specFuel" text="Diesel"
-                                       styleClass="spec-value"
-                                       GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-                            </GridPane>
+                                    <Label text="Type :" styleClass="spec-label"
+                                           GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                    <Label fx:id="specType" styleClass="spec-value"
+                                           GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-                            <!-- QUANTITY + ACTIONS -->
-                            <VBox spacing="12">
+                                    <Label text="Puissance :" styleClass="spec-label"
+                                           GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                    <Label fx:id="specPower" styleClass="spec-value"
+                                           GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-                                <!-- Quantity row -->
-                                <HBox spacing="12" alignment="CENTER_LEFT">
+                                    <Label text="Poids :" styleClass="spec-label"
+                                           GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                    <Label fx:id="specWeight" styleClass="spec-value"
+                                           GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-                                    <Label text="Quantité :" styleClass="spec-label"/>
+                                    <Label text="Carburant :" styleClass="spec-label"
+                                           GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                    <Label fx:id="specFuel" styleClass="spec-value"
+                                           GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                                </GridPane>
 
-                                    <HBox spacing="0" alignment="CENTER"
-                                          styleClass="qty-box">
+                                <!-- QUANTITY + ACTIONS -->
+                                <VBox spacing="15">
 
-                                        <Button fx:id="btnMinus"
-                                                text="-"
-                                                onAction="#decreaseQuantity"
-                                                styleClass="qty-button"/>
+                                    <!-- Quantity row -->
+                                    <HBox spacing="12" alignment="CENTER_LEFT">
 
-                                        <Label fx:id="quantityLabel"
-                                               text="1"
-                                               styleClass="qty-value"/>
+                                        <Label text="Quantité :" styleClass="spec-label"/>
 
-                                        <Button fx:id="btnPlus"
-                                                text="+"
-                                                onAction="#increaseQuantity"
-                                                styleClass="qty-button"/>
+                                        <HBox spacing="0" alignment="CENTER"
+                                              styleClass="qty-box">
+
+                                            <Button fx:id="btnMinus"
+                                                    text="-"
+                                                    onAction="#decreaseQuantity"
+                                                    styleClass="qty-button"/>
+
+                                            <Label fx:id="quantityLabel"
+                                                   text="1"
+                                                   styleClass="qty-value"/>
+
+                                            <Button fx:id="btnPlus"
+                                                    text="+"
+                                                    onAction="#increaseQuantity"
+                                                    styleClass="qty-button"/>
+                                        </HBox>
                                     </HBox>
-                                </HBox>
 
-                                <!-- Buttons row -->
-                                <HBox spacing="12">
-                                    <Button fx:id="btnAddToCart"
-                                            text="Ajouter au devis"
-                                            styleClass="primary-button"/>
-                                    <Button fx:id="btnBuyNow"
-                                            text="Commander maintenant"
-                                            styleClass="secondary-button"/>
-                                </HBox>
+                                    <!-- Buttons row -->
+                                    <HBox spacing="12">
+                                        <Button fx:id="btnAddToCart"
+                                                text="Ajouter au devis"
+                                                styleClass="primary-button"/>
+                                        <Button fx:id="btnBuyNow"
+                                                text="Commander maintenant"
+                                                styleClass="secondary-button"/>
+                                    </HBox>
+                                </VBox>
+
                             </VBox>
+                        </HBox>
 
+                        <!-- REVIEWS SECTION -->
+                        <VBox spacing="15" alignment="TOP_LEFT"
+                              styleClass="reviews-section">
+
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Label text="Avis récents"
+                                       styleClass="reviews-title"/>
+
+                                <Button text="Voir tous les avis →"
+                                        fx:id="btnSeeAllReviews"
+                                        styleClass="see-all-reviews-btn"/>
+
+                            </HBox>
+
+                            <HBox fx:id="reviewsContainer"
+                                  spacing="20"
+                                  styleClass="reviews-container"/>
                         </VBox>
-                    </HBox>
-
-                    <!-- REVIEWS SECTION -->
-                    <VBox spacing="15" styleClass="reviews-section">
-
-                        <HBox spacing="15" alignment="CENTER_LEFT">
-                            <Label text="Avis récents"
-                                   styleClass="reviews-title"/>
-
-                            <Button text="Rédiger un avis"
-                                    styleClass="review-write-button"/>
-                        </HBox>
-
-                        <HBox fx:id="reviewsContainer"
-                              spacing="20"
-                              styleClass="reviews-container">
-
-                            <!-- Review cards will be added from controller -->
-
-                        </HBox>
 
                     </VBox>
                 </VBox>

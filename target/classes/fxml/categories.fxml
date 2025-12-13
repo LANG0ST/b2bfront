@@ -7,9 +7,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.fxml.FXMLLoader?>
-<?import javafx.fxml.FXML?>
-<?import javafx.fxml.JavaFXBuilderFactory?>
 
 <BorderPane xmlns="http://javafx.com/javafx/25"
             xmlns:fx="http://javafx.com/fxml/1"
@@ -17,65 +14,78 @@
             prefWidth="1600" prefHeight="900"
             stylesheets="@../style/categories.css">
 
-    <!-- TOP NAVBAR (reused) -->
+    <!-- ==================================== -->
+    <!--              TOP NAVBAR              -->
+    <!-- ==================================== -->
     <top>
         <fx:include source="components/Navbar.fxml"/>
     </top>
 
-    <!-- LEFT FILTER PANEL -->
+
+    <!-- ==================================== -->
+    <!--          LEFT FILTER PANEL           -->
+    <!-- ==================================== -->
     <left>
-        <VBox prefWidth="260"
-              spacing="15"
+        <VBox prefWidth="280"
+              spacing="20"
               styleClass="filters-panel">
 
             <padding>
                 <Insets top="30" right="20" bottom="20" left="30"/>
             </padding>
 
+            <!-- Title -->
             <HBox spacing="10" alignment="CENTER_LEFT">
                 <Label text="Filtres" styleClass="filters-title"/>
-                <Label text="Effacer" styleClass="filters-clear"/>
+                <Label text="Effacer"
+                       styleClass="filters-clear"
+                       onMouseClicked="#clearFilters"/>
             </HBox>
 
-            <Label text="Catégorie actuelle"
+            <!-- Category Name -->
+            <Label text="Catégorie"
                    styleClass="filters-section-title"/>
 
             <Label fx:id="currentCategoryLabel"
-                   text="Engins et Matériel Lourd"
+                   text="Nom de catégorie"
                    styleClass="filters-current-category"/>
 
+            <!-- Filter items -->
             <Label text="Affiner par"
                    styleClass="filters-section-title"/>
 
-            <!-- Dynamic filter content will be added here -->
             <VBox fx:id="filtersBox"
-                  spacing="6"
+                  spacing="10"
                   styleClass="filters-box"/>
 
         </VBox>
     </left>
 
-    <!-- CENTER PRODUCTS GRID -->
+
+    <!-- ==================================== -->
+    <!--           PRODUCTS CENTER            -->
+    <!-- ==================================== -->
     <center>
         <ScrollPane fitToWidth="true"
                     fitToHeight="true"
                     hbarPolicy="NEVER"
                     styleClass="products-scroll">
 
-            <VBox spacing="20" styleClass="products-root">
+            <VBox spacing="30"
+                  styleClass="products-root">
 
-                <!-- Header row: title + sort -->
-                <HBox spacing="10"
+                <padding>
+                    <Insets top="20" left="20" right="20" bottom="30"/>
+                </padding>
+
+                <!-- Header row: ONLY title (sort removed) -->
+                <HBox spacing="20"
                       styleClass="products-header">
 
                     <Label fx:id="productsTitle"
-                           text="Produits pour les chantiers"
+                           text="Produits"
                            styleClass="products-title"/>
 
-                    <HBox spacing="5" styleClass="sort-box">
-                        <Label text="Trier par" styleClass="sort-label"/>
-                        <Label text="Populaire ▾" styleClass="sort-value"/>
-                    </HBox>
                 </HBox>
 
                 <!-- Product grid -->
@@ -84,12 +94,13 @@
                           prefColumns="3"
                           styleClass="products-tile">
 
-                    <!-- Controller will add product cards here -->
+                    <!-- Cards injected from controller -->
 
                 </TilePane>
 
             </VBox>
         </ScrollPane>
     </center>
+
 
 </BorderPane>

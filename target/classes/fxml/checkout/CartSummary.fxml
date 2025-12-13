@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxWidth="600.0" prefHeight="474.0" prefWidth="600.0" spacing="20" styleClass="cart-summary-root" stylesheets="@../../style/checkout.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fx.b2bfront.controller.checkout.CartSummaryController">
+
+    <!-- Title -->
+    <Label styleClass="cart-title" text="Your cart" />
+
+    <!-- CART ITEMS (dynamic) -->
+    <VBox fx:id="cartItemsContainer" spacing="16" />
+
+    <Separator prefHeight="25.0" prefWidth="488.0" styleClass="cart-divider" />
+
+    <!-- Coupon -->
+    <TextField fx:id="couponField" promptText="Enter coupon code here" styleClass="coupon-field" />
+
+    <!-- Totals -->
+    <VBox spacing="8">
+        <HBox alignment="CENTER_LEFT">
+            <Label styleClass="total-label" text="Subtotal" />
+            <Pane HBox.hgrow="ALWAYS" />
+        </HBox>
+         <Label fx:id="subtotalLabel" styleClass="total-price" text="0" />
+
+        <HBox alignment="CENTER_LEFT">
+            <Label styleClass="total-label" text="Shipping" />
+            <Pane HBox.hgrow="ALWAYS" />
+        </HBox>
+         <Label fx:id="shippingLabel" styleClass="total-price" text="0" />
+
+        <Separator prefHeight="25.0" prefWidth="426.0" styleClass="cart-divider" />
+
+        <HBox alignment="CENTER_LEFT">
+            <Label styleClass="total-label" text="Total" />
+            <Pane HBox.hgrow="ALWAYS" />
+        </HBox>
+    </VBox>
+      <Label fx:id="totalLabel" styleClass="total-final" text="0" />
+
+</VBox>

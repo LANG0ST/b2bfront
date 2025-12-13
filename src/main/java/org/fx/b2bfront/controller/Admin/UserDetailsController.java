@@ -2,8 +2,7 @@ package org.fx.b2bfront.controller.Admin;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import org.fx.b2bfront.model.Company;
+import org.fx.b2bfront.dto.CompanyDto;
 import org.fx.b2bfront.utils.AppNavigator;
 
 public class UserDetailsController {
@@ -13,21 +12,21 @@ public class UserDetailsController {
     @FXML private Label phoneLabel;
     @FXML private Label emailLabel;
     @FXML private Label cityLabel;
-    @FXML private Label createdAtLabel;
     @FXML private Label statusLabel;
+    @FXML private Label createdAtLabel;
 
-    private Company user;
+    private CompanyDto company;
 
-    public void setUser(Company user) {
-        this.user = user;
+    public void setCompany(CompanyDto company) {
+        this.company = company;
 
-        title.setText("Détails de " + user.getName());
-        nameLabel.setText(user.getName());
-        phoneLabel.setText(user.getPhone());
-        emailLabel.setText(user.getEmail());
-        cityLabel.setText(user.getCity());
-        createdAtLabel.setText(user.getCreatedAt().toString());
-        statusLabel.setText(user.isEnabled() ? "Activé" : "Désactivé");
+        title.setText("Détails de " + company.getName());
+        nameLabel.setText(company.getName());
+        phoneLabel.setText(company.getPhone());
+        emailLabel.setText(company.getEmail());
+        cityLabel.setText(company.getCity());
+        statusLabel.setText(company.isEnabled() ? "Activé" : "Désactivé");
+        createdAtLabel.setText(company.getCreatedAt());
     }
 
     @FXML

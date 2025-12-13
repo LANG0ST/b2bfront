@@ -1,120 +1,247 @@
 package org.fx.b2bfront.controller.product;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
+import org.fx.b2bfront.api.ProductsApi;
+import org.fx.b2bfront.api.ReviewsApi;
+import org.fx.b2bfront.dto.ProductDto;
+import org.fx.b2bfront.dto.ReviewDto;
+import org.fx.b2bfront.store.AuthStore;
+import org.fx.b2bfront.store.CartStore;
+import org.fx.b2bfront.store.ProductStore;
+import org.fx.b2bfront.utils.AppNavigator;
 
-public class ProductController {
+import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
 
-    // Main product fields
+public class ProductController implements Initializable {
+
+    // IMAGE
+    @FXML private Pane imagePane;
+
+    // INFO
     @FXML private Label productNameLabel;
     @FXML private Label productPriceLabel;
     @FXML private Label productDescriptionLabel;
 
+    // SPECS
     @FXML private Label specType;
     @FXML private Label specPower;
     @FXML private Label specWeight;
     @FXML private Label specFuel;
 
-    // Quantity
+    // QUANTITY
     @FXML private Label quantityLabel;
     @FXML private Button btnMinus;
     @FXML private Button btnPlus;
 
-    // Reviews container
+    // ACTIONS
+    @FXML private Button btnAddToCart;
+    @FXML private Button btnBuyNow;
+    @FXML private Button btnSeeAllReviews;
+
+    // REVIEWS
     @FXML private HBox reviewsContainer;
 
     private int quantity = 1;
+    private ProductDto currentProduct;
 
+    // =========================================================
+    // INITIALIZE
+    // =========================================================
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+
+        Long productId = ProductStore.getSelectedProductId();
+        if (productId != null) {
+            loadProduct(productId);
+            loadLatestReviews(productId);
+        }
+
+        btnAddToCart.setOnAction(e -> {
+            if (currentProduct == null) return;
+            CartStore.add(currentProduct.getId(), quantity);
+            ProductsApi.addToCart(AuthStore.companyId, currentProduct.getId(), quantity);
+        });
+
+        btnBuyNow.setOnAction(e -> {
+            if (currentProduct == null) return;
+            CartStore.add(currentProduct.getId(), quantity);
+            AppNavigator.navigateTo("cart.fxml");
+        });
+
+        btnSeeAllReviews.setOnAction(e -> {
+            if (currentProduct == null) return;
+            ProductStore.setSelectedProductId(currentProduct.getId());
+            AppNavigator.navigateTo("reviews.fxml");
+        });
+    }
+
+    // =========================================================
+    // QUANTITY (FXML ACTIONS — THIS FIXES YOUR ERROR)
+    // =========================================================
     @FXML
-    public void initialize() {
-        // For now: hard-coded product — later you inject data from backend
-        loadSampleProduct();
-        buildSampleReviews();
-        updateQuantityLabel();
-    }
-
-    // =========================
-    // SAMPLE DATA
-    // =========================
-    private void loadSampleProduct() {
-        productNameLabel.setText("Pelleteuse Caterpillar 320D");
-        productPriceLabel.setText("350 000 MAD");
-        productDescriptionLabel.setText(
-                "Pelleteuse hydraulique de chantier adaptée aux grands travaux " +
-                        "de terrassement (stades, routes, plateformes logistiques). " +
-                        "Faible consommation, cabine climatisée, entretien simplifié."
-        );
-
-        specType.setText("Engin de terrassement");
-        specPower.setText("162 kW");
-        specWeight.setText("21 tonnes");
-        specFuel.setText("Diesel");
-    }
-
-    private void buildSampleReviews() {
-        reviewsContainer.getChildren().clear();
-
-        reviewsContainer.getChildren().add(createReviewCard(
-                "Société Atlas BTP",
-                "Très bonne machine, idéale pour les grands chantiers.",
-                "★★★★★"
-        ));
-
-        reviewsContainer.getChildren().add(createReviewCard(
-                "Entreprise Casa Infra",
-                "Consommation correcte, entretien facile, service après-vente réactif.",
-                "★★★★☆"
-        ));
-
-        reviewsContainer.getChildren().add(createReviewCard(
-                "Groupe Nord Travaux",
-                "Bon rendement sur sols difficiles, confort opérateur appréciable.",
-                "★★★★★"
-        ));
-    }
-
-    private VBox createReviewCard(String author, String body, String stars) {
-        VBox card = new VBox(6);
-        card.getStyleClass().add("review-card");
-
-        Label starsLabel = new Label(stars);
-        starsLabel.getStyleClass().add("review-stars");
-
-        Label titleLabel = new Label("Avis client");
-        titleLabel.getStyleClass().add("review-title");
-
-        Label bodyLabel = new Label(body);
-        bodyLabel.setWrapText(true);
-        bodyLabel.getStyleClass().add("review-body");
-
-        Label authorLabel = new Label(author);
-        authorLabel.getStyleClass().add("review-author");
-
-        card.getChildren().addAll(starsLabel, titleLabel, bodyLabel, authorLabel);
-        return card;
-    }
-
-    // =========================
-    // QUANTITY HANDLERS
-    // =========================
-    @FXML
-    private void decreaseQuantity() {
+    public void decreaseQuantity() {
         if (quantity > 1) {
             quantity--;
-            updateQuantityLabel();
+            quantityLabel.setText(String.valueOf(quantity));
         }
     }
 
     @FXML
-    private void increaseQuantity() {
+    public void increaseQuantity() {
         quantity++;
-        updateQuantityLabel();
+        quantityLabel.setText(String.valueOf(quantity));
     }
 
-    private void updateQuantityLabel() {
-        quantityLabel.setText(String.valueOf(quantity));
+    // =========================================================
+    // PRODUCT
+    // =========================================================
+    private void loadProduct(long productId) {
+        currentProduct = ProductsApi.getById(productId);
+
+        if (currentProduct == null) return;
+
+        productNameLabel.setText(currentProduct.getName());
+        productPriceLabel.setText(String.format("%.2f MAD", currentProduct.getPrice()));
+        productDescriptionLabel.setText(
+                currentProduct.getDescription() != null ? currentProduct.getDescription() : ""
+        );
+
+        applySpecs(currentProduct.getFilterTag());
+        loadImage(currentProduct.getImageUrl());
+    }
+
+    // =========================================================
+    // SPECS FROM filterTag
+    // =========================================================
+    private void applySpecs(String filterTag) {
+        Map<String, String> specs = parseFilterTag(filterTag);
+
+        specType.setText(specs.getOrDefault("brand", "—"));
+        specPower.setText(specs.getOrDefault("power", "—"));
+        specWeight.setText(specs.getOrDefault("weight", "—"));
+        specFuel.setText(specs.getOrDefault("fuel", "—"));
+    }
+
+    private Map<String, String> parseFilterTag(String tag) {
+        Map<String, String> map = new HashMap<>();
+        if (tag == null || tag.isBlank()) return map;
+
+        for (String pair : tag.split(";")) {
+            String[] kv = pair.split("=");
+            if (kv.length == 2) {
+                map.put(kv[0].toLowerCase().trim(), kv[1].trim());
+            }
+        }
+        return map;
+    }
+
+    // =========================================================
+    // IMAGE
+    // =========================================================
+    private void loadImage(String url) {
+        if (url == null || url.isBlank()) {
+            loadPlaceholder();
+            return;
+        }
+
+        if (url.startsWith("/")) {
+            url = "http://localhost:8082" + url;
+        }
+
+        ImageView iv = new ImageView(new Image(url, true));
+        applyCover(iv);
+        imagePane.getChildren().setAll(iv);
+    }
+
+    private void loadPlaceholder() {
+        ImageView iv = new ImageView(
+                new Image(getClass().getResource("/images/placeholder.png").toExternalForm())
+        );
+        applyCover(iv);
+        imagePane.getChildren().setAll(iv);
+    }
+
+    private void applyCover(ImageView iv) {
+        iv.setPreserveRatio(false);
+        iv.fitWidthProperty().bind(imagePane.widthProperty());
+        iv.fitHeightProperty().bind(imagePane.heightProperty());
+
+        Rectangle clip = new Rectangle();
+        clip.widthProperty().bind(imagePane.widthProperty());
+        clip.heightProperty().bind(imagePane.heightProperty());
+        clip.setArcWidth(20);
+        clip.setArcHeight(20);
+        iv.setClip(clip);
+    }
+
+    // =========================================================
+    // REVIEWS (BACKEND – 3 LATEST)
+    // =========================================================
+    private void loadLatestReviews(long productId) {
+        reviewsContainer.getChildren().clear();
+
+        new Thread(() -> {
+            try {
+                List<ReviewDto> reviews =
+                        ReviewsApi.getLatestForProduct(productId, 3);
+
+                Platform.runLater(() -> {
+
+                    if (reviews == null || reviews.isEmpty()) {
+                        reviewsContainer.getChildren().add(
+                                new Label("Aucun avis pour ce produit.")
+                        );
+                        return;
+                    }
+
+                    for (ReviewDto r : reviews) {
+                        reviewsContainer.getChildren().add(buildReviewCard(r));
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    private VBox buildReviewCard(ReviewDto r) {
+
+        VBox card = new VBox(6);
+        card.getStyleClass().add("review-card");
+        card.setPadding(new Insets(12));
+        card.setPrefWidth(260);
+
+        Label author = new Label(
+                r.getAuthor() != null ? r.getAuthor() : "Client"
+        );
+        author.getStyleClass().add("review-author");
+
+        Label stars = new Label("★".repeat(Math.max(1, r.getRating())));
+        stars.getStyleClass().add("review-stars");
+
+        Label content = new Label(
+                r.getContent() != null ? r.getContent() : ""
+        );
+        content.setWrapText(true);
+        content.getStyleClass().add("review-text");
+
+        card.getChildren().addAll(author, stars, content);
+        return card;
     }
 }

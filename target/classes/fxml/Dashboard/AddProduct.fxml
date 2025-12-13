@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.fx.b2bfront.controller.dashboard.AddProductController"
+            stylesheets="@../../style/addproduct.css">
+
+    <!-- ================= HEADER ================= -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" styleClass="header-bar">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Button text="← Retour" fx:id="btnBack" styleClass="back-btn"/>
+            <Label text="Ajouter un produit" styleClass="page-title"/>
+        </HBox>
+    </top>
+
+    <!-- ================= CONTENT ================= -->
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
+            <VBox spacing="30" alignment="TOP_CENTER" styleClass="page-root">
+                <padding>
+                    <Insets top="30" right="30" bottom="40" left="30"/>
+                </padding>
+
+                <!-- IMAGE CARD -->
+                <VBox spacing="12" alignment="CENTER" styleClass="card">
+                    <ImageView fx:id="imagePreview"
+                               fitWidth="260"
+                               fitHeight="160"
+                               preserveRatio="true"
+                               styleClass="image-preview"/>
+                    <Button text="Choisir une image"
+                            fx:id="btnChooseImage"
+                            styleClass="orange-btn"/>
+                </VBox>
+
+                <!-- FORM CARD -->
+                <VBox spacing="20" styleClass="card form-card">
+
+                    <!-- BASIC INFO -->
+                    <GridPane hgap="20" vgap="15">
+                        <columnConstraints>
+                            <ColumnConstraints halignment="RIGHT" minWidth="120"/>
+                            <ColumnConstraints halignment="LEFT" hgrow="ALWAYS"/>
+                        </columnConstraints>
+
+                        <Label text="Nom"/>
+                        <TextField fx:id="nameField" promptText="Nom du produit"
+                                   GridPane.columnIndex="1"/>
+
+                        <Label text="Description" GridPane.rowIndex="1"/>
+                        <TextArea fx:id="descField" prefRowCount="3"
+                                  promptText="Description"
+                                  GridPane.rowIndex="1"
+                                  GridPane.columnIndex="1"/>
+
+                        <Label text="Prix (DH)" GridPane.rowIndex="2"/>
+                        <TextField fx:id="priceField" promptText="Ex: 250.00"
+                                   GridPane.rowIndex="2"
+                                   GridPane.columnIndex="1"/>
+
+                        <Label text="Stock" GridPane.rowIndex="3"/>
+                        <TextField fx:id="stockField" promptText="Quantité en stock"
+                                   GridPane.rowIndex="3"
+                                   GridPane.columnIndex="1"/>
+
+                        <Label text="Catégorie" GridPane.rowIndex="4"/>
+                        <ComboBox fx:id="categoryBox"
+                                  prefWidth="260"
+                                  GridPane.rowIndex="4"
+                                  GridPane.columnIndex="1"/>
+                    </GridPane>
+
+                    <!-- DYNAMIC ATTRIBUTES -->
+                    <VBox spacing="10">
+                        <Label text="Attributs produit" styleClass="section-title"/>
+
+                        <ScrollPane fitToWidth="true"
+                                    prefHeight="180"
+                                    styleClass="attributes-scroll">
+                            <VBox fx:id="attributesBox"
+                                  spacing="12"/>
+                        </ScrollPane>
+                    </VBox>
+
+                </VBox>
+
+                <!-- SUBMIT -->
+                <Button text="Ajouter le produit"
+                        fx:id="btnSubmit"
+                        styleClass="orange-btn"
+                        prefWidth="220"/>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

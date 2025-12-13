@@ -4,7 +4,7 @@ public class LignePanier {
 
     private Long idLignePanier;
     private Panier panier;
-    private Produit produit;
+    private Product product;
     private int quantite;
 
 
@@ -24,12 +24,12 @@ public class LignePanier {
         this.panier = panier;
     }
 
-    public Produit getProduit() {
-        return produit;
+    public Product getProduit() {
+        return product;
     }
 
-    public void setProduit(Produit produit) {
-        this.produit = produit;
+    public void setProduit(Product product) {
+        this.product = product;
     }
 
     public int getQuantite() {
@@ -41,8 +41,8 @@ public class LignePanier {
     }
 
     public double getSousTotal() {
-        if (produit != null && produit.getPrice() != null) {
-            return quantite * produit.getPrice().doubleValue();
+        if (product != null && product.getPrice() != null) {
+            return quantite * product.getPrice().doubleValue();
         }
         return 0.0;
     }

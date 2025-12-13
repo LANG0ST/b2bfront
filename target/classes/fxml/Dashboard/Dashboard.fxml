@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.fx.b2bfront.controller.dashboard.DashboardController"
+            prefWidth="1600" prefHeight="900"
+            stylesheets="@../../style/Udashboard.css">
+
+    <top>
+        <fx:include source="../components/Navbar.fxml"/>
+    </top>
+
+    <!-- ============ SIDEBAR ============ -->
+    <left>
+        <VBox prefWidth="240" spacing="18" styleClass="sidebar">
+            <padding>
+                <Insets top="35" bottom="35" left="25" right="25"/>
+            </padding>
+
+            <Label text="Dashboard" styleClass="sidebar-title"/>
+
+            <Label fx:id="btnBuyer" text="Mes commandes" styleClass="sidebar-item"/>
+            <Label fx:id="btnSeller" text="Commandes reçues" styleClass="sidebar-item"/>
+            <Label fx:id="btnProducts" text="Mes produits" styleClass="sidebar-item"/>
+            <Label fx:id="btnNotif" text="Notifications" styleClass="sidebar-item"/>
+
+        </VBox>
+    </left>
+
+    <!-- ============ MAIN CONTENT ============ -->
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="dashboard-scroll">
+            <VBox spacing="40" styleClass="dashboard-content">
+                <padding>
+                    <Insets top="40" bottom="40" left="40" right="40"/>
+                </padding>
+
+                <!-- BUYER ORDERS -->
+                <VBox fx:id="buyerSection" spacing="18" visible="true" managed="true">
+                    <Label text="Mes commandes (acheteur)" styleClass="section-title"/>
+                    <VBox fx:id="buyerOrdersContainer" spacing="12" styleClass="section-container"/>
+                </VBox>
+
+                <!-- SELLER ORDERS -->
+                <VBox fx:id="sellerSection" spacing="18" visible="false" managed="false">
+                    <Label text="Commandes reçues (vendeur)" styleClass="section-title"/>
+                    <VBox fx:id="sellerOrdersContainer" spacing="12" styleClass="section-container"/>
+                </VBox>
+
+                <!-- MY PRODUCTS -->
+                <VBox fx:id="productsSection" spacing="18" visible="false" managed="false">
+
+                    <HBox alignment="CENTER_LEFT" spacing="12">
+                        <Label text="Mes produits" styleClass="section-title"/>
+                        <Button fx:id="btnAddProduct"
+                                text="Ajouter un produit"
+                                styleClass="btn-primary"/>
+                    </HBox>
+
+                    <!-- 👇 This will hold either the list OR the AddProduct page -->
+                    <StackPane fx:id="productsContentPane">
+
+                        <!-- Default: product list -->
+                        <VBox fx:id="productsContainer"
+                              spacing="12"
+                              styleClass="section-container"/>
+
+                    </StackPane>
+
+                </VBox>
+
+                <!-- NOTIFICATIONS -->
+                <VBox fx:id="notifSection" spacing="18" visible="false" managed="false">
+                    <Label text="Notifications" styleClass="section-title"/>
+                    <VBox fx:id="notificationsContainer" spacing="12" styleClass="section-container"/>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

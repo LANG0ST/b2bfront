@@ -77,9 +77,9 @@
 
             <!-- =================== MASS ACTIONS =================== -->
             <HBox spacing="15">
-                <Button text="Bloquer sélection"  styleClass="action-btn"/>
-                <Button text="Débloquer sélection" styleClass="action-btn-green"/>
-                <Button text="Supprimer sélection" styleClass="action-btn-red"/>
+                <Button fx:id="bloqueAllBtn" text="Bloquer sélection"  styleClass="action-btn"/>
+                <Button fx:id="debloqueAllBtn" text="Débloquer sélection" styleClass="action-btn-green"/>
+                <Button fx:id="deleteAllBtn" text="Supprimer sélection" styleClass="action-btn-red"/>
             </HBox>
 
             <!-- =================== TABLE =================== -->
@@ -88,16 +88,16 @@
 
                     <TableColumn text="✔" fx:id="selectCol" prefWidth="40"/>
 
-                    <TableColumn text="ID" fx:id="idCol" prefWidth="60"/>
-                    <TableColumn text="Nom" fx:id="nameCol" prefWidth="150"/>
-                    <TableColumn text="Téléphone" fx:id="phoneCol" prefWidth="130"/>
-                    <TableColumn text="Email" fx:id="emailCol" prefWidth="150"/>
-                    <TableColumn text="Ville" fx:id="cityCol" prefWidth="130"/>
-                    <TableColumn text="Créé le" fx:id="createdAtCol" prefWidth="170"/>
-                    <TableColumn text="Activé" fx:id="enabledCol" prefWidth="105"/>
+                    <TableColumn text="ID" fx:id="idCol" prefWidth="40"/>
+                    <TableColumn text="Nom" fx:id="nameCol" prefWidth="160"/>
+                    <TableColumn text="Crée le " fx:id="createdAtCol" prefWidth="160"/>
+                    <TableColumn text="Téléphone" fx:id="phoneCol" prefWidth="100"/>
+                    <TableColumn text="Email" fx:id="emailCol" prefWidth="230"/>
+                    <TableColumn text="Ville" fx:id="cityCol" prefWidth="100"/>
+                    <TableColumn text="Activé" fx:id="enabledCol" prefWidth="85"/>
 
                     <!-- Actions -->
-                    <TableColumn text="Actions" fx:id="actionsCol" prefWidth="300"/>
+                    <TableColumn text="Actions" fx:id="actionsCol" prefWidth="320"/>
 
                 </columns>
             </TableView>

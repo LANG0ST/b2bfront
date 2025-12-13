@@ -18,7 +18,7 @@ public class Company {
     private String fullName;
     private Role role;
     private boolean enabled;
-    private List<Produit> produits;
+    private List<Product> products;
 
     public Company() {
         super();
@@ -37,7 +37,7 @@ public class Company {
         this.enabled = enabled;
     }
 
-    public Company(Long id, LocalDateTime createdAt, String name, String address, String city, String phone, String website, String email, String password, boolean mustChangePassword, String fullName, Role role, boolean enabled, List<Produit> produits) {
+    public Company(Long id, LocalDateTime createdAt, String name, String address, String city, String phone, String website, String email, String password, boolean mustChangePassword, String fullName, Role role, boolean enabled, List<Product> products) {
         this.id = id;
         this.createdAt = createdAt;
         this.name = name;
@@ -51,7 +51,7 @@ public class Company {
         this.fullName = fullName;
         this.role = role;
         this.enabled = enabled;
-        this.produits = produits;
+        this.products = products;
     }
 
     public Long getId() {
@@ -158,12 +158,12 @@ public class Company {
         this.enabled = enabled;
     }
 
-    public List<Produit> getProduits() {
-        return produits;
+    public List<Product> getProduits() {
+        return products;
     }
 
-    public void setProduits(List<Produit> produits) {
-        this.produits = produits;
+    public void setProduits(List<Product> products) {
+        this.products = products;
     }
 
     @Override
@@ -182,7 +182,7 @@ public class Company {
                 ", fullName='" + fullName + '\'' +
                 ", role=" + role +
                 ", enabled=" + enabled +
-                ", produits=" + produits +
+                ", produits=" + products +
                 '}';
     }
 }

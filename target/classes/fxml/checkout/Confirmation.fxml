@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.fx.b2bfront.controller.checkout.ConfirmationController"
+            stylesheets="@../../style/checkout.css"
+            prefWidth="1600" prefHeight="900">
+
+    <top>
+        <fx:include source="../components/Navbar.fxml"/>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="20" styleClass="checkout-root">
+            <Label text="Commande envoyée au vendeur"
+                   styleClass="checkout-title"/>
+
+            <Label text="Le vendeur a reçu votre demande. Vous serez notifié lorsqu'il l'acceptera ou la refusera."
+                   wrapText="true"
+                   maxWidth="600"/>
+
+            <Button text="Aller au tableau de bord"
+                    onAction="#goToDashboard"
+                    styleClass="primary-button"/>
+        </VBox>
+    </center>
+
+</BorderPane>

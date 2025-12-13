@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 
-<BorderPane prefHeight="900" prefWidth="1600" stylesheets="@../style/homepage.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fx.b2bfront.controller.home.HomepageController">
+<BorderPane prefHeight="900" prefWidth="1600"
+            stylesheets="@../style/homepage.css"
+            xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.fx.b2bfront.controller.home.HomepageController">
 
     <!-- ================= TOP NAVIGATION ================= -->
     <top>
-        <fx:include source="components/Navbar.fxml" />
+        <fx:include source="components/Navbar.fxml"/>
     </top>
 
-    <!-- ================= LEFT SIDEBAR ================= -->
+    <!-- ================= LEFT SIDEBAR (Dynamic Categories) ================= -->
     <left>
-        <VBox prefHeight="820.0" prefWidth="316.0" spacing="15" styleClass="sidebar">
+        <VBox fx:id="sidebarCategories"
+              prefHeight="900"
+              prefWidth="300"
+              spacing="15"
+              styleClass="sidebar">
             <padding>
-                <Insets bottom="20" left="20" right="20" top="20" />
+                <Insets top="25" bottom="25" left="20" right="20"/>
             </padding>
 
-            <Label styleClass="sidebar-title" text="Categories" />
-
-            <Button prefHeight="50" prefWidth="259.0" styleClass="sidebar-item" text="Electronics" />
-            <Button prefHeight="50" prefWidth="260.0" styleClass="sidebar-item" text="Machinery" />
-            <Button prefHeight="50" prefWidth="259.0" styleClass="sidebar-item" text="Clothing" />
-            <Button prefHeight="50" prefWidth="259.0" styleClass="sidebar-item" text="Food and Beverage" />
-            <Button prefHeight="50" prefWidth="259.0" styleClass="sidebar-item" text="Office Supplies" />
-            <Button prefHeight="50" prefWidth="259.0" styleClass="sidebar-item" text="Logistics" />
-
+            <Label text="Categories" styleClass="sidebar-title"/>
+            <!-- Buttons will be injected dynamically -->
         </VBox>
     </left>
 
@@ -39,30 +39,35 @@
     <center>
         <VBox spacing="40">
             <padding>
-                <Insets bottom="30" left="30" right="30" top="30" />
+                <Insets top="30" bottom="30" left="30" right="30"/>
             </padding>
 
-            <!-- FEATURED -->
-            <VBox prefHeight="464.0" prefWidth="1290.0" spacing="15" styleClass="featured-card">
+            <!-- FEATURED BANNER -->
+            <VBox prefWidth="1290" prefHeight="420" spacing="15" styleClass="featured-card">
                 <padding>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    <Insets top="10" bottom="10" left="10" right="10"/>
                 </padding>
 
-                <Pane prefHeight="387.0" prefWidth="1250.0" styleClass="featured-image" />
+                <Pane fx:id="featuredBanner"
+                      minHeight="300"
+                      prefHeight="320"
+                      maxHeight="350"
+                      prefWidth="1250"
+                      styleClass="featured-image"/>
             </VBox>
 
             <!-- TRENDING -->
-            <Label prefHeight="21.0" prefWidth="185.0" styleClass="section-title" text="Trending Products" />
+            <Label text="Trending Products" styleClass="section-title"/>
 
-            <HBox prefHeight="318.0" prefWidth="1290.0" spacing="25">
+            <!-- PRODUCT GRID (Dynamic) -->
+            <FlowPane fx:id="productsContainer"
+                      prefWidth="1290"
+                      hgap="25"
+                      vgap="25"
+                      styleClass="products-grid">
+                <!-- Product cards injected by controller -->
+            </FlowPane>
 
-                <VBox prefHeight="252.0" prefWidth="354.0" spacing="8" styleClass="product-card">
-                    <Pane prefHeight="173.0" prefWidth="309.0" styleClass="product-image" />
-                    <Label prefHeight="20.0" prefWidth="263.0" styleClass="product-name" text="Product 1" />
-                    <Label styleClass="product-price" text="\$89" />
-                </VBox>
-
-            </HBox>
         </VBox>
     </center>
 

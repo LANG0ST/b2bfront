@@ -68,7 +68,7 @@
                 <TextField fx:id="signupAddress" prefHeight="45" styleClass="text-input"/>
 
                 <Label text="City"/>
-                <TextField fx:id="signupCity" prefHeight="45" styleClass="text-input"/>
+                <ComboBox fx:id="signupCity" prefHeight="45" styleClass="text-input"/>
 
                 <Label text="Phone"/>
                 <TextField fx:id="signupPhone" prefHeight="45" styleClass="text-input"/>

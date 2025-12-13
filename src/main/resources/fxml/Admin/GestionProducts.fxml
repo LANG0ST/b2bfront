@@ -47,29 +47,31 @@
         <StackPane fx:id="mainContent">
         <VBox spacing="30" styleClass="main-content" fx:id="productsPage">
 
-            <Label text="Gestion des produits" styleClass="section-title"/>
+            <Label text="Gestion des products" styleClass="section-title"/>
 
             <VBox spacing="20">
                 <HBox spacing="20" alignment="CENTER_LEFT">
-                    <TextField fx:id="searchField" promptText="Rechercher produit..." styleClass="search-bar"/>
+                    <TextField fx:id="searchField" promptText="Rechercher product..." styleClass="search-bar"/>
                     <ComboBox fx:id="filterCategorie"  styleClass="filter-box"/>
                     <ComboBox fx:id="filterCompany"  styleClass="filter-box"/>
                     <Button text="Réinitialiser" fx:id="clearFiltersBtn" styleClass="clear-filters-btn"/>
                 </HBox>
 
+
+                <!-- MASS ACTIONS -->
                 <HBox spacing="15">
-                    <Button text="Supprimer sélection" styleClass="action-btn-red"/>
+                    <Button fx:id="deleteAllBtn" text="Supprimer sélection" styleClass="action-btn-red"/>
                 </HBox>
 
                 <TableView fx:id="productsTable" styleClass="table">
                     <columns>
                         <TableColumn fx:id="selectCol" text="✔" prefWidth="50"/>
-                        <TableColumn fx:id="idCol" text="ID" prefWidth="100"/>
-                        <TableColumn fx:id="nameCol" text="Nom" prefWidth="150"/>
+                        <TableColumn fx:id="idCol" text="ID" prefWidth="50"/>
+                        <TableColumn fx:id="nameCol" text="Nom" prefWidth="200"/>
                         <TableColumn fx:id="descriptionCol" text="Description" prefWidth="325"/>
-                        <TableColumn fx:id="priceCol" text="Prix" prefWidth="100"/>
-                        <TableColumn fx:id="stockCol" text="Stock" prefWidth="100"/>
-                        <TableColumn fx:id="categorieCol" text="Categorie" prefWidth="100"/>
+                        <TableColumn fx:id="priceCol" text="Prix" prefWidth="85"/>
+                        <TableColumn fx:id="stockCol" text="Stock" prefWidth="50"/>
+                        <TableColumn fx:id="categorieCol" text="Categorie" prefWidth="150"/>
                         <TableColumn fx:id="companyCol" text="Entreprise" prefWidth="150"/>
                         <TableColumn fx:id="actionsCol" text="Actions" prefWidth="175"/>
                     </columns>

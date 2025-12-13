@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.ComboBox?>
+<BorderPane prefHeight="900" prefWidth="1600"
+            stylesheets="@../../style/checkout.css"
+            xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.fx.b2bfront.controller.checkout.AddressController">
+
+    <!-- Navbar -->
+    <top>
+        <fx:include source="../components/Navbar.fxml" />
+    </top>
+
+    <center>
+        <VBox spacing="40" styleClass="checkout-root">
+            <padding>
+                <Insets bottom="40" left="60" right="60" top="40" />
+            </padding>
+
+            <HBox spacing="200">
+
+                <!-- LEFT CARD (FIXED) -->
+                <VBox prefHeight="549.0" prefWidth="772.0" spacing="20" styleClass="checkout-card">
+
+                    <Label styleClass="checkout-title" text="Livraison" />
+
+                    <HBox spacing="10" styleClass="checkout-steps">
+                        <Label styleClass="step-current" text="Address" />
+                        <Label text="—" />
+                        <Label styleClass="step-next" text="Shipping" />
+                        <Label text="—" />
+                        <Label styleClass="step-next" text="Payment" />
+                    </HBox>
+
+                    <Label styleClass="section-title" text="Shipping Information" />
+
+                    <VBox prefWidth="480" spacing="14">
+                        <TextField fx:id="firstName" prefWidth="460" promptText="First Name" />
+                        <TextField fx:id="address" prefWidth="460" promptText="Address" />
+                        <ComboBox fx:id="city"
+                                  prefHeight="45"
+                                  styleClass="text-input"/>
+                        <TextField fx:id="zipcode" prefWidth="460" promptText="Zipcode" />
+
+                        <HBox spacing="8">
+                            <CheckBox fx:id="saveInfo" />
+                            <Label styleClass="small-label" text="Save contact information" />
+                        </HBox>
+                    </VBox>
+
+                    <Button onAction="#goToShipping" styleClass="primary-button" text="Continue to shipping" />
+
+                </VBox>
+
+                <!-- RIGHT SIDE (FIXED CART SUMMARY) -->
+                <fx:include source="CartSummary.fxml" />
+
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>

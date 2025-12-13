@@ -1,63 +1,74 @@
 package org.fx.b2bfront.controller.components;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Side;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.CustomMenuItem;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import org.fx.b2bfront.store.AppStore;
 import org.fx.b2bfront.utils.AppNavigator;
+
+import java.util.Map;
 
 public class NavbarController {
 
-    @FXML private Button btnCategories;
+    @FXML private TextField searchBar;
+    @FXML private Button btnHome;
     @FXML private Button btnNotifications;
+    @FXML private Button btnCart;
+    @FXML private Button btnDashboard;
 
-    private ContextMenu categoriesMenu;
+    @FXML private ImageView notifIcon;
 
     @FXML
     public void initialize() {
-        setupCategoriesMenu();
 
-        // Notifications button stays visible but no dropdown anymore
+        btnHome.setOnAction(e -> AppNavigator.navigateTo("homepage.fxml"));
+        btnDashboard.setOnAction(e -> AppNavigator.navigateTo("dashboard/Dashboard.fxml"));
+        btnCart.setOnAction(e -> AppNavigator.navigateTo("cart.fxml"));
+
         btnNotifications.setOnAction(e -> {
-            System.out.println("Notifications clicked!");
-            AppNavigator.navigateTo("categories.fxml");
-
+            AppNavigator.navigateToWithParams(
+                    "dashboard/Dashboard.fxml",
+                    Map.of("section", "notif")   // <-- this is the key
+            );
         });
-    }
 
-    private void setupCategoriesMenu() {
-        categoriesMenu = new ContextMenu();
-        categoriesMenu.getItems().addAll(
-                createCategoryItem("Electronics"),
-                createCategoryItem("Machinery"),
-                createCategoryItem("Clothing"),
-                createCategoryItem("Food & Beverage"),
-                createCategoryItem("Office Supplies")
-        );
 
-        btnCategories.setOnAction(event -> {
-            if (categoriesMenu.isShowing()) {
-                categoriesMenu.hide();
-            } else {
-                categoriesMenu.show(btnCategories, Side.BOTTOM, 0, 0);
+        updateNotificationIcon();
+
+        searchBar.setOnAction(e -> {
+            String q = searchBar.getText().trim();
+            if (!q.isEmpty()) {
+                AppStore.setSearchQuery(q);
+                AppNavigator.navigateTo("search/SearchResults.fxml");
             }
         });
+
     }
 
-    private CustomMenuItem createCategoryItem(String text) {
-        Label lbl = new Label(text);
-        lbl.getStyleClass().add("dropdown-text");
+    private void updateNotificationIcon() {
 
-        VBox wrapper = new VBox(lbl);
-        wrapper.getStyleClass().add("dropdown-item");
-        wrapper.setPrefWidth(200); // ensures consistent width
+        String iconPath;
 
-        CustomMenuItem item = new CustomMenuItem(wrapper, false);
-        item.setHideOnClick(false);   // keeps menu open unless clicked
-        return item;
+        if (AppStore.hasNotifications()) {
+            iconPath = "/images/notification.png";
+        } else {
+            iconPath = "/images/nonotification.png";
+        }
+
+        var res = getClass().getResource(iconPath);
+        if (res == null) {
+            System.out.println("Cannot load icon: " + iconPath);
+            return;
+        }
+
+        notifIcon.setImage(new Image(res.toExternalForm()));
     }
+
+    public void refreshNotificationIcon() {
+        updateNotificationIcon();
+    }
+
 
 }

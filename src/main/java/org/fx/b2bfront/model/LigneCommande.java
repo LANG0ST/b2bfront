@@ -4,7 +4,7 @@ public class LigneCommande {
 
     private Long idLigneCommande;
     private Commande commande;
-    private Produit produit;
+    private Product product;
     private int quantite;
     private double prixUnitaire;
     private Double sellerLinePrix;
@@ -13,10 +13,10 @@ public class LigneCommande {
         super();
     }
 
-    public LigneCommande(Long idLigneCommande, Commande commande, Produit produit, int quantite, double prixUnitaire, Double sellerLinePrix) {
+    public LigneCommande(Long idLigneCommande, Commande commande, Product product, int quantite, double prixUnitaire, Double sellerLinePrix) {
         this.idLigneCommande = idLigneCommande;
         this.commande = commande;
-        this.produit = produit;
+        this.product = product;
         this.quantite = quantite;
         this.prixUnitaire = prixUnitaire;
         this.sellerLinePrix = sellerLinePrix;
@@ -38,12 +38,12 @@ public class LigneCommande {
         this.commande = commande;
     }
 
-    public Produit getProduit() {
-        return produit;
+    public Product getProduit() {
+        return product;
     }
 
-    public void setProduit(Produit produit) {
-        this.produit = produit;
+    public void setProduit(Product product) {
+        this.product = product;
     }
 
     public int getQuantite() {
@@ -75,7 +75,7 @@ public class LigneCommande {
         return "LigneCommande{" +
                 "idLigneCommande=" + idLigneCommande +
                 ", commande=" + commande +
-                ", produit=" + produit +
+                ", produit=" + product +
                 ", quantite=" + quantite +
                 ", prixUnitaire=" + prixUnitaire +
                 ", sellerLinePrix=" + sellerLinePrix +

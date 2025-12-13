@@ -1,0 +1,357 @@
+/* ============================================================
+   GLOBAL
+============================================================ */
+.dashboard-root {
+    -fx-background-color: #F5F5F5;
+    -fx-font-family: "Segoe UI", system-ui;
+}
+
+ScrollPane {
+    -fx-background-color: transparent;
+}
+
+/* ============================================================
+   SIDEBAR
+============================================================ */
+.sidebar {
+    -fx-background-color: #FFFFFF;
+    -fx-pref-width: 240;
+    -fx-padding: 30 20;
+    -fx-spacing: 18;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 2);
+}
+
+.sidebar-title {
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 0 0 18 0;
+}
+
+.sidebar-item {
+    -fx-font-size: 15;
+    -fx-text-fill: #444;
+    -fx-padding: 10 14;
+    -fx-background-radius: 8;
+}
+
+.sidebar-item:hover {
+    -fx-background-color: #FFE7D1;
+    -fx-text-fill: #FF8A00;
+    -fx-cursor: hand;
+}
+
+.sidebar-active {
+    -fx-background-color: #FF8A00;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* Button: Add Product */
+.add-product-btn {
+    -fx-background-color: #FF8A00;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 10 20;
+}
+.add-product-btn:hover {
+    -fx-background-color: #e57a00;
+}
+
+/* ============================================================
+   MAIN CONTENT WRAPPER
+============================================================ */
+.dashboard-content {
+    -fx-padding: 30 40;
+    -fx-spacing: 40;
+}
+
+.section-title {
+    -fx-font-size: 22;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+/* ============================================================
+   GENERIC WHITE CARD
+============================================================ */
+.section-container,
+.order-card,
+.product-card,
+.notification-card {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12;
+    -fx-padding: 15;
+    -fx-spacing: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);
+}
+
+/* ============================================================
+   ORDER CARDS (Buyer + Seller)
+============================================================ */
+.order-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-padding: 18;
+    -fx-spacing: 10;
+}
+
+.order-card:hover {
+    -fx-background-color: #FFF3E0;
+}
+
+/* Header row text */
+.order-ref {
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.order-date {
+    -fx-font-size: 14;
+    -fx-text-fill: #777;
+}
+
+.order-line {
+    -fx-font-size: 13;
+    -fx-text-fill: #444;
+}
+
+.order-total {
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222;
+    -fx-padding: 8 0 0 0;
+}
+
+/* Status colors */
+.status-en_cours { -fx-text-fill: #FF8A00; -fx-font-weight: bold; }
+.status-validee  { -fx-text-fill: #2BA600; -fx-font-weight: bold; }
+.status-refusee  { -fx-text-fill: #D80000; -fx-font-weight: bold; }
+
+/* ============================================================
+   PRODUCT CARDS
+============================================================ */
+.product-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-padding: 14;
+    -fx-spacing: 15;
+}
+
+/* ============================================================
+   NOTIFICATIONS
+============================================================ */
+.notification-card {
+    -fx-background-color: #F6F6F6;
+    -fx-background-radius: 10;
+    -fx-padding: 12;
+}
+
+.notif-dot-unread {
+    -fx-text-fill: #FF8A00;
+}
+
+.notif-dot-read {
+    -fx-text-fill: #BBBBBB;
+}
+
+.notif-message {
+    -fx-font-size: 14;
+    -fx-text-fill: #333;
+}
+
+/* ============================================================
+   ACTION BUTTONS (ACCEPTER / REFUSER)
+============================================================ */
+.action-btn-green {
+    -fx-background-color: #11A311;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 6 12;
+}
+.action-btn-green:hover {
+    -fx-background-color: #0C7F0C;
+}
+
+.action-btn-red {
+    -fx-background-color: #E64545;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 6 12;
+}
+.action-btn-red:hover {
+    -fx-background-color: #C73838;
+}
+
+/* ============================================================
+   TABLES (Seller Orders)
+============================================================ */
+.dash-table {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #E0E0E0;
+}
+
+.dash-table .column-header-background {
+    -fx-background-color: #FF8A00;
+    -fx-background-radius: 12 12 0 0;
+}
+
+.dash-table .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+}
+
+.dash-table .table-row-cell {
+    -fx-cell-size: 46px;
+    -fx-background-color: white;
+}
+
+.dash-table .table-row-cell:odd {
+    -fx-background-color: #FAFAFA;
+}
+
+.dash-table .table-row-cell:hover {
+    -fx-background-color: #FFF0E0;
+}
+
+.dash-table .table-cell {
+    -fx-font-size: 14;
+    -fx-text-fill: #333;
+}
+/* ===========================================
+   BUYER ORDER CARDS (Mes commandes)
+=========================================== */
+
+.order-card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 12;
+    -fx-padding: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 2);
+}
+
+.order-ref {
+    -fx-font-weight: bold;
+    -fx-font-size: 15;
+}
+
+.order-date {
+    -fx-text-fill: #666;
+    -fx-font-size: 14;
+}
+
+.order-line {
+    -fx-font-size: 13;
+    -fx-text-fill: #444;
+}
+
+.order-total {
+    -fx-font-weight: bold;
+    -fx-text-fill: #222;
+    -fx-font-size: 14;
+}
+
+.status-en_cours { -fx-text-fill: #FF8A00; }
+.status-validee  { -fx-text-fill: #2FA800; }
+.status-refusee  { -fx-text-fill: #D40000; }
+
+
+/* PRODUCT CARDS */
+.product-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-padding: 16;
+    -fx-spacing: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 12, 0, 0, 3);
+}
+
+.product-card:hover {
+    -fx-background-color: #FFF6EC;
+}
+
+.product-name {
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.product-price {
+    -fx-font-size: 14;
+    -fx-text-fill: #FF8A00;
+}
+
+.product-stock {
+    -fx-font-size: 13;
+    -fx-text-fill: #666;
+}
+
+/* Orange edit button */
+.action-btn-orange {
+    -fx-background-color: #FF8A00;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-padding: 6 12;
+    -fx-font-weight: bold;
+}
+.action-btn-orange:hover {
+    -fx-background-color: #e57a00;
+}
+
+/* ---------------------------
+   ADD PRODUCT PAGE
+----------------------------*/
+
+.page-title {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.back-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FF8A00;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+.orange-btn {
+    -fx-background-color: #FF8A00;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 10 20;
+}
+.orange-btn:hover {
+    -fx-background-color: #e57a00;
+}
+
+.text-field, .text-area, .combo-box {
+    -fx-background-radius: 8;
+    -fx-padding: 8;
+    -fx-font-size: 14px;
+}
+
+.image-preview {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 10;
+    -fx-background-radius: 12;
+}
+.btn-primary {
+    -fx-background-color: #E67E22;
+    -fx-text-fill: white;
+    -fx-padding: 8 16;
+    -fx-background-radius: 8;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #cf6d1c;
+}

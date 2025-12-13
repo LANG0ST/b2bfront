@@ -1,167 +1,150 @@
-/* ===========================
-   GLOBAL
-=========================== */
+/* ============================================================
+   GLOBAL ROOT
+   ============================================================ */
 .root {
-    -fx-font-family: "Inter", "Segoe UI", sans-serif;
-    -fx-background-color: #F5F6FA;
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-background-color: #F5F5F5;
 }
 
-/* ===========================
-   NAVBAR
-=========================== */
-.navbar {
-    -fx-background-color: #FFFFFF;
-    -fx-padding: 0 40;
-    -fx-border-color: #E8E8E8;
-    -fx-border-width: 0 0 1 0;
-}
-
-.logo {
-    -fx-font-size: 26px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #FF8A00;   /* vivid industrial orange */
-}
-
-/* Search Bar */
-.search-bar {
-    -fx-background-color: #FFF2E6;  /* very light orange tint */
-    -fx-background-radius: 25;
-    -fx-padding: 0 15;
-    -fx-font-size: 14px;
-    -fx-border-radius: 25;
-    -fx-border-color: transparent;
-    -fx-min-height: 45;
-}
-
-.search-bar:focused {
-    -fx-background-color: #FFE6CC;
-    -fx-border-color: #FFB266; /* soft orange border */
-}
-
-/* Top Right Buttons */
-.icon-button {
-    -fx-background-color: transparent;
-    -fx-text-fill: #333;
-    -fx-font-size: 15px;
-    -fx-padding: 8 15;
-    -fx-background-radius: 10;
-}
-
-.icon-button:hover {
-    -fx-background-color: #FFF2E6; /* match search bar */
-}
-
-/* ===========================
+/* ============================================================
    SIDEBAR
-=========================== */
+   ============================================================ */
 .sidebar {
     -fx-background-color: #FFFFFF;
-    -fx-border-color: #E8E8E8;
-    -fx-border-width: 0 1 0 0;
+    -fx-padding: 25;
+    -fx-spacing: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 15, 0.1, 0, 1);
 }
 
 .sidebar-title {
-    -fx-font-size: 17px;
+    -fx-text-fill: #1E1E1E;
+    -fx-font-size: 20px;
     -fx-font-weight: bold;
-    -fx-text-fill: #333;
     -fx-padding: 0 0 10 0;
 }
 
-.sidebar-item {
+/* Category Buttons */
+.category-btn {
     -fx-background-color: #FFFFFF;
-    -fx-border-color: #E6E6E6;
-    -fx-border-radius: 12;
-    -fx-background-radius: 12;
-    -fx-font-size: 14px;
-    -fx-text-fill: #333;
-    -fx-alignment: CENTER_LEFT;
-    -fx-padding: 0 15;
+    -fx-text-fill: #1E1E1E;
+    -fx-font-size: 15px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-padding: 12 18;
     -fx-cursor: hand;
+    -fx-border-color: #D0D0D0;
+    -fx-border-width: 1.2;
+    -fx-alignment: CENTER_LEFT;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.03), 4, 0.1, 0, 1);
+    -fx-pref-width: 220;
+    -fx-max-width: 220;
 }
 
-.sidebar-item:hover {
-    -fx-background-color: #FFF2E6; /* light orange */
-    -fx-border-color: #FFC080;
+.category-btn:hover {
+    -fx-background-color: #FF9F1C;
+    -fx-text-fill: #000000;
+    -fx-border-color: #FF9F1C;
 }
 
-/* ===========================
-   FEATURED CARD
-=========================== */
-.featured-card {
-    -fx-background-color: white;
-    -fx-background-radius: 20;
-    -fx-padding: 20;
-    -fx-border-radius: 20;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 18, 0.1, 0, 2);
-}
-
-.featured-title {
-    -fx-font-size: 20px;
+.category-btn-active {
+    -fx-background-color: #FF9F1C;
+    -fx-text-fill: #000000;
     -fx-font-weight: bold;
-    -fx-text-fill: #333;
+    -fx-border-color: #FF9F1C;
+}
+
+/* ============================================================
+   FEATURED BANNER
+   ============================================================ */
+.featured-card {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 16;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.10), 20, 0.15, 0, 4);
 }
 
 .featured-image {
-    -fx-background-color: #FFF0E0; /* soft warm neutral */
-    -fx-background-radius: 15;
-    -fx-border-radius: 15;
-    -fx-border-color: #FFD9B3; /* pale orange */
-    -fx-alignment: CENTER;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+    -fx-background-color: linear-gradient(to right, #FFB347, #FFCC33);
+    -fx-border-color: transparent;
+    -fx-pref-height: 450;
 }
 
-.placeholder {
-    -fx-text-fill: #E69540; /* muted orange */
-    -fx-font-size: 14px;
-}
-
-.featured-price {
-    -fx-font-size: 16px;
-    -fx-text-fill: #FF8A00; /* MAIN ORANGE */
-    -fx-font-weight: bold;
-}
-
-/* ===========================
-   TRENDING TITLE
-=========================== */
+/* ============================================================
+   SECTION TITLES
+   ============================================================ */
 .section-title {
-    -fx-font-size: 20px;
+    -fx-font-size: 22px;
     -fx-font-weight: bold;
-    -fx-text-fill: #333;
+    -fx-text-fill: #1E1E1E;
+    -fx-padding: 10 0 0 5;
 }
 
-/* ===========================
+/* ============================================================
+   PRODUCT GRID (FlowPane)
+   ============================================================ */
+.products-grid {
+    -fx-padding: 10 5 30 5;
+    -fx-hgap: 30;
+    -fx-vgap: 30;
+    -fx-alignment: TOP_LEFT;
+}
+
+/* ============================================================
    PRODUCT CARDS
-=========================== */
+   ============================================================ */
 .product-card {
     -fx-background-color: #FFFFFF;
-    -fx-background-radius: 18;
-    -fx-border-radius: 18;
-    -fx-padding: 12;
-    -fx-spacing: 8;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0.1, 0, 2);
-    -fx-alignment: TOP_CENTER;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+    -fx-padding: 14;
+    -fx-spacing: 10;
+    -fx-cursor: hand;
+    -fx-pref-width: 240;
+    -fx-pref-height: 290;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.07), 15, 0.1, 0, 2);
+    -fx-transition: all 0.25s ease-in-out;
 }
 
 .product-card:hover {
-    -fx-effect: dropshadow(gaussian, rgba(255,138,0,0.25), 25, 0.2, 0, 4); /* orange glow */
+    -fx-background-color: #FFF6E5;
+    -fx-translate-y: -3;
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 20, 0.2, 0, 4);
 }
 
 .product-image {
-    -fx-background-color: #FFF4E6; /* light warm industrial */
     -fx-background-radius: 12;
     -fx-border-radius: 12;
-    -fx-border-color: #FFD9B3; /* pale orange border */
-    -fx-alignment: CENTER;
+    -fx-background-color: #F3F3F3;
+    -fx-pref-width: 220;
+    -fx-pref-height: 160;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 3, 0.1, 0, 1);
 }
 
+/* Product name */
 .product-name {
-    -fx-font-size: 14px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
-    -fx-text-fill: #333;
+    -fx-text-fill: #1E1E1E;
+    -fx-wrap-text: true;
 }
 
+/* Price */
 .product-price {
-    -fx-font-size: 13px;
-    -fx-text-fill: #FF8A00; /* main orange */
+    -fx-text-fill: #FF9F1C;
+    -fx-font-size: 18px;
     -fx-font-weight: bold;
+}
+
+/* Category badge */
+.product-category {
+    -fx-font-size: 12px;
+    -fx-text-fill: #FF9F1C;
+    -fx-background-color: rgba(255,159,28,0.15);
+    -fx-background-radius: 6;
+    -fx-padding: 3 8;
+    -fx-max-width: 100;
 }

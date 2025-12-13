@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.fx.b2bfront.controller.dashboard.EditProductController"
+            stylesheets="@../../style/edit-product.css">
+
+    <!-- ===================================================== -->
+    <!-- CENTER CONTENT                                        -->
+    <!-- ===================================================== -->
+
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="30">
+            <padding>
+                <Insets top="40" right="20" bottom="40" left="20"/>
+            </padding>
+
+            <!-- TITLE -->
+            <Label text="Modifier le produit"
+                   styleClass="edit-title"/>
+
+            <!-- MAIN CARD -->
+            <VBox spacing="22"
+                  maxWidth="520"
+                  styleClass="edit-card">
+
+                <!-- IMAGE PREVIEW -->
+                <VBox alignment="CENTER">
+                    <ImageView fx:id="productImage"
+                               fitWidth="140"
+                               fitHeight="140"
+                               preserveRatio="true"
+                               styleClass="product-image"/>
+
+                    <Button text="Choisir une image"
+                            fx:id="btnChooseImage"
+                            styleClass="btn-image"
+                    />
+                </VBox>
+
+
+                <!-- ========== PRODUCT NAME ========== -->
+                <VBox spacing="5">
+                    <Label text="Nom du produit" styleClass="input-label"/>
+                    <TextField fx:id="nameField"
+                               promptText="ex : Câble 380V"
+                               styleClass="text-input"/>
+                </VBox>
+
+                <!-- ========== DESCRIPTION ========== -->
+                <VBox spacing="5">
+                    <Label text="Description" styleClass="input-label"/>
+                    <TextArea fx:id="descField"
+                              promptText="Décrivez le produit..."
+                              prefRowCount="3"
+                              styleClass="text-area"/>
+                </VBox>
+
+                <!-- ========== PRICE ========== -->
+                <VBox spacing="5">
+                    <Label text="Prix (DH)" styleClass="input-label"/>
+                    <TextField fx:id="priceField"
+                               promptText="ex : 149.99"
+                               styleClass="text-input"/>
+                </VBox>
+
+                <!-- ========== STOCK ========== -->
+                <VBox spacing="5">
+                    <Label text="Stock" styleClass="input-label"/>
+                    <TextField fx:id="stockField"
+                               promptText="ex : 25"
+                               styleClass="text-input"/>
+                </VBox>
+
+                <!-- ========== ACTION BUTTONS ========== -->
+                <HBox spacing="15" alignment="CENTER_RIGHT">
+                    <Button text="Annuler"
+                            fx:id="btnCancel"
+                            styleClass="btn-cancel"/>
+
+                    <Button text="Enregistrer"
+                            fx:id="btnSave"
+                            styleClass="btn-save"/>
+                </HBox>
+
+            </VBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>

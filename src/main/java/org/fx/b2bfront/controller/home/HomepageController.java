@@ -1,11 +1,137 @@
 package org.fx.b2bfront.controller.home;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import org.fx.b2bfront.api.CategoryApi;
+import org.fx.b2bfront.api.ProductsApi;
+import org.fx.b2bfront.dto.CategoryDto;
+import org.fx.b2bfront.dto.ProductDto;
+import org.fx.b2bfront.store.ProductStore;
+import org.fx.b2bfront.utils.AppNavigator;
+import org.fx.b2bfront.utils.ProductCardFactory;  // Added import
+
+import java.util.List;
+import java.util.Map;
 
 public class HomepageController {
 
-    @FXML
+    @FXML private VBox sidebarCategories;
+    @FXML private FlowPane productsContainer;
+    @FXML private Pane featuredBanner;  // Fixed to match FXML
+
+    // --------------------------------------------------
+    // INITIALIZATION
+    // --------------------------------------------------
     public void initialize() {
-        System.out.println("Homepage loaded successfully!");
+        loadCategories();
+        loadTrendingProducts();
+    }
+
+
+    // ==================================================
+    // 1) CATEGORIES SIDEBAR
+    // ==================================================
+    private void loadCategories() {
+        new Thread(() -> {
+            try {
+                List<CategoryDto> categories = CategoryApi.getAll();
+
+                Platform.runLater(() -> {
+                    sidebarCategories.getChildren().clear();
+
+                    Label title = new Label("Categories");
+                    title.getStyleClass().add("sidebar-title");
+                    sidebarCategories.getChildren().add(title);
+
+                    for (CategoryDto cat : categories) {
+                        Button btn = new Button(cat.getName());
+                        btn.getStyleClass().add("category-btn");
+
+                        btn.setOnAction(evt -> {
+                            AppNavigator.navigateToWithParams(
+                                    "Categories.fxml",
+                                    Map.of(
+                                            "categoryId", cat.getId(),
+                                            "categoryName", cat.getName()
+                                    )
+                            );
+                        });
+
+                        sidebarCategories.getChildren().add(btn);
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+
+    // ==================================================
+    // 2) TRENDING PRODUCTS (LIMIT 4)
+    // ==================================================
+    private void loadTrendingProducts() {
+        new Thread(() -> {
+            try {
+                List<ProductDto> trending = ProductsApi.getTrending();
+
+                List<ProductDto> limited = trending.stream()
+                        .limit(4)
+                        .toList();
+
+                Platform.runLater(() -> {
+                    productsContainer.getChildren().clear();
+                    limited.forEach(this::addProductCard);
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+
+    // ==================================================
+    // 3) OPTIONAL: LOAD PRODUCTS BY CATEGORY
+    // ==================================================
+    private void loadProductsByCategory(int categoryId) {
+        new Thread(() -> {
+            try {
+                List<ProductDto> list = ProductsApi.getByCategory(categoryId);
+
+                Platform.runLater(() -> {
+                    productsContainer.getChildren().clear();
+                    list.forEach(this::addProductCard);
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+
+    // ==================================================
+    // 4) BUILD PRODUCT CARD
+    // ==================================================
+    private void addProductCard(ProductDto product) {
+        VBox card = ProductCardFactory.buildSmall(product);
+        card.setOnMouseClicked(event -> openProductPage(product));
+        productsContainer.getChildren().add(card);
+    }
+
+
+    // ==================================================
+    // 5) NAVIGATE TO PRODUCT PAGE
+    // ==================================================
+    private void openProductPage(ProductDto product) {
+        ProductStore.setSelectedProductId(product.getId());
+        AppNavigator.navigateTo("product.fxml");
     }
 }
