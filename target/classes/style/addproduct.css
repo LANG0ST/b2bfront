@@ -1,0 +1,165 @@
+/* ============================================================
+   GLOBAL
+   ============================================================ */
+
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: #F5F5F5;
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.header-bar {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E5E5E5;
+    -fx-border-width: 0 0 1 0;
+}
+
+.page-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222;
+}
+
+.back-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FF7A00;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.back-btn:hover {
+    -fx-underline: true;
+}
+
+
+/* ============================================================
+   PAGE LAYOUT
+   ============================================================ */
+
+.page-root {
+    -fx-max-width: 720;
+}
+
+
+/* ============================================================
+   CARD STYLE
+   ============================================================ */
+
+.card {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+    -fx-padding: 22;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 18, 0.2, 0, 4);
+}
+
+.form-card {
+    -fx-spacing: 22;
+}
+
+
+/* ============================================================
+   IMAGE PICKER
+   ============================================================ */
+
+.image-preview {
+    -fx-background-color: #EEEEEE;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #DDD;
+}
+
+
+/* ============================================================
+   FORM FIELDS
+   ============================================================ */
+
+.label {
+    -fx-text-fill: #555;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.text-field,
+.text-area,
+.combo-box {
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #D0D0D0;
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 8 10;
+}
+
+.text-field:focused,
+.text-area:focused,
+.combo-box:focused {
+    -fx-border-color: #FF9F1C;
+    -fx-border-width: 1.5;
+}
+
+.text-area {
+    -fx-wrap-text: true;
+}
+
+
+/* ============================================================
+   DYNAMIC ATTRIBUTES
+   ============================================================ */
+
+.section-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.attributes-scroll {
+    -fx-background-color: transparent;
+    -fx-border-color: #E0E0E0;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.attributes-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.attributes-scroll VBox {
+    -fx-background-color: #FAFAFA;
+    -fx-background-radius: 10;
+    -fx-padding: 12;
+}
+
+
+/* Attribute labels (BRAND, POWER, etc.) */
+.attributes-scroll Label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #666;
+    -fx-font-weight: bold;
+}
+
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.orange-btn {
+    -fx-background-color: #FF9F1C;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 10 18;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+}
+
+.orange-btn:hover {
+    -fx-background-color: #FF7A00;
+}
+
+.orange-btn:pressed {
+    -fx-background-color: #E86B00;
+}

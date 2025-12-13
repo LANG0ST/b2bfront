@@ -53,12 +53,24 @@
 
                 <!-- MY PRODUCTS -->
                 <VBox fx:id="productsSection" spacing="18" visible="false" managed="false">
+
                     <HBox alignment="CENTER_LEFT" spacing="12">
                         <Label text="Mes produits" styleClass="section-title"/>
-                        <Button fx:id="btnAddProduct" text="Ajouter un produit" styleClass="btn-primary"/>
+                        <Button fx:id="btnAddProduct"
+                                text="Ajouter un produit"
+                                styleClass="btn-primary"/>
                     </HBox>
 
-                    <VBox fx:id="productsContainer" spacing="12" styleClass="section-container"/>
+                    <!-- 👇 This will hold either the list OR the AddProduct page -->
+                    <StackPane fx:id="productsContentPane">
+
+                        <!-- Default: product list -->
+                        <VBox fx:id="productsContainer"
+                              spacing="12"
+                              styleClass="section-container"/>
+
+                    </StackPane>
+
                 </VBox>
 
                 <!-- NOTIFICATIONS -->

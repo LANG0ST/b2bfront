@@ -2,15 +2,18 @@ package org.fx.b2bfront.controller.dashboard;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.fx.b2bfront.api.DashboardApi;
 import org.fx.b2bfront.api.ProductsApi;
@@ -47,6 +50,8 @@ public class DashboardController implements Initializable, ParamReceiver {
     @FXML private Label btnSeller;
     @FXML private Label btnProducts;
     @FXML private Label btnNotif;
+    @FXML
+    private StackPane productsContentPane;
 
     @FXML private Button btnAddProduct;
 
@@ -69,9 +74,9 @@ public class DashboardController implements Initializable, ParamReceiver {
         btnProducts.setOnMouseClicked(e -> showSection("products"));
         btnNotif.setOnMouseClicked(e -> showSection("notif"));
 
-        btnAddProduct.setOnAction(e ->
-                AppNavigator.navigateTo("dashboard/AddProduct.fxml")
-        );
+        btnAddProduct.setOnAction(e -> loadAddProduct());
+
+
 
         // Load all dashboard data
         if (companyId != null) {
@@ -382,21 +387,30 @@ public class DashboardController implements Initializable, ParamReceiver {
         card.setAlignment(Pos.CENTER_LEFT);
         card.setPadding(new Insets(15));
 
-        String imagePath;
+        Image image;
 
-        if (p.getImageUrl() != null && !p.getImageUrl().isEmpty()) {
-            String fileName = p.getImageUrl().trim().replace("\\", "/");
-            imagePath = "/images/" + fileName;
+        if (p.getImageUrl() != null && !p.getImageUrl().isBlank()) {
+            // ✅ Cloudinary or remote URL
+            image = new Image(
+                    p.getImageUrl(),   // FULL URL
+                    90,
+                    90,
+                    true,
+                    true,
+                    true               // background loading
+            );
         } else {
-            imagePath = "/images/placeholder.png";
+            // ✅ Local placeholder
+            image = new Image(
+                    getClass().getResource("/images/placeholder.png").toExternalForm(),
+                    90,
+                    90,
+                    true,
+                    true
+            );
         }
 
-        URL url = getClass().getResource(imagePath);
-        if (url == null) url = getClass().getResource("/images/placeholder.png");
-
-        Image image = new Image(url.toExternalForm(), 90, 90, true, true);
         ImageView imgView = new ImageView(image);
-
         imgView.setFitWidth(90);
         imgView.setFitHeight(90);
         imgView.setPreserveRatio(true);
@@ -424,7 +438,6 @@ public class DashboardController implements Initializable, ParamReceiver {
         editBtn.setOnAction(e -> {
             Map<String, Object> params = new HashMap<>();
             params.put("product", p);
-
             AppNavigator.navigateToWithParams("dashboard/EditProduct.fxml", params);
         });
 
@@ -498,5 +511,20 @@ public class DashboardController implements Initializable, ParamReceiver {
             }
         }).start();
     }
+    private void loadAddProduct() {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/fxml/dashboard/AddProduct.fxml")
+            );
+
+            Parent view = loader.load();
+
+            productsContentPane.getChildren().setAll(view);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
