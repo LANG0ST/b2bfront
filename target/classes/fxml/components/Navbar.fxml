@@ -22,7 +22,14 @@
     </padding>
 
     <!-- LOGO -->
-    <Label styleClass="logo" text="B2B"/>
+    <ImageView fitHeight="34"
+               preserveRatio="true"
+               styleClass="logo-image">
+        <image>
+            <Image url="@../../images/loogo.png"/>
+        </image>
+    </ImageView>
+
 
     <!-- SEARCH BAR (CENTER) -->
     <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
@@ -68,6 +75,10 @@
                 </ImageView>
             </graphic>
         </Button>
+        <Button fx:id="btnLogout"
+                text="Logout"
+                styleClass="nav-button"/>
+
     </HBox>
 
 </HBox>

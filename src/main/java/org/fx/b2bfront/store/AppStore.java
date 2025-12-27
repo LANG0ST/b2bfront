@@ -3,6 +3,7 @@ package org.fx.b2bfront.store;
 public class AppStore {
 
     private static boolean hasUnreadNotifications = false;
+    private static String searchQuery = null;
 
     public static boolean hasNotifications() {
         return hasUnreadNotifications;
@@ -11,7 +12,6 @@ public class AppStore {
     public static void setHasNotifications(boolean value) {
         hasUnreadNotifications = value;
     }
-    private static String searchQuery = null;
 
     public static void setSearchQuery(String q) {
         searchQuery = q;
@@ -21,4 +21,11 @@ public class AppStore {
         return searchQuery;
     }
 
+    // =========================
+    // LOGOUT SUPPORT
+    // =========================
+    public static void clear() {
+        hasUnreadNotifications = false;
+        searchQuery = null;
+    }
 }

@@ -6,32 +6,29 @@ import org.fx.b2bfront.dto.LoginRequestFront;
 import org.fx.b2bfront.dto.LoginResponseFront;
 import org.fx.b2bfront.dto.RegisterRequestFront;
 
+import java.util.Map;
+
 public class AuthApi {
 
     private static final String BASE_URL = "http://localhost:8082/api/auth";
     private static final OkHttpClient client = new OkHttpClient();
     private static final Gson gson = new Gson();
 
-
-    // ============================
-    //          REGISTER
-    // ============================
+    // =====================================================
+    // REGISTER
+    // =====================================================
     public static ApiResult register(RegisterRequestFront req) {
         try {
             String json = gson.toJson(req);
-            System.out.println("=== JSON SENDING TO BACKEND ===");
-            System.out.println(gson.toJson(req));
-            System.out.println("================================");
 
             RequestBody body = RequestBody.create(
                     json,
-                    MediaType.parse("application/json; charset=utf-8")
+                    MediaType.get("application/json")
             );
 
             Request request = new Request.Builder()
                     .url(BASE_URL + "/register")
                     .post(body)
-                    .addHeader("Content-Type", "application/json")
                     .build();
 
             Response response = client.newCall(request).execute();
@@ -44,13 +41,11 @@ public class AuthApi {
         }
     }
 
-
     public record ApiResult(boolean success, String message) {}
 
-
-    // ============================
-    //            LOGIN
-    // ============================
+    // =====================================================
+    // LOGIN
+    // =====================================================
     public static LoginResult login(LoginRequestFront req) {
         try {
             String json = gson.toJson(req);
@@ -72,7 +67,8 @@ public class AuthApi {
                 return new LoginResult(false, null, res);
             }
 
-            LoginResponseFront parsed = gson.fromJson(res, LoginResponseFront.class);
+            LoginResponseFront parsed =
+                    gson.fromJson(res, LoginResponseFront.class);
 
             return new LoginResult(true, parsed, null);
 
@@ -81,5 +77,48 @@ public class AuthApi {
         }
     }
 
-    public record LoginResult(boolean success, LoginResponseFront data, String error) {}
+    public record LoginResult(boolean success,
+                              LoginResponseFront data,
+                              String error) {}
+
+    // =====================================================
+    // FORGOT PASSWORD (NEW)
+    // =====================================================
+// AuthApi.java
+    public static void forgotPassword(String email) throws Exception {
+        String json = "{\"email\":\"" + email + "\"}";
+
+        RequestBody body = RequestBody.create(
+                json,
+                MediaType.get("application/json")
+        );
+
+        Request request = new Request.Builder()
+                .url(BASE_URL + "/forgot-password")
+                .post(body)
+                .build();
+
+        client.newCall(request).execute().close();
+    }
+
+    public static void resetPassword(String token, String newPassword) throws Exception {
+        String json = "{"
+                + "\"token\":\"" + token + "\","
+                + "\"newPassword\":\"" + newPassword + "\""
+                + "}";
+
+        RequestBody body = RequestBody.create(
+                json,
+                MediaType.get("application/json")
+        );
+
+        Request request = new Request.Builder()
+                .url(BASE_URL + "/reset-password")
+                .post(body)
+                .build();
+
+        client.newCall(request).execute().close();
+    }
+
 }
+

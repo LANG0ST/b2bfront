@@ -132,8 +132,8 @@ public class AddProductController {
                     L’image doit être rectangulaire (plus large que haute).
 
                     ✔ 1200×700  (OK)
-                    ❌ 800×800  (trop carré)
-                    ❌ 700×1100 (trop verticale)
+                    800×800  (trop carré)
+                    700×1100 (trop verticale)
                     """);
             a.show();
             return;

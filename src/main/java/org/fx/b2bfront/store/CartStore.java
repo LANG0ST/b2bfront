@@ -58,4 +58,10 @@ public class CartStore {
     public static java.util.List<CartItem> getItems() {
         return cart != null ? cart.getItems() : java.util.List.of();
     }
+
+
+    public static void clear() {
+        cart = null;
+    }
+
 }
