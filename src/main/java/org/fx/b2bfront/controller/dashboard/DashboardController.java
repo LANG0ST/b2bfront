@@ -390,7 +390,6 @@ public class DashboardController implements Initializable, ParamReceiver {
         Image image;
 
         if (p.getImageUrl() != null && !p.getImageUrl().isBlank()) {
-            // ✅ Cloudinary or remote URL
             image = new Image(
                     p.getImageUrl(),   // FULL URL
                     90,
@@ -400,7 +399,6 @@ public class DashboardController implements Initializable, ParamReceiver {
                     true               // background loading
             );
         } else {
-            // ✅ Local placeholder
             image = new Image(
                     getClass().getResource("/images/placeholder.png").toExternalForm(),
                     90,

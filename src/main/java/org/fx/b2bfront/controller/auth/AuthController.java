@@ -25,6 +25,7 @@ public class AuthController {
     @FXML private TextField loginEmail;
     @FXML private PasswordField loginPassword;
     @FXML private Button loginButton;
+    @FXML private Hyperlink forgotPasswordLink;
 
     // SIGNUP
     @FXML private TextField signupName;
@@ -32,18 +33,18 @@ public class AuthController {
     @FXML private TextField signupEmail;
     @FXML private PasswordField signupPassword;
     @FXML private TextField signupAddress;
-    @FXML private ComboBox<String> signupCity;   // UPDATED
+    @FXML private ComboBox<String> signupCity;
     @FXML private TextField signupPhone;
     @FXML private Button signupButton;
 
     private boolean showingLogin = true;
 
+    // =====================================================
+    // INITIALIZE
+    // =====================================================
     @FXML
     public void initialize() {
 
-        // ---------------------------
-        // CITY LIST (30 most known)
-        // ---------------------------
         signupCity.setItems(FXCollections.observableArrayList(
                 "Casablanca", "Rabat", "Marrakech", "Tangier", "Fes",
                 "Agadir", "Tetouan", "Oujda", "Kenitra", "Safi",
@@ -57,10 +58,9 @@ public class AuthController {
         loginButton.setOnAction(e -> loginCompany());
     }
 
-
-    /* ================================
-                 TOGGLE PANEL
-       ================================ */
+    // =====================================================
+    // SLIDER
+    // =====================================================
     private void toggle() {
         TranslateTransition slide = new TranslateTransition(Duration.millis(400), slider);
 
@@ -83,40 +83,48 @@ public class AuthController {
         if (!showingLogin) toggle();
     }
 
+    // =====================================================
+    // FORGOT PASSWORD (NEW)
+    // =====================================================
+    @FXML
+    private void onForgotPassword() {
 
-    /* ================================
-              VALIDATION
-       ================================ */
-    private String validateSignup(String name, String ice, String email, String password,
-                                  String address, String city, String phone) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Mot de passe oublié");
+        dialog.setHeaderText("Réinitialisation du mot de passe");
+        dialog.setContentText("Entrez votre adresse email :");
 
-        if (name.isEmpty()) return "Company name is required.";
-        if (email.isEmpty()) return "Email is required.";
-        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$"))
-            return "Invalid email format.";
+        dialog.showAndWait().ifPresent(email -> {
 
-        if (password.length() < 8)
-            return "Password must be at least 8 characters.";
+            if (email.isBlank()) {
+                showAlert("Veuillez saisir une adresse email valide.");
+                return;
+            }
 
-        if (address.length() < 4)
-            return "Address is too short.";
+            new Thread(() -> {
+                try {
+                    AuthApi.forgotPassword(email);
 
-        if (city == null || city.isEmpty())
-            return "Please select a city.";
+                    javafx.application.Platform.runLater(() ->
+                            showAlert(
+                                    "Si un compte existe avec cet email,\n" +
+                                            "un lien de réinitialisation a été envoyé."
+                            )
+                    );
 
-        if (!phone.matches("\\d{8,12}"))
-            return "Phone must contain only digits (8–12).";
-
-        if (!ice.isEmpty() && !ice.matches("\\d{6,15}"))
-            return "ICE must be 6–15 digits.";
-
-        return null;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    javafx.application.Platform.runLater(() ->
+                            showAlert("Impossible d'envoyer l'email pour le moment.")
+                    );
+                }
+            }).start();
+        });
     }
 
-
-    /* ================================
-               REGISTER
-       ================================ */
+    // =====================================================
+    // REGISTER
+    // =====================================================
     @FXML
     public void registerCompany() {
 
@@ -125,19 +133,17 @@ public class AuthController {
         String email = signupEmail.getText().trim();
         String password = signupPassword.getText().trim();
         String address = signupAddress.getText().trim();
-        String city = signupCity.getValue(); // from ComboBox
+        String city = signupCity.getValue();
         String phone = signupPhone.getText().trim();
 
-        // VALIDATION
-        String error = validateSignup(name, ice, email, password, address, city, phone);
-        if (error != null) {
-            showAlert(error);
+        if (name.isEmpty() || email.isEmpty() || password.length() < 8 ||
+                city == null || !phone.matches("\\d{8,12}")) {
+            showAlert("Veuillez remplir correctement tous les champs.");
             return;
         }
 
-        RegisterRequestFront req = new RegisterRequestFront(
-                name, ice, email, password, address, city, phone
-        );
+        RegisterRequestFront req =
+                new RegisterRequestFront(name, ice, email, password, address, city, phone);
 
         var result = AuthApi.register(req);
 
@@ -146,35 +152,27 @@ public class AuthController {
             return;
         }
 
-        showAlert("Registration successful! You can now log in.");
+        showAlert("Inscription réussie. Vous pouvez maintenant vous connecter.");
         toggleToLogin();
     }
 
-
-    /* ================================
-                LOGIN
-       ================================ */
+    // =====================================================
+    // LOGIN
+    // =====================================================
     private void loginCompany() {
 
         String email = loginEmail.getText().trim();
         String password = loginPassword.getText().trim();
 
-        // ADMIN BYPASS
-        if (email.equals("admin@b2b.ensa") && password.equals("admin1234")) {
-            AppNavigator.navigateTo("Admin/AdminDashBoard.fxml");
-            return;
-        }
-
         if (email.isEmpty() || password.isEmpty()) {
-            showAlert("Please enter email and password.");
+            showAlert("Veuillez entrer email et mot de passe.");
             return;
         }
 
-        var req = new LoginRequestFront(email, password);
-        var result = AuthApi.login(req);
+        var result = AuthApi.login(new LoginRequestFront(email, password));
 
         if (!result.success()) {
-            showAlert("Login failed:\n" + result.error());
+            showAlert("Login échoué:\n" + result.error());
             return;
         }
 
@@ -184,29 +182,33 @@ public class AuthController {
         AuthStore.companyId = data.user.companyId;
         AuthStore.email = data.user.email;
 
-        // Load cart
         CartStore.loadCartFromBackend(AuthStore.companyId);
 
-        // Load notifications state
         new Thread(() -> {
             try {
                 var list = NotificationApi.getNotifications(AuthStore.companyId);
-                boolean unread = list.stream().anyMatch(n -> !n.isRead());
-                AppStore.setHasNotifications(unread);
+                AppStore.setHasNotifications(
+                        list.stream().anyMatch(n -> !n.isRead())
+                );
             } catch (Exception ignored) {}
         }).start();
 
         AppNavigator.navigateTo("homepage.fxml");
     }
 
-
-    /* ================================
-                ALERT
-       ================================ */
+    // =====================================================
+    // ALERT
+    // =====================================================
     private void showAlert(String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
         alert.setContentText(msg);
         alert.showAndWait();
     }
+
+    @FXML
+    private void openForgotPassword() {
+        AppNavigator.navigateTo("ForgotPassword.fxml");
+    }
+
 }

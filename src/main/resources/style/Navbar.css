@@ -42,3 +42,20 @@
 .icon-button:hover {
     -fx-background-color: #F2F2F2;
 }
+
+/* LOGOUT BUTTON */
+
+.logout-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-padding: 6 12;
+
+    -fx-text-fill: #D32F2F;
+}
+
+.logout-button:hover {
+    -fx-text-fill: #B71C1C;
+    -fx-background-color: transparent;
+}

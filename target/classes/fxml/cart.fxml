@@ -30,16 +30,11 @@
 
                     <HBox spacing="80">
 
-                        <!-- =============================== -->
-                        <!-- LEFT SIDE — LIST OF ITEMS -->
-                        <!-- =============================== -->
+
                         <VBox fx:id="cartItemsContainer"
                               spacing="30"
                               HBox.hgrow="ALWAYS"/>
 
-                        <!-- =============================== -->
-                        <!-- RIGHT SIDE — SUMMARY BOX -->
-                        <!-- =============================== -->
                         <VBox spacing="25"
                               prefWidth="380"
                               styleClass="summary-box">

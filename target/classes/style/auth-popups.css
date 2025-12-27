@@ -1,0 +1,103 @@
+/* ===== Popup Base ===== */
+.popup-root {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+    -fx-border-color: rgba(0,0,0,0.08);
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 18, 0.25, 0, 8);
+    -fx-min-width: 420;
+    -fx-max-width: 420;
+}
+
+/* ===== Typography ===== */
+.popup-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #111827;
+}
+
+.popup-subtitle {
+    -fx-font-size: 12.5px;
+    -fx-text-fill: #6B7280;
+    -fx-padding: 0 0 8 0;
+}
+
+.popup-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #374151;
+}
+
+/* ===== Inputs ===== */
+.popup-input {
+    -fx-background-color: #F9FAFB;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: rgba(0,0,0,0.10);
+    -fx-border-width: 1;
+    -fx-padding: 10 12 10 12;
+    -fx-font-size: 13px;
+    -fx-text-fill: #111827;
+}
+
+.popup-input:focused {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #F59E0B;  /* orange */
+    -fx-border-width: 1.5;
+    -fx-effect: dropshadow(gaussian, rgba(245,158,11,0.35), 10, 0.25, 0, 0);
+}
+
+/* ===== Status label (errors/success) ===== */
+.popup-status {
+    -fx-background-color: rgba(245, 158, 11, 0.12);
+    -fx-text-fill: #92400E;
+    -fx-background-radius: 12;
+    -fx-padding: 10 12 10 12;
+    -fx-font-size: 12.5px;
+}
+
+/* If you want an "error mode", you can set styleClass to: popup-status error */
+.popup-status.error {
+    -fx-background-color: rgba(239, 68, 68, 0.12);
+    -fx-text-fill: #991B1B;
+}
+
+/* If you want a "success mode", you can set styleClass to: popup-status success */
+.popup-status.success {
+    -fx-background-color: rgba(34, 197, 94, 0.12);
+    -fx-text-fill: #065F46;
+}
+
+/* ===== Buttons ===== */
+.btn-primary {
+    -fx-background-color: #F59E0B;
+    -fx-text-fill: white;
+    -fx-font-weight: 800;
+    -fx-background-radius: 12;
+    -fx-padding: 10 16 10 16;
+    -fx-cursor: hand;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #E69008;
+}
+
+.btn-primary:pressed {
+    -fx-background-color: #D97706;
+}
+
+.btn-secondary {
+    -fx-background-color: transparent;
+    -fx-text-fill: #111827;
+    -fx-font-weight: 800;
+    -fx-border-color: rgba(0,0,0,0.12);
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 10 16 10 16;
+    -fx-cursor: hand;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: rgba(0,0,0,0.04);
+}

@@ -7,7 +7,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxWidth="600.0" prefHeight="474.0" prefWidth="600.0" spacing="20" styleClass="cart-summary-root" stylesheets="@../../style/checkout.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fx.b2bfront.controller.checkout.CartSummaryController">
+<VBox maxWidth="600.0" prefHeight="474.0" prefWidth="600.0" spacing="20" styleClass="cart-summary-root"
+      stylesheets="@../../style/checkout.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.fx.b2bfront.controller.checkout.CartSummaryController">
 
     <!-- Title -->
     <Label styleClass="cart-title" text="Your cart" />
@@ -16,9 +18,6 @@
     <VBox fx:id="cartItemsContainer" spacing="16" />
 
     <Separator prefHeight="25.0" prefWidth="488.0" styleClass="cart-divider" />
-
-    <!-- Coupon -->
-    <TextField fx:id="couponField" promptText="Enter coupon code here" styleClass="coupon-field" />
 
     <!-- Totals -->
     <VBox spacing="8">

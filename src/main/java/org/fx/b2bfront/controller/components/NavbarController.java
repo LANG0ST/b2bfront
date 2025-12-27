@@ -6,6 +6,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.fx.b2bfront.store.AppStore;
+import org.fx.b2bfront.store.AuthStore;
+import org.fx.b2bfront.store.CartStore;
 import org.fx.b2bfront.utils.AppNavigator;
 
 import java.util.Map;
@@ -19,6 +21,7 @@ public class NavbarController {
     @FXML private Button btnDashboard;
 
     @FXML private ImageView notifIcon;
+    @FXML private Button btnLogout;
 
     @FXML
     public void initialize() {
@@ -26,11 +29,12 @@ public class NavbarController {
         btnHome.setOnAction(e -> AppNavigator.navigateTo("homepage.fxml"));
         btnDashboard.setOnAction(e -> AppNavigator.navigateTo("dashboard/Dashboard.fxml"));
         btnCart.setOnAction(e -> AppNavigator.navigateTo("cart.fxml"));
+        btnLogout.setOnAction(e -> logout());
 
         btnNotifications.setOnAction(e -> {
             AppNavigator.navigateToWithParams(
                     "dashboard/Dashboard.fxml",
-                    Map.of("section", "notif")   // <-- this is the key
+                    Map.of("section", "notif")
             );
         });
 
@@ -46,6 +50,20 @@ public class NavbarController {
         });
 
     }
+
+    private void logout() {
+
+        AuthStore.jwt = null;
+        AuthStore.role = null;
+        AuthStore.companyId = null;
+        AuthStore.email = null;
+
+        AppStore.clear();
+        CartStore.clear();
+
+        AppNavigator.navigateTo("Auth.fxml");
+    }
+
 
     private void updateNotificationIcon() {
 
