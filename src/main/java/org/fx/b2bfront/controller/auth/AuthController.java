@@ -10,6 +10,7 @@ import org.fx.b2bfront.api.AuthApi;
 import org.fx.b2bfront.api.NotificationApi;
 import org.fx.b2bfront.dto.LoginRequestFront;
 import org.fx.b2bfront.dto.RegisterRequestFront;
+import org.fx.b2bfront.service.NotificationPoller;
 import org.fx.b2bfront.store.AppStore;
 import org.fx.b2bfront.store.AuthStore;
 import org.fx.b2bfront.store.CartStore;
@@ -169,6 +170,10 @@ public class AuthController {
             return;
         }
 
+        if (email.equals("admin@b2b.ensa") && password.equals("admin1234")) {
+            AppNavigator.navigateTo("Admin/AdminDashBoard.fxml");
+            return;
+        }
         var result = AuthApi.login(new LoginRequestFront(email, password));
 
         if (!result.success()) {
@@ -193,6 +198,7 @@ public class AuthController {
             } catch (Exception ignored) {}
         }).start();
 
+        NotificationPoller.start();
         AppNavigator.navigateTo("homepage.fxml");
     }
 

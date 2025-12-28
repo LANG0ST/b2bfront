@@ -1,18 +1,33 @@
 package org.fx.b2bfront.store;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 public class AppStore {
 
-    private static boolean hasUnreadNotifications = false;
+    private static final BooleanProperty hasUnreadNotifications =
+            new SimpleBooleanProperty(false);
+
     private static String searchQuery = null;
 
+    // =========================
+    // NOTIFICATIONS
+    // =========================
     public static boolean hasNotifications() {
-        return hasUnreadNotifications;
+        return hasUnreadNotifications.get();
     }
 
     public static void setHasNotifications(boolean value) {
-        hasUnreadNotifications = value;
+        hasUnreadNotifications.set(value);
     }
 
+    public static BooleanProperty hasNotificationsProperty() {
+        return hasUnreadNotifications;
+    }
+
+    // =========================
+    // SEARCH
+    // =========================
     public static void setSearchQuery(String q) {
         searchQuery = q;
     }
@@ -25,7 +40,7 @@ public class AppStore {
     // LOGOUT SUPPORT
     // =========================
     public static void clear() {
-        hasUnreadNotifications = false;
+        hasUnreadNotifications.set(false);
         searchQuery = null;
     }
 }

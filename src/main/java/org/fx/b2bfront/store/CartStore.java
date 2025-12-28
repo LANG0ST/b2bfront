@@ -19,7 +19,7 @@ public class CartStore {
             cart.setCompanyId(companyId);
         }
 
-        System.out.println("🛒 Loaded cart from backend: " +
+        System.out.println("Loaded cart from backend: " +
                 (cart.getItems() != null ? cart.getItems().size() : 0) + " items");
     }
 

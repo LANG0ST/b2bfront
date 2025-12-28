@@ -98,8 +98,8 @@ public class PaymentController {
 
         // Card number: digits only (remove spaces first)
         String rawCard = cardNumber.getText().replaceAll("[^0-9]", "");
-        if (!rawCard.matches("\\d{20,24}")) {
-            showAlert("Le numéro de carte doit contenir entre 20 et 24 chiffres.");
+        if (!rawCard.matches("\\d{16,20}")) {
+            showAlert("Le numéro de carte doit contenir entre 16 et 20 chiffres.");
             return;
         }
 
