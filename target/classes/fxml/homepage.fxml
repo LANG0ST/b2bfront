@@ -43,7 +43,7 @@
             </padding>
 
             <!-- FEATURED BANNER -->
-            <VBox prefWidth="1290" prefHeight="420" spacing="15" styleClass="featured-card">
+            <VBox prefWidth="1290" prefHeight="384" spacing="15" styleClass="featured-card">
                 <padding>
                     <Insets top="10" bottom="10" left="10" right="10"/>
                 </padding>

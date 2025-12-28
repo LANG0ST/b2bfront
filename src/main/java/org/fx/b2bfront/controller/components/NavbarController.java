@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.fx.b2bfront.service.NotificationPoller;
 import org.fx.b2bfront.store.AppStore;
 import org.fx.b2bfront.store.AuthStore;
 import org.fx.b2bfront.store.CartStore;
@@ -39,6 +40,9 @@ public class NavbarController {
         });
 
 
+        AppStore.hasNotificationsProperty().addListener((obs, oldVal, newVal) -> {
+            updateNotificationIcon();
+        });
         updateNotificationIcon();
 
         searchBar.setOnAction(e -> {
@@ -58,6 +62,7 @@ public class NavbarController {
         AuthStore.companyId = null;
         AuthStore.email = null;
 
+        NotificationPoller.stop();
         AppStore.clear();
         CartStore.clear();
 
